@@ -1,0 +1,73 @@
+{
+  "existing": {
+    "mailing": {
+      "MAILING00": {
+        "attachment": [],
+        "completed_at": "s8d",
+        "created_at": "s8e",
+        "failed_count": "s8f",
+        "id": "MAILING00",
+        "message": "s91",
+        "name": "s92",
+        "parse_mode": "s93",
+        "recipient": [],
+        "schedule_time": "s95",
+        "sent_count": "s96",
+        "status": "s97",
+        "total_recipient": "s98",
+        "updated_at": "s99"
+      },
+      "MAILING01": {
+        "attachment": [],
+        "completed_at": "s119",
+        "created_at": "s11a",
+        "failed_count": "s11b",
+        "id": "MAILING01",
+        "message": "s11d",
+        "name": "s11e",
+        "parse_mode": "s11f",
+        "recipient": [],
+        "schedule_time": "s121",
+        "sent_count": "s122",
+        "status": "s123",
+        "total_recipient": "s124",
+        "updated_at": "s125"
+      },
+      "MAILING02": {
+        "attachment": [],
+        "completed_at": "s1a5",
+        "created_at": "s1a6",
+        "failed_count": "s1a7",
+        "id": "MAILING02",
+        "message": "s1a9",
+        "name": "s1aa",
+        "parse_mode": "s1ab",
+        "recipient": [],
+        "schedule_time": "s1ad",
+        "sent_count": "s1ae",
+        "status": "s1af",
+        "total_recipient": "s1b0",
+        "updated_at": "s1b1"
+      }
+    }
+  },
+  "new": {
+    "mailing": {
+      "mailing_ref01": {
+        "attachment": [],
+        "completed_at": "s231",
+        "created_at": "s232",
+        "failed_count": "s233",
+        "message": "s235",
+        "name": "s236",
+        "parse_mode": "s237",
+        "recipient": [],
+        "schedule_time": "s239",
+        "sent_count": "s23a",
+        "status": "s23b",
+        "total_recipient": "s23c",
+        "updated_at": "s23d"
+      }
+    }
+  }
+}

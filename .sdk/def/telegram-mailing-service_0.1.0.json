@@ -1,0 +1,537 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Telegram Mailing Service",
+    "description": "This API allows users to create, manage, and track mailing lists within the Telegram platform. It provides endpoints to create new mailings, check their status, and cancel existing mailings.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://app.telegasend.ru"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://app.telegasend.ru/api",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Mailings",
+      "description": "Operations for managing Telegram mailings"
+    }
+  ],
+  "paths": {
+    "/mailings": {
+      "post": {
+        "tags": [
+          "Mailings"
+        ],
+        "summary": "Create a new mailing",
+        "description": "Creates a new mailing campaign for Telegram distribution",
+        "operationId": "createMailing",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMailingRequest"
+              },
+              "examples": {
+                "basic": {
+                  "summary": "Basic mailing example",
+                  "value": {
+                    "name": "Welcome Campaign",
+                    "message": "Welcome to our service!",
+                    "recipients": [
+                      "@user1",
+                      "@user2"
+                    ],
+                    "scheduleTime": "2024-01-15T10:00:00Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Mailing created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MailingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Mailings"
+        ],
+        "summary": "List all mailings",
+        "description": "Retrieves a list of all mailings with their current status",
+        "operationId": "listMailings",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter mailings by status",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pending",
+                "active",
+                "completed",
+                "cancelled",
+                "failed"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of results to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Number of results to skip for pagination",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of mailings retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MailingResponse"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "Total number of mailings"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "offset": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/mailings/{mailingId}": {
+      "get": {
+        "tags": [
+          "Mailings"
+        ],
+        "summary": "Get mailing status",
+        "description": "Retrieves the current status and details of a specific mailing",
+        "operationId": "getMailingStatus",
+        "parameters": [
+          {
+            "name": "mailingId",
+            "in": "path",
+            "description": "Unique identifier of the mailing",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mailing status retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MailingResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Mailing not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Mailings"
+        ],
+        "summary": "Cancel a mailing",
+        "description": "Cancels an existing mailing campaign. Only pending or active mailings can be cancelled.",
+        "operationId": "cancelMailing",
+        "parameters": [
+          {
+            "name": "mailingId",
+            "in": "path",
+            "description": "Unique identifier of the mailing to cancel",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mailing cancelled successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Mailing cancelled successfully"
+                    },
+                    "mailingId": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "cancelled"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Mailing cannot be cancelled (already completed or cancelled)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Mailing not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateMailingRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "message",
+          "recipients"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the mailing campaign",
+            "minLength": 1,
+            "maxLength": 255,
+            "example": "Welcome Campaign"
+          },
+          "message": {
+            "type": "string",
+            "description": "Message content to be sent to recipients",
+            "minLength": 1,
+            "maxLength": 4096,
+            "example": "Welcome to our service!"
+          },
+          "recipients": {
+            "type": "array",
+            "description": "List of Telegram usernames or chat IDs",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "example": [
+              "@user1",
+              "@user2",
+              "123456789"
+            ]
+          },
+          "scheduleTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Optional scheduled time for sending the mailing (ISO 8601 format)",
+            "example": "2024-01-15T10:00:00Z"
+          },
+          "attachments": {
+            "type": "array",
+            "description": "Optional list of file URLs to attach",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "parseMode": {
+            "type": "string",
+            "description": "Message formatting mode",
+            "enum": [
+              "Markdown",
+              "HTML",
+              "MarkdownV2"
+            ],
+            "default": "Markdown"
+          }
+        }
+      },
+      "MailingResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier of the mailing",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the mailing campaign",
+            "example": "Welcome Campaign"
+          },
+          "message": {
+            "type": "string",
+            "description": "Message content",
+            "example": "Welcome to our service!"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current status of the mailing",
+            "enum": [
+              "pending",
+              "active",
+              "completed",
+              "cancelled",
+              "failed"
+            ],
+            "example": "active"
+          },
+          "totalRecipients": {
+            "type": "integer",
+            "description": "Total number of recipients",
+            "example": 100
+          },
+          "sentCount": {
+            "type": "integer",
+            "description": "Number of messages successfully sent",
+            "example": 95
+          },
+          "failedCount": {
+            "type": "integer",
+            "description": "Number of messages that failed to send",
+            "example": 5
+          },
+          "scheduleTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Scheduled time for the mailing",
+            "example": "2024-01-15T10:00:00Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the mailing was created",
+            "example": "2024-01-14T15:30:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the mailing was last updated",
+            "example": "2024-01-15T10:30:00Z"
+          },
+          "completedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the mailing was completed",
+            "example": "2024-01-15T10:35:00Z"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message",
+            "example": "Invalid request parameters"
+          },
+          "code": {
+            "type": "string",
+            "description": "Error code",
+            "example": "INVALID_REQUEST"
+          },
+          "details": {
+            "type": "object",
+            "description": "Additional error details",
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key",
+        "description": "API key for authentication"
+      }
+    }
+  }
+}
