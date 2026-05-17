@@ -19,7 +19,7 @@ class TelegramMailingServiceConfig
         ],
             ],
             "options" => [
-                "base" => "https://app.telegasend.ru/api",
+                "base" => "https://app.telegasend.ru/api/v1",
                 "auth" => [
                     "prefix" => "Bearer",
                 ],

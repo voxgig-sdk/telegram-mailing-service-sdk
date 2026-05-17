@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "https://app.telegasend.ru/api",
+      "url": "https://app.telegasend.ru/api/v1",
       "description": "Production server"
     }
   ],

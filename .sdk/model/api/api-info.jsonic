@@ -11,7 +11,7 @@ main: {
       servers: [
         {
           description: "Production server"
-          url: "https://app.telegasend.ru/api"
+          url: "https://app.telegasend.ru/api/v1"
         }
       ]
       title: "Telegram Mailing Service"
