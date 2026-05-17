@@ -1,10 +1,10 @@
 package voxgigtelegrammailingservicesdk
 
 import (
-	"github.com/voxgig-sdk/telegram-mailing-service-sdk/core"
-	"github.com/voxgig-sdk/telegram-mailing-service-sdk/entity"
-	"github.com/voxgig-sdk/telegram-mailing-service-sdk/feature"
-	_ "github.com/voxgig-sdk/telegram-mailing-service-sdk/utility"
+	"github.com/voxgig-sdk/telegram-mailing-service-sdk/go/core"
+	"github.com/voxgig-sdk/telegram-mailing-service-sdk/go/entity"
+	"github.com/voxgig-sdk/telegram-mailing-service-sdk/go/feature"
+	_ "github.com/voxgig-sdk/telegram-mailing-service-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

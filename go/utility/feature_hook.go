@@ -3,7 +3,7 @@ package utility
 import (
 	"reflect"
 
-	"github.com/voxgig-sdk/telegram-mailing-service-sdk/core"
+	"github.com/voxgig-sdk/telegram-mailing-service-sdk/go/core"
 )
 
 func featureHookUtil(ctx *core.Context, name string) {

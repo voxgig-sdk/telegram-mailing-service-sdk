@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/telegram-mailing-service-sdk"
-	"github.com/voxgig-sdk/telegram-mailing-service-sdk/core"
+	sdk "github.com/voxgig-sdk/telegram-mailing-service-sdk/go"
+	"github.com/voxgig-sdk/telegram-mailing-service-sdk/go/core"
 )
 
 func TestMailingDirect(t *testing.T) {

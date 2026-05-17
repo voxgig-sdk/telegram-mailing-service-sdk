@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/telegram-mailing-service-sdk/core"
+import "github.com/voxgig-sdk/telegram-mailing-service-sdk/go/core"
 
 func init() {
 	core.UtilityRegistrar = registerAll

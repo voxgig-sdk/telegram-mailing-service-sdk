@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/voxgig-sdk/telegram-mailing-service-sdk/core"
+	"github.com/voxgig-sdk/telegram-mailing-service-sdk/go/core"
 )
 
 type LogFeature struct {

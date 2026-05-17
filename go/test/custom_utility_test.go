@@ -3,7 +3,7 @@ package sdktest
 import (
 	"testing"
 
-	sdk "github.com/voxgig-sdk/telegram-mailing-service-sdk"
+	sdk "github.com/voxgig-sdk/telegram-mailing-service-sdk/go"
 )
 
 func TestCustomUtility(t *testing.T) {
