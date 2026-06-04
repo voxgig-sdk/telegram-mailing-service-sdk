@@ -129,7 +129,6 @@ def _mailing_basic_setup(extra):
         "TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID": idmap,
         "TELEGRAMMAILINGSERVICE_TEST_LIVE": "FALSE",
         "TELEGRAMMAILINGSERVICE_TEST_EXPLAIN": "FALSE",
-        "TELEGRAMMAILINGSERVICE_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -140,7 +139,6 @@ def _mailing_basic_setup(extra):
     if env.get("TELEGRAMMAILINGSERVICE_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("TELEGRAMMAILINGSERVICE_APIKEY"),
             },
             extra or {},
         ])

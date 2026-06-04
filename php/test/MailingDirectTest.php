@@ -123,14 +123,12 @@ function mailing_direct_setup($mockres)
     $env = Runner::env_override([
         "TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID" => [],
         "TELEGRAMMAILINGSERVICE_TEST_LIVE" => "FALSE",
-        "TELEGRAMMAILINGSERVICE_APIKEY" => "NONE",
     ]);
 
     $live = $env["TELEGRAMMAILINGSERVICE_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["TELEGRAMMAILINGSERVICE_APIKEY"],
         ];
         $client = new TelegramMailingServiceSDK($merged_opts);
         return [

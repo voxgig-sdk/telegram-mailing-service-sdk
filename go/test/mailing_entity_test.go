@@ -172,7 +172,6 @@ func mailingBasicSetup(extra map[string]any) *entityTestSetup {
 		"TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID": idmap,
 		"TELEGRAMMAILINGSERVICE_TEST_LIVE":      "FALSE",
 		"TELEGRAMMAILINGSERVICE_TEST_EXPLAIN":   "FALSE",
-		"TELEGRAMMAILINGSERVICE_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID"])
@@ -183,7 +182,6 @@ func mailingBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["TELEGRAMMAILINGSERVICE_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["TELEGRAMMAILINGSERVICE_APIKEY"],
 			},
 			extra,
 		})

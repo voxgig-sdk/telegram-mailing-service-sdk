@@ -15,9 +15,6 @@ module TelegramMailingServiceConfig
       },
       "options" => {
         "base" => "https://app.telegasend.ru/api/v1",
-        "auth" => {
-          "prefix" => "Bearer",
-        },
         "headers" => {
           "content-type" => "application/json",
         },
