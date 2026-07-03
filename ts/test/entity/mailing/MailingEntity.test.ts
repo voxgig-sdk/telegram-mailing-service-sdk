@@ -141,6 +141,7 @@ function basicSetup(extra?: any) {
     'TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID': idmap,
     'TELEGRAM_MAILING_SERVICE_TEST_LIVE': 'FALSE',
     'TELEGRAM_MAILING_SERVICE_TEST_EXPLAIN': 'FALSE',
+    'TELEGRAM_MAILING_SERVICE_APIKEY': 'NONE',
   })
 
   idmap = env['TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID']
@@ -150,6 +151,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new TelegramMailingServiceSDK(merge([
       {
+        apikey: env.TELEGRAM_MAILING_SERVICE_APIKEY,
       },
       extra
     ]))

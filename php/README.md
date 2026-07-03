@@ -1,6 +1,11 @@
 # TelegramMailingService PHP SDK
 
-The PHP SDK for the TelegramMailingService API. Provides an entity-oriented interface using PHP conventions.
+
+
+The PHP SDK for the TelegramMailingService API — an entity-oriented client using PHP conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -20,13 +25,15 @@ loading a specific record.
 <?php
 require_once 'telegrammailingservice_sdk.php';
 
-$client = new TelegramMailingServiceSDK([]);
+$client = new TelegramMailingServiceSDK([
+    "apikey" => getenv("TELEGRAM-MAILING-SERVICE_APIKEY"),
+]);
 ```
 
 ### 2. List mailings
 
 ```php
-[$result, $err] = $client->Mailing(null)->list(null, null);
+[$result, $err] = $client->Mailing()->list();
 if ($err) { throw new \Exception($err); }
 
 if (is_array($result)) {
@@ -40,7 +47,7 @@ if (is_array($result)) {
 ### 3. Load a mailing
 
 ```php
-[$result, $err] = $client->Mailing(null)->load(["id" => "example_id"], null);
+[$result, $err] = $client->Mailing()->load(["id" => "example_id"]);
 if ($err) { throw new \Exception($err); }
 print_r($result);
 ```
@@ -49,10 +56,10 @@ print_r($result);
 
 ```php
 // Create
-[$created, $_] = $client->Mailing(null)->create(["name" => "Example"], null);
+[$created, $_] = $client->Mailing()->create(["name" => "Example"]);
 
 // Remove
-$client->Mailing(null)->remove(["id" => $created["id"]], null);
+$client->Mailing()->remove(["id" => $created["id"]]);
 ```
 
 
@@ -96,11 +103,9 @@ print_r($fetchdef["headers"]);
 Create a mock client for unit testing — no server required:
 
 ```php
-$client = TelegramMailingServiceSDK::test(null, null);
+$client = TelegramMailingServiceSDK::test();
 
-[$result, $err] = $client->TelegramMailingService(null)->load(
-    ["id" => "test01"], null
-);
+[$result, $err] = $client->TelegramMailingService()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -135,6 +140,7 @@ Create a `.env.local` file at the project root:
 
 ```
 TELEGRAM-MAILING-SERVICE_TEST_LIVE=TRUE
+TELEGRAM-MAILING-SERVICE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -157,6 +163,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

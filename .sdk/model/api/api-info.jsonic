@@ -16,22 +16,7 @@ main: {
       ]
       title: "Telegram Mailing Service"
       version: "1.0.0"
-      tagline: "Create, manage, and track mailing campaigns sent through Telegram bots"
-      homepage: "https://app.telegasend.ru"
-      docs_url: "https://freepublicapis.com/telegram-mailing-service"
-      about_md: `The Telegram Mailing Service API is provided by [TelegaSend](https://app.telegasend.ru), a service that lets developers run bulk-messaging campaigns to Telegram users through a bot. Requests are made against \`https://app.telegasend.ru/api/v1\` and authenticated with a Telegram \`bot_token\` supplied in the request body.
-
-What you get from the API:
-
-- Launch a new mailing with a bot token, message text, optional schedule, development-mode flag, and a recipient list supplied via file URL (\`POST /api/v1/mailing\`).
-- Look up the current delivery status of a previously created mailing by its identifier (\`GET /api/v1/mailing/{id}\`).
-- A per-mailing recipient cap of 1,000.
-
-Operational notes: CORS is disabled, so the API is intended for server-side use rather than direct browser calls. Community monitoring on FreePublicAPIs reports ~700ms average response times and 100% reliability over a recent 30-day window. Licence terms are not published on the catalogue page — consult TelegaSend directly before relying on the service.`
-      entity_desc: {
-        mailing: "A Telegram mailing campaign — created with `POST /api/v1/mailing` (bot token, message, schedule, recipient file URL) and inspected with `GET /api/v1/mailing/{id}` for delivery status."
-      }
-      auth: false
     }
   }
 }
+

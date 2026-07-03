@@ -136,12 +136,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID': {},
     'TELEGRAMMAILINGSERVICE_TEST_LIVE': 'FALSE',
+    'TELEGRAMMAILINGSERVICE_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.TELEGRAMMAILINGSERVICE_TEST_LIVE
 
   if (live) {
     const client = new TelegramMailingServiceSDK({
+      apikey: env.TELEGRAMMAILINGSERVICE_APIKEY,
     })
 
     let idmap: any = env['TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID']

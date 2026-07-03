@@ -194,12 +194,14 @@ func mailingDirectSetup(mockres any) *mailingDirectSetupResult {
 	env := envOverride(map[string]any{
 		"TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID": map[string]any{},
 		"TELEGRAMMAILINGSERVICE_TEST_LIVE":    "FALSE",
+		"TELEGRAMMAILINGSERVICE_APIKEY":       "NONE",
 	})
 
 	live := env["TELEGRAMMAILINGSERVICE_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["TELEGRAMMAILINGSERVICE_APIKEY"],
 		}
 		client := sdk.NewTelegramMailingServiceSDK(mergedOpts)
 

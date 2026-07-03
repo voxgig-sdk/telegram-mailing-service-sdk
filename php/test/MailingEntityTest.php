@@ -122,6 +122,7 @@ function mailing_basic_setup($extra)
         "TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID" => $idmap,
         "TELEGRAMMAILINGSERVICE_TEST_LIVE" => "FALSE",
         "TELEGRAMMAILINGSERVICE_TEST_EXPLAIN" => "FALSE",
+        "TELEGRAMMAILINGSERVICE_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -133,6 +134,7 @@ function mailing_basic_setup($extra)
     if ($env["TELEGRAMMAILINGSERVICE_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
+                "apikey" => $env["TELEGRAMMAILINGSERVICE_APIKEY"],
             ],
             $extra ?? [],
         ]);

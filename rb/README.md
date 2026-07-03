@@ -1,6 +1,11 @@
 # TelegramMailingService Ruby SDK
 
-The Ruby SDK for the TelegramMailingService API. Provides an entity-oriented interface using idiomatic Ruby conventions.
+
+
+The Ruby SDK for the TelegramMailingService API — an entity-oriented client using idiomatic Ruby conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -31,13 +36,15 @@ loading a specific record.
 ```ruby
 require_relative "TelegramMailingService_sdk"
 
-client = TelegramMailingServiceSDK.new({})
+client = TelegramMailingServiceSDK.new({
+  "apikey" => ENV["TELEGRAM-MAILING-SERVICE_APIKEY"],
+})
 ```
 
 ### 2. List mailings
 
 ```ruby
-result, err = client.Mailing(nil).list(nil, nil)
+result, err = client.Mailing().list
 raise err if err
 
 if result.is_a?(Array)
@@ -51,7 +58,7 @@ end
 ### 3. Load a mailing
 
 ```ruby
-result, err = client.Mailing(nil).load({ "id" => "example_id" }, nil)
+result, err = client.Mailing().load({ "id" => "example_id" })
 raise err if err
 puts result
 ```
@@ -60,10 +67,10 @@ puts result
 
 ```ruby
 # Create
-created, _ = client.Mailing(nil).create({ "name" => "Example" }, nil)
+created, _ = client.Mailing().create({ "name" => "Example" })
 
 # Remove
-client.Mailing(nil).remove({ "id" => created["id"] }, nil)
+client.Mailing().remove({ "id" => created["id"] })
 ```
 
 
@@ -107,11 +114,9 @@ puts fetchdef["headers"]
 Create a mock client for unit testing — no server required:
 
 ```ruby
-client = TelegramMailingServiceSDK.test(nil, nil)
+client = TelegramMailingServiceSDK.test
 
-result, err = client.TelegramMailingService(nil).load(
-  { "id" => "test01" }, nil
-)
+result, err = client.TelegramMailingService().load({ "id" => "test01" })
 # result contains mock response data
 ```
 
@@ -143,6 +148,7 @@ Create a `.env.local` file at the project root:
 
 ```
 TELEGRAM-MAILING-SERVICE_TEST_LIVE=TRUE
+TELEGRAM-MAILING-SERVICE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -165,6 +171,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `String` | API key for authentication. |
 | `base` | `String` | Base URL of the API server. |
 | `prefix` | `String` | URL path prefix prepended to all requests. |
 | `suffix` | `String` | URL path suffix appended to all requests. |

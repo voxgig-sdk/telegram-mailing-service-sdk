@@ -15,6 +15,9 @@ def make_config():
         },
         "options": {
             "base": "https://app.telegasend.ru/api/v1",
+            "auth": {
+                "prefix": "Bearer",
+            },
             "headers": {
         "content-type": "application/json",
       },
@@ -26,41 +29,42 @@ def make_config():
       "mailing": {
         "fields": [
           {
+            "active": True,
             "name": "attachment",
             "req": False,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "completed_at",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 1,
           },
           {
+            "active": True,
             "name": "created_at",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 2,
           },
           {
+            "active": True,
             "name": "failed_count",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 3,
           },
           {
+            "active": True,
             "name": "id",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 4,
           },
           {
+            "active": True,
             "name": "message",
             "op": {
               "create": {
@@ -70,10 +74,10 @@ def make_config():
             },
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 5,
           },
           {
+            "active": True,
             "name": "name",
             "op": {
               "create": {
@@ -83,114 +87,115 @@ def make_config():
             },
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 6,
           },
           {
+            "active": True,
             "name": "parse_mode",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 7,
           },
           {
+            "active": True,
             "name": "recipient",
             "req": True,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 8,
           },
           {
+            "active": True,
             "name": "schedule_time",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 9,
           },
           {
+            "active": True,
             "name": "sent_count",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 10,
           },
           {
+            "active": True,
             "name": "status",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 11,
           },
           {
+            "active": True,
             "name": "total_recipient",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 12,
           },
           {
+            "active": True,
             "name": "updated_at",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 13,
           },
         ],
         "name": "mailing",
         "op": {
           "create": {
+            "input": "data",
             "name": "create",
             "points": [
               {
+                "active": True,
+                "args": {},
                 "method": "POST",
                 "orig": "/mailings",
                 "parts": [
                   "mailings",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "create",
           },
           "list": {
+            "input": "data",
             "name": "list",
             "points": [
               {
+                "active": True,
                 "args": {
                   "query": [
                     {
+                      "active": True,
                       "example": 20,
                       "kind": "query",
                       "name": "limit",
                       "orig": "limit",
                       "reqd": False,
                       "type": "`$INTEGER`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "example": 0,
                       "kind": "query",
                       "name": "offset",
                       "orig": "offset",
                       "reqd": False,
                       "type": "`$INTEGER`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "kind": "query",
                       "name": "status",
                       "orig": "status",
                       "reqd": False,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -210,26 +215,26 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "list",
           },
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "mailing_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -253,26 +258,26 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
           "remove": {
+            "input": "data",
             "name": "remove",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "mailing_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -296,11 +301,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "remove",
           },
         },

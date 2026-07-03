@@ -1,20 +1,8 @@
 # TelegramMailingService SDK
 
-Create, manage, and track mailing campaigns sent through Telegram bots
+Telegram Mailing Service client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Telegram Mailing Service
-
-The Telegram Mailing Service API is provided by [TelegaSend](https://app.telegasend.ru), a service that lets developers run bulk-messaging campaigns to Telegram users through a bot. Requests are made against `https://app.telegasend.ru/api/v1` and authenticated with a Telegram `bot_token` supplied in the request body.
-
-What you get from the API:
-
-- Launch a new mailing with a bot token, message text, optional schedule, development-mode flag, and a recipient list supplied via file URL (`POST /api/v1/mailing`).
-- Look up the current delivery status of a previously created mailing by its identifier (`GET /api/v1/mailing/{id}`).
-- A per-mailing recipient cap of 1,000.
-
-Operational notes: CORS is disabled, so the API is intended for server-side use rather than direct browser calls. Community monitoring on FreePublicAPIs reports ~700ms average response times and 100% reliability over a recent 30-day window. Licence terms are not published on the catalogue page — consult TelegaSend directly before relying on the service.
 
 ## Try it
 
@@ -48,29 +36,31 @@ gem install telegram-mailing-service-sdk
 luarocks install telegram-mailing-service-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { TelegramMailingServiceSDK } from 'telegram-mailing-service'
 
-const client = new TelegramMailingServiceSDK({})
+const client = new TelegramMailingServiceSDK({
+  apikey: process.env.TELEGRAM-MAILING-SERVICE_APIKEY,
+})
 
 // List all mailings
 const mailings = await client.Mailing().list()
+console.log(mailings.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -100,7 +90,7 @@ The API exposes one entity:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Mailing** | A Telegram mailing campaign — created with `POST /api/v1/mailing` (bot token, message, schedule, recipient file URL) and inspected with `GET /api/v1/mailing/{id}` for delivery status. | `/mailings` |
+| **Mailing** |  | `/mailings` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -110,17 +100,20 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from telegrammailingservice_sdk import TelegramMailingServiceSDK
 
-client = TelegramMailingServiceSDK({})
+client = TelegramMailingServiceSDK({
+    "apikey": os.environ.get("TELEGRAM-MAILING-SERVICE_APIKEY"),
+})
 
 # List all mailings
-mailings, err = client.Mailing(None).list(None, None)
+mailings, err = client.Mailing().list()
+print(mailings)
 
 # Load a specific mailing
-mailing, err = client.Mailing(None).load(
-    {"id": "example_id"}, None
-)
+mailing, err = client.Mailing().load({"id": "example_id"})
+print(mailing)
 ```
 
 ### PHP
@@ -129,15 +122,17 @@ mailing, err = client.Mailing(None).load(
 <?php
 require_once 'telegrammailingservice_sdk.php';
 
-$client = new TelegramMailingServiceSDK([]);
+$client = new TelegramMailingServiceSDK([
+    "apikey" => getenv("TELEGRAM-MAILING-SERVICE_APIKEY"),
+]);
 
 // List all mailings
-[$mailings, $err] = $client->Mailing(null)->list(null, null);
+[$mailings, $err] = $client->Mailing()->list();
+print_r($mailings);
 
 // Load a specific mailing
-[$mailing, $err] = $client->Mailing(null)->load(
-    ["id" => "example_id"], null
-);
+[$mailing, $err] = $client->Mailing()->load(["id" => "example_id"]);
+print_r($mailing);
 ```
 
 ### Golang
@@ -145,10 +140,13 @@ $client = new TelegramMailingServiceSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/telegram-mailing-service-sdk/go"
 
-client := sdk.NewTelegramMailingServiceSDK(map[string]any{})
+client := sdk.NewTelegramMailingServiceSDK(map[string]any{
+    "apikey": os.Getenv("TELEGRAM-MAILING-SERVICE_APIKEY"),
+})
 
 // List all mailings
 mailings, err := client.Mailing(nil).List(nil, nil)
+fmt.Println(mailings)
 ```
 
 ### Ruby
@@ -156,15 +154,17 @@ mailings, err := client.Mailing(nil).List(nil, nil)
 ```ruby
 require_relative "TelegramMailingService_sdk"
 
-client = TelegramMailingServiceSDK.new({})
+client = TelegramMailingServiceSDK.new({
+  "apikey" => ENV["TELEGRAM-MAILING-SERVICE_APIKEY"],
+})
 
 # List all mailings
-mailings, err = client.Mailing(nil).list(nil, nil)
+mailings, err = client.Mailing().list
+puts mailings
 
 # Load a specific mailing
-mailing, err = client.Mailing(nil).load(
-  { "id" => "example_id" }, nil
-)
+mailing, err = client.Mailing().load({ "id" => "example_id" })
+puts mailing
 ```
 
 ### Lua
@@ -172,15 +172,17 @@ mailing, err = client.Mailing(nil).load(
 ```lua
 local sdk = require("telegram-mailing-service_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("TELEGRAM-MAILING-SERVICE_APIKEY"),
+})
 
 -- List all mailings
-local mailings, err = client:Mailing(nil):list(nil, nil)
+local mailings, err = client:Mailing():list()
+print(mailings)
 
 -- Load a specific mailing
-local mailing, err = client:Mailing(nil):load(
-  { id = "example_id" }, nil
-)
+local mailing, err = client:Mailing():load({ id = "example_id" })
+print(mailing)
 ```
 
 ## Unit testing in offline mode
@@ -199,25 +201,21 @@ const result = await client.Mailing().load({ id: 'test01' })
 ### Python
 
 ```python
-client = TelegramMailingServiceSDK.test(None, None)
-result, err = client.Mailing(None).load(
-    {"id": "test01"}, None
-)
+client = TelegramMailingServiceSDK.test()
+result, err = client.Mailing().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = TelegramMailingServiceSDK::test(null, null);
-[$result, $err] = $client->Mailing(null)->load(
-    ["id" => "test01"], null
-);
+$client = TelegramMailingServiceSDK::test();
+[$result, $err] = $client->Mailing()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Mailing(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -226,19 +224,15 @@ result, err := client.Mailing(nil).Load(
 ### Ruby
 
 ```ruby
-client = TelegramMailingServiceSDK.test(nil, nil)
-result, err = client.Mailing(nil).load(
-  { "id" => "test01" }, nil
-)
+client = TelegramMailingServiceSDK.test
+result, err = client.Mailing().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Mailing(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Mailing():load({ id = "test01" })
 ```
 
 ## How it works
@@ -342,11 +336,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Telegram Mailing Service
-
-- Upstream: [https://app.telegasend.ru](https://app.telegasend.ru)
-- API docs: [https://freepublicapis.com/telegram-mailing-service](https://freepublicapis.com/telegram-mailing-service)
 
 ---
 

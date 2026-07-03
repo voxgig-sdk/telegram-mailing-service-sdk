@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -132,9 +132,9 @@ local mailing = client:Mailing(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Mailing(nil):create({
+local result, err = client:Mailing():create({
   recipient = --[[ `$ARRAY` ]],
-}, nil)
+})
 ```
 
 #### `list(reqmatch, ctrl) -> any, err`
@@ -142,7 +142,7 @@ local result, err = client:Mailing(nil):create({
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Mailing(nil):list(nil, nil)
+local results, err = client:Mailing():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -150,7 +150,7 @@ local results, err = client:Mailing(nil):list(nil, nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Mailing(nil):load({ id = "mailing_id" }, nil)
+local result, err = client:Mailing():load({ id = "mailing_id" })
 ```
 
 #### `remove(reqmatch, ctrl) -> any, err`
@@ -158,7 +158,7 @@ local result, err = client:Mailing(nil):load({ id = "mailing_id" }, nil)
 Remove the entity matching the given criteria.
 
 ```lua
-local result, err = client:Mailing(nil):remove({ id = "mailing_id" }, nil)
+local result, err = client:Mailing():remove({ id = "mailing_id" })
 ```
 
 ### Common Methods

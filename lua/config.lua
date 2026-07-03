@@ -14,6 +14,9 @@ local function make_config()
     },
     options = {
       base = "https://app.telegasend.ru/api/v1",
+      auth = {
+        prefix = "Bearer",
+      },
       headers = {
         ["content-type"] = "application/json",
       },
@@ -25,41 +28,42 @@ local function make_config()
       ["mailing"] = {
         ["fields"] = {
           {
+            ["active"] = true,
             ["name"] = "attachment",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
-            ["active"] = true,
             ["index$"] = 0,
           },
           {
+            ["active"] = true,
             ["name"] = "completed_at",
             ["req"] = false,
             ["type"] = "`$STRING`",
-            ["active"] = true,
             ["index$"] = 1,
           },
           {
+            ["active"] = true,
             ["name"] = "created_at",
             ["req"] = false,
             ["type"] = "`$STRING`",
-            ["active"] = true,
             ["index$"] = 2,
           },
           {
+            ["active"] = true,
             ["name"] = "failed_count",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
-            ["active"] = true,
             ["index$"] = 3,
           },
           {
+            ["active"] = true,
             ["name"] = "id",
             ["req"] = false,
             ["type"] = "`$STRING`",
-            ["active"] = true,
             ["index$"] = 4,
           },
           {
+            ["active"] = true,
             ["name"] = "message",
             ["op"] = {
               ["create"] = {
@@ -69,10 +73,10 @@ local function make_config()
             },
             ["req"] = false,
             ["type"] = "`$STRING`",
-            ["active"] = true,
             ["index$"] = 5,
           },
           {
+            ["active"] = true,
             ["name"] = "name",
             ["op"] = {
               ["create"] = {
@@ -82,114 +86,115 @@ local function make_config()
             },
             ["req"] = false,
             ["type"] = "`$STRING`",
-            ["active"] = true,
             ["index$"] = 6,
           },
           {
+            ["active"] = true,
             ["name"] = "parse_mode",
             ["req"] = false,
             ["type"] = "`$STRING`",
-            ["active"] = true,
             ["index$"] = 7,
           },
           {
+            ["active"] = true,
             ["name"] = "recipient",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
-            ["active"] = true,
             ["index$"] = 8,
           },
           {
+            ["active"] = true,
             ["name"] = "schedule_time",
             ["req"] = false,
             ["type"] = "`$STRING`",
-            ["active"] = true,
             ["index$"] = 9,
           },
           {
+            ["active"] = true,
             ["name"] = "sent_count",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
-            ["active"] = true,
             ["index$"] = 10,
           },
           {
+            ["active"] = true,
             ["name"] = "status",
             ["req"] = false,
             ["type"] = "`$STRING`",
-            ["active"] = true,
             ["index$"] = 11,
           },
           {
+            ["active"] = true,
             ["name"] = "total_recipient",
             ["req"] = false,
             ["type"] = "`$INTEGER`",
-            ["active"] = true,
             ["index$"] = 12,
           },
           {
+            ["active"] = true,
             ["name"] = "updated_at",
             ["req"] = false,
             ["type"] = "`$STRING`",
-            ["active"] = true,
             ["index$"] = 13,
           },
         },
         ["name"] = "mailing",
         ["op"] = {
           ["create"] = {
+            ["input"] = "data",
             ["name"] = "create",
             ["points"] = {
               {
+                ["active"] = true,
+                ["args"] = {},
                 ["method"] = "POST",
                 ["orig"] = "/mailings",
                 ["parts"] = {
                   "mailings",
                 },
+                ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["active"] = true,
-                ["args"] = {},
-                ["select"] = {},
                 ["index$"] = 0,
               },
             },
-            ["input"] = "data",
             ["key$"] = "create",
           },
           ["list"] = {
+            ["input"] = "data",
             ["name"] = "list",
             ["points"] = {
               {
+                ["active"] = true,
                 ["args"] = {
                   ["query"] = {
                     {
+                      ["active"] = true,
                       ["example"] = 20,
                       ["kind"] = "query",
                       ["name"] = "limit",
                       ["orig"] = "limit",
                       ["reqd"] = false,
                       ["type"] = "`$INTEGER`",
-                      ["active"] = true,
                     },
                     {
+                      ["active"] = true,
                       ["example"] = 0,
                       ["kind"] = "query",
                       ["name"] = "offset",
                       ["orig"] = "offset",
                       ["reqd"] = false,
                       ["type"] = "`$INTEGER`",
-                      ["active"] = true,
                     },
                     {
+                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "status",
                       ["orig"] = "status",
                       ["reqd"] = false,
                       ["type"] = "`$STRING`",
-                      ["active"] = true,
                     },
                   },
                 },
@@ -209,26 +214,26 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["active"] = true,
                 ["index$"] = 0,
               },
             },
-            ["input"] = "data",
             ["key$"] = "list",
           },
           ["load"] = {
+            ["input"] = "data",
             ["name"] = "load",
             ["points"] = {
               {
+                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
+                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "mailing_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["active"] = true,
                     },
                   },
                 },
@@ -252,26 +257,26 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["active"] = true,
                 ["index$"] = 0,
               },
             },
-            ["input"] = "data",
             ["key$"] = "load",
           },
           ["remove"] = {
+            ["input"] = "data",
             ["name"] = "remove",
             ["points"] = {
               {
+                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
+                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "mailing_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["active"] = true,
                     },
                   },
                 },
@@ -295,11 +300,9 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["active"] = true,
                 ["index$"] = 0,
               },
             },
-            ["input"] = "data",
             ["key$"] = "remove",
           },
         },
