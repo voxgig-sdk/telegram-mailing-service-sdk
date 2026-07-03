@@ -10,7 +10,7 @@ The TypeScript SDK for the TelegramMailingService API — a type-safe, entity-or
 
 ## Install
 ```bash
-npm install telegram-mailing-service
+npm install @voxgig-sdk/telegram-mailing-service
 ```
 ## Tutorial: your first API call
 

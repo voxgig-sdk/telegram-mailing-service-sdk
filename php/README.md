@@ -10,7 +10,7 @@ The PHP SDK for the TelegramMailingService API — an entity-oriented client usi
 
 ## Install
 ```bash
-composer require voxgig/telegram-mailing-service-sdk
+composer require voxgig-sdk/telegram-mailing-service
 ```
 
 

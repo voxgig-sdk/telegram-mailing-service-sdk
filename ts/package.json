@@ -1,7 +1,23 @@
 {
   "name": "@voxgig-sdk/telegram-mailing-service",
   "version": "0.0.1",
-  "description": "DESCRIPTION",
+  "description": "Unofficial generated TypeScript SDK for the Telegram Mailing Service public API. Not affiliated with or endorsed by the upstream API provider.",
+  "keywords": [
+    "voxgig",
+    "sdk",
+    "generated-sdk",
+    "openapi",
+    "api-client",
+    "telegram-mailing-service"
+  ],
+  "homepage": "https://github.com/voxgig-sdk/telegram-mailing-service-sdk#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voxgig-sdk/telegram-mailing-service-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/voxgig-sdk/telegram-mailing-service-sdk/issues"
+  },
   "main": "dist/TelegramMailingServiceSDK.js",
   "type": "commonjs",
   "types": "dist/TelegramMailingServiceSDK.d.ts",
@@ -14,7 +30,10 @@
     "clean": "rm -rf node_modules yarn.lock package-lock.json",
     "reset": "npm run clean && npm i && npm run build && npm test"
   },
-  "author": "TelegramMailingService",
+  "author": {
+    "name": "Voxgig",
+    "url": "https://voxgig.com"
+  },
   "license": "MIT",
   "dependencies": {},
   "peerDependencies": {},

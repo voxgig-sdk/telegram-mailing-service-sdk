@@ -10,13 +10,13 @@ The Ruby SDK for the TelegramMailingService API — an entity-oriented client us
 
 ## Install
 ```bash
-gem install telegram-mailing-service-sdk
+gem install voxgig-sdk-telegram-mailing-service
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "telegram-mailing-service-sdk"
+gem "voxgig-sdk-telegram-mailing-service"
 ```
 
 Then run:

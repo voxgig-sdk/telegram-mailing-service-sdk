@@ -10,7 +10,7 @@ The Python SDK for the TelegramMailingService API — an entity-oriented client 
 
 ## Install
 ```bash
-pip install telegram-mailing-service-sdk
+pip install voxgig-sdk-telegram-mailing-service
 ```
 
 Or install from source:

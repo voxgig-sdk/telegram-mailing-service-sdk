@@ -10,7 +10,7 @@ The Lua SDK for the TelegramMailingService API — an entity-oriented client usi
 
 ## Install
 ```bash
-luarocks install telegram-mailing-service-sdk
+luarocks install voxgig-sdk-telegram-mailing-service
 ```
 
 If the module is not yet published, add the source directory to
