@@ -28,9 +28,11 @@ const client = new TelegramMailingServiceSDK({
   apikey: process.env.TELEGRAM_MAILING_SERVICE_APIKEY,
 })
 
-// List all mailings
-const mailings = await client.mailing.list()
-console.log(mailings.data)
+// List all mailings (returns Mailing[])
+const mailings = await client.Mailing().list()
+for (const mailing of mailings) {
+  console.log(mailing)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -88,12 +90,13 @@ client = TelegramMailingServiceSDK({
     "apikey": os.environ.get("TELEGRAM_MAILING_SERVICE_APIKEY"),
 })
 
-# List all mailings
-mailings = client.mailing.list()
-print(mailings)
+# List all mailings (returns a list, raises on error)
+mailings = client.Mailing().list({})
+for mailing in mailings:
+    print(mailing)
 
-# Load a specific mailing
-mailing = client.mailing.load({"id": "example_id"})
+# Load a specific mailing (returns the record, raises on error)
+mailing = client.Mailing().load({"id": "example_id"})
 print(mailing)
 ```
 
@@ -107,12 +110,12 @@ $client = new TelegramMailingServiceSDK([
     "apikey" => getenv("TELEGRAM_MAILING_SERVICE_APIKEY"),
 ]);
 
-// List all mailings (throws on error)
-$mailings = $client->mailing()->list();
+// List all mailings (returns an array; throws on error)
+$mailings = $client->Mailing()->list();
 print_r($mailings);
 
-// Load a specific mailing
-$mailing = $client->mailing()->load(["id" => "example_id"]);
+// Load a specific mailing (returns the bare record; throws on error)
+$mailing = $client->Mailing()->load(["id" => "example_id"]);
 print_r($mailing);
 ```
 
@@ -139,12 +142,12 @@ client = TelegramMailingServiceSDK.new({
   "apikey" => ENV["TELEGRAM_MAILING_SERVICE_APIKEY"],
 })
 
-# List all mailings
-mailings = client.mailing.list
+# List all mailings (returns an Array; raises on error)
+mailings = client.Mailing.list
 puts mailings
 
-# Load a specific mailing
-mailing = client.mailing.load({ "id" => "example_id" })
+# Load a specific mailing (returns the bare record; raises on error)
+mailing = client.Mailing.load({ "id" => "example_id" })
 puts mailing
 ```
 
@@ -158,11 +161,11 @@ local client = sdk.new({
 })
 
 -- List all mailings
-local mailings, err = client:mailing():list()
+local mailings, err = client:Mailing():list()
 print(mailings)
 
 -- Load a specific mailing
-local mailing, err = client:mailing():load({ id = "example_id" })
+local mailing, err = client:Mailing():load({ id = "example_id" })
 print(mailing)
 ```
 
@@ -175,22 +178,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = TelegramMailingServiceSDK.test()
-const result = await client.mailing.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const mailing = await client.Mailing().load({ id: 'test01' })
+// mailing is a bare Mailing populated with mock data
+console.log(mailing)
 ```
 
 ### Python
 
 ```python
 client = TelegramMailingServiceSDK.test()
-result = client.mailing.load({"id": "test01"})
+mailing = client.Mailing().load({"id": "test01"})
+print(mailing)
 ```
 
 ### PHP
 
 ```php
-$client = TelegramMailingServiceSDK::test();
-$result = $client->mailing()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = TelegramMailingServiceSDK::test([
+    "entity" => ["mailing" => ["test01" => ["id" => "test01"]]],
+]);
+$mailing = $client->Mailing()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -205,15 +213,18 @@ result, err := client.Mailing(nil).Load(
 ### Ruby
 
 ```ruby
-client = TelegramMailingServiceSDK.test
-result = client.mailing.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = TelegramMailingServiceSDK.test({
+  "entity" => { "mailing" => { "test01" => { "id" => "test01" } } },
+})
+mailing = client.Mailing.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:mailing():load({ id = "test01" })
+local result, err = client:Mailing():load({ id = "test01" })
 ```
 
 ## How it works
@@ -261,6 +272,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

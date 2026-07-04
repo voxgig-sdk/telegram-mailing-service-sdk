@@ -34,24 +34,28 @@ client = TelegramMailingServiceSDK({
 })
 ```
 
-### 2. List mailings
+### 2. List mailing records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.mailing.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    mailings = client.Mailing().list({})
+    for mailing in mailings:
+        print(mailing)
 except Exception as err:
     print(f"list failed: {err}")
 ```
 
 ### 3. Load a mailing
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.mailing.load({"id": "example_id"})
-    print(result)
+    mailing = client.Mailing().load({"id": "example_id"})
+    print(mailing)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -59,11 +63,11 @@ except Exception as err:
 ### 4. Create, update, and remove
 
 ```python
-# Create
-created = client.mailing.create({"name": "Example"})
+# Create — returns the bare created record (a dict)
+created = client.Mailing().create({"name": "Example"})
 
 # Remove
-client.mailing.remove({"id": created["id"]})
+client.Mailing().remove({"id": created["id"]})
 ```
 
 
@@ -109,8 +113,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = TelegramMailingServiceSDK.test()
 
-result = client.mailing.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+mailing = client.Mailing().load({"id": "test01"})
+# mailing contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -258,7 +263,7 @@ API path: `/mailings`
 
 ### Mailing
 
-Create an instance: `const mailing = client.mailing`
+Create an instance: `mailing = client.Mailing()`
 
 #### Operations
 
@@ -290,21 +295,21 @@ Create an instance: `const mailing = client.mailing`
 
 #### Example: Load
 
-```ts
-const mailing = await client.mailing.load({ id: 'mailing_id' })
+```python
+mailing = client.Mailing().load({"id": "mailing_id"})
 ```
 
 #### Example: List
 
-```ts
-const mailings = await client.mailing.list()
+```python
+mailings = client.Mailing().list({})
 ```
 
 #### Example: Create
 
-```ts
-const mailing = await client.mailing.create({
-  recipient: /* `$ARRAY` */,
+```python
+mailing = client.Mailing().create({
+    "recipient": ...,  # `$ARRAY`
 })
 ```
 
@@ -379,7 +384,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-mailing = client.mailing
+mailing = client.Mailing()
 mailing.load({"id": "example_id"})
 
 # mailing.data_get() now returns the loaded mailing data

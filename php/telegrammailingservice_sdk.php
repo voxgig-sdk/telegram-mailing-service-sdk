@@ -233,10 +233,10 @@ class TelegramMailingServiceSDK
 
     private $_mailing = null;
 
-    // Idiomatic facade: $client->mailing()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Mailing() (PHP method
-    // names are case-insensitive).
-    public function mailing($data = null)
+    // Canonical facade: $client->Mailing()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->mailing()
+    // resolves here too.
+    public function Mailing($data = null)
     {
         require_once __DIR__ . '/entity/mailing_entity.php';
         if ($data === null) {

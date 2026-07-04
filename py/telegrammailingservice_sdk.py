@@ -220,25 +220,15 @@ class TelegramMailingServiceSDK:
         }
 
 
-    @property
-    def mailing(self):
-        """Idiomatic facade: client.mailing.list() / client.mailing.load({"id": ...})."""
-        from entity.mailing_entity import MailingEntity
-        cached = getattr(self, "_mailing", None)
-        if cached is None:
-            cached = MailingEntity(self, None)
-            self._mailing = cached
-        return cached
-
-    def Mailing(self, data=None):
-        # Deprecated: use client.mailing instead.
+    def Mailing(self, data=None) -> "MailingEntity":
+        """Entity factory: client.Mailing().list({}) / client.Mailing().load({"id": ...})."""
         from entity.mailing_entity import MailingEntity
         return MailingEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "TelegramMailingServiceSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -258,3 +248,9 @@ class TelegramMailingServiceSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.mailing_entity import MailingEntity

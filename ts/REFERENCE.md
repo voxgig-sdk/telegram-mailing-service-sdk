@@ -110,7 +110,7 @@ Alias for `TelegramMailingServiceSDK.test()`.
 ## MailingEntity
 
 ```ts
-const mailing = client.mailing
+const mailing = client.Mailing()
 ```
 
 ### Fields
@@ -158,7 +158,7 @@ const mailing = client.mailing
 Create a new entity with the given data.
 
 ```ts
-const result = await client.mailing.create({
+const result = await client.Mailing().create({
   recipient: /* `$ARRAY` */,
 })
 ```
@@ -168,7 +168,7 @@ const result = await client.mailing.create({
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.mailing.list()
+const results = await client.Mailing().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -176,7 +176,7 @@ const results = await client.mailing.list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.mailing.load({ id: 'mailing_id' })
+const result = await client.Mailing().load({ id: 'mailing_id' })
 ```
 
 #### `remove(match: object, ctrl?: object)`
@@ -184,7 +184,7 @@ const result = await client.mailing.load({ id: 'mailing_id' })
 Remove the entity matching the given criteria.
 
 ```ts
-const result = await client.mailing.remove({ id: 'mailing_id' })
+const result = await client.Mailing().remove({ id: 'mailing_id' })
 ```
 
 ### Common Methods

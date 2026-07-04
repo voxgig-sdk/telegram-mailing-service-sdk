@@ -30,16 +30,14 @@ client = TelegramMailingServiceSDK.new({
 })
 ```
 
-### 2. List mailings
+### 2. List mailing records
 
 ```ruby
 begin
-  result = client.mailing.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of Mailing records — iterate directly.
+  mailings = client.Mailing.list
+  mailings.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -50,8 +48,9 @@ end
 
 ```ruby
 begin
-  result = client.mailing.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Mailing record (raises on error).
+  mailing = client.Mailing.load({ "id" => "example_id" })
+  puts mailing
 rescue => err
   warn "load failed: #{err}"
 end
@@ -60,11 +59,11 @@ end
 ### 4. Create, update, and remove
 
 ```ruby
-# Create
-created = client.mailing.create({ "name" => "Example" })
+# create returns the bare created Mailing record.
+created = client.Mailing.create({ "name" => "Example" })
 
 # Remove
-client.mailing.remove({ "id" => created["id"] })
+client.Mailing.remove({ "id" => created["id"] })
 ```
 
 
@@ -108,13 +107,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = TelegramMailingServiceSDK.test
+client = TelegramMailingServiceSDK.test({
+  "entity" => { "mailing" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.mailing.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+mailing = client.Mailing.load({ "id" => "test01" })
+puts mailing
 ```
 
 ### Use a custom fetch function
@@ -261,7 +264,7 @@ API path: `/mailings`
 
 ### Mailing
 
-Create an instance: `const mailing = client.mailing`
+Create an instance: `mailing = client.Mailing`
 
 #### Operations
 
@@ -293,21 +296,23 @@ Create an instance: `const mailing = client.mailing`
 
 #### Example: Load
 
-```ts
-const mailing = await client.mailing.load({ id: 'mailing_id' })
+```ruby
+# load returns the bare Mailing record (raises on error).
+mailing = client.Mailing.load({ "id" => "mailing_id" })
 ```
 
 #### Example: List
 
-```ts
-const mailings = await client.mailing.list()
+```ruby
+# list returns an Array of Mailing records (raises on error).
+mailings = client.Mailing.list
 ```
 
 #### Example: Create
 
-```ts
-const mailing = await client.mailing.create({
-  recipient: /* `$ARRAY` */,
+```ruby
+mailing = client.Mailing.create({
+  "recipient" => nil, # `$ARRAY`
 })
 ```
 
@@ -383,7 +388,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-mailing = client.mailing
+mailing = client.Mailing
 mailing.load({ "id" => "example_id" })
 
 # mailing.data_get now returns the loaded mailing data

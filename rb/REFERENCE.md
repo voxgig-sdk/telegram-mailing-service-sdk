@@ -87,7 +87,7 @@ same parameters as `direct()`. Raises on error.
 ## MailingEntity
 
 ```ruby
-mailing = client.mailing
+mailing = client.Mailing
 ```
 
 ### Fields
@@ -135,7 +135,7 @@ mailing = client.mailing
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.mailing.create({
+result = client.Mailing.create({
   "recipient" => # `$ARRAY`,
 })
 ```
@@ -145,7 +145,7 @@ result = client.mailing.create({
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.mailing.list(nil)
+results = client.Mailing.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -153,7 +153,7 @@ results = client.mailing.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.mailing.load({ "id" => "mailing_id" })
+result = client.Mailing.load({ "id" => "mailing_id" })
 ```
 
 #### `remove(reqmatch, ctrl = nil) -> result`
@@ -161,7 +161,7 @@ result = client.mailing.load({ "id" => "mailing_id" })
 Remove the entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.mailing.remove({ "id" => "mailing_id" })
+result = client.Mailing.remove({ "id" => "mailing_id" })
 ```
 
 ### Common Methods

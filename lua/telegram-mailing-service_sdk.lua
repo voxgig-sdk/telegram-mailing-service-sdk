@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:mailing():list() / client:mailing():load({ id = ... })
-function TelegramMailingServiceSDK:mailing(data)
+-- Idiomatic facade: client:Mailing():list() / client:Mailing():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function TelegramMailingServiceSDK:Mailing(data)
   local EntityMod = require("entity.mailing_entity")
   if data == nil then
     if self._mailing == nil then
@@ -253,12 +254,6 @@ function TelegramMailingServiceSDK:mailing(data)
     end
     return self._mailing
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:mailing() instead.
-function TelegramMailingServiceSDK:Mailing(data)
-  local EntityMod = require("entity.mailing_entity")
   return EntityMod.new(self, data)
 end
 

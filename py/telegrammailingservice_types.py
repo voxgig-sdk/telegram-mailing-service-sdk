@@ -4,73 +4,75 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Mailing:
+class MailingRequired(TypedDict):
     recipient: list
-    attachment: Optional[list] = None
-    completed_at: Optional[str] = None
-    created_at: Optional[str] = None
-    failed_count: Optional[int] = None
-    id: Optional[str] = None
-    message: Optional[str] = None
-    name: Optional[str] = None
-    parse_mode: Optional[str] = None
-    schedule_time: Optional[str] = None
-    sent_count: Optional[int] = None
-    status: Optional[str] = None
-    total_recipient: Optional[int] = None
-    updated_at: Optional[str] = None
 
 
-@dataclass
-class MailingLoadMatch:
+class Mailing(MailingRequired, total=False):
+    attachment: list
+    completed_at: str
+    created_at: str
+    failed_count: int
+    id: str
+    message: str
+    name: str
+    parse_mode: str
+    schedule_time: str
+    sent_count: int
+    status: str
+    total_recipient: int
+    updated_at: str
+
+
+class MailingLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class MailingListMatch:
-    attachment: Optional[list] = None
-    completed_at: Optional[str] = None
-    created_at: Optional[str] = None
-    failed_count: Optional[int] = None
-    id: Optional[str] = None
-    message: Optional[str] = None
-    name: Optional[str] = None
-    parse_mode: Optional[str] = None
-    recipient: Optional[list] = None
-    schedule_time: Optional[str] = None
-    sent_count: Optional[int] = None
-    status: Optional[str] = None
-    total_recipient: Optional[int] = None
-    updated_at: Optional[str] = None
-
-
-@dataclass
-class MailingCreateData:
-    attachment: Optional[list] = None
-    completed_at: Optional[str] = None
-    created_at: Optional[str] = None
-    failed_count: Optional[int] = None
-    id: Optional[str] = None
-    message: Optional[str] = None
-    name: Optional[str] = None
-    parse_mode: Optional[str] = None
-    recipient: Optional[list] = None
-    schedule_time: Optional[str] = None
-    sent_count: Optional[int] = None
-    status: Optional[str] = None
-    total_recipient: Optional[int] = None
-    updated_at: Optional[str] = None
-
-
-@dataclass
-class MailingRemoveMatch:
+class MailingListMatch(TypedDict, total=False):
+    attachment: list
+    completed_at: str
+    created_at: str
+    failed_count: int
     id: str
+    message: str
+    name: str
+    parse_mode: str
+    recipient: list
+    schedule_time: str
+    sent_count: int
+    status: str
+    total_recipient: int
+    updated_at: str
 
+
+class MailingCreateData(TypedDict, total=False):
+    attachment: list
+    completed_at: str
+    created_at: str
+    failed_count: int
+    id: str
+    message: str
+    name: str
+    parse_mode: str
+    recipient: list
+    schedule_time: str
+    sent_count: int
+    status: str
+    total_recipient: int
+    updated_at: str
+
+
+class MailingRemoveMatch(TypedDict):
+    id: str

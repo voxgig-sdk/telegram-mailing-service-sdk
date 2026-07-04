@@ -31,18 +31,16 @@ $client = new TelegramMailingServiceSDK([
 ]);
 ```
 
-### 2. List mailings
+### 2. List mailing records
 
 ```php
 try {
-    $result = $client->mailing()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of Mailing records — iterate directly.
+    $mailings = $client->Mailing()->list();
+    foreach ($mailings as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -51,9 +49,10 @@ try {
 
 ```php
 try {
-    $result = $client->mailing()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Mailing record (throws on error).
+    $mailing = $client->Mailing()->load(["id" => "example_id"]);
+    print_r($mailing);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -61,11 +60,11 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// Create
-$created = $client->mailing()->create(["name" => "Example"]);
+// create() returns the bare created Mailing record.
+$created = $client->Mailing()->create(["name" => "Example"]);
 
 // Remove
-$client->mailing()->remove(["id" => $created["id"]]);
+$client->Mailing()->remove(["id" => $created["id"]]);
 ```
 
 
@@ -109,13 +108,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = TelegramMailingServiceSDK::test();
+$client = TelegramMailingServiceSDK::test([
+    "entity" => ["mailing" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->mailing()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$mailing = $client->Mailing()->load(["id" => "test01"]);
+print_r($mailing);
 ```
 
 ### Use a custom fetch function
@@ -266,7 +269,7 @@ API path: `/mailings`
 
 ### Mailing
 
-Create an instance: `const mailing = client.mailing`
+Create an instance: `$mailing = $client->Mailing();`
 
 #### Operations
 
@@ -298,22 +301,24 @@ Create an instance: `const mailing = client.mailing`
 
 #### Example: Load
 
-```ts
-const mailing = await client.mailing.load({ id: 'mailing_id' })
+```php
+// load() returns the bare Mailing record (throws on error).
+$mailing = $client->Mailing()->load(["id" => "mailing_id"]);
 ```
 
 #### Example: List
 
-```ts
-const mailings = await client.mailing.list()
+```php
+// list() returns an array of Mailing records (throws on error).
+$mailings = $client->Mailing()->list();
 ```
 
 #### Example: Create
 
-```ts
-const mailing = await client.mailing.create({
-  recipient: /* `$ARRAY` */,
-})
+```php
+$mailing = $client->Mailing()->create([
+    "recipient" => null, // `$ARRAY`
+]);
 ```
 
 
@@ -388,7 +393,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$mailing = $client->mailing();
+$mailing = $client->Mailing();
 $mailing->load(["id" => "example_id"]);
 
 // $mailing->dataGet() now returns the loaded mailing data

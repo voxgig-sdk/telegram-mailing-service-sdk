@@ -81,7 +81,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## MailingEntity
 
 ```python
-mailing = client.mailing
+mailing = client.Mailing()
 ```
 
 ### Fields
@@ -129,8 +129,8 @@ mailing = client.mailing
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.mailing.create({
-    "recipient": # `$ARRAY`,
+result = client.Mailing().create({
+    "recipient": ...,  # `$ARRAY`
 })
 ```
 
@@ -139,7 +139,9 @@ result = client.mailing.create({
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.mailing.list({})
+results = client.Mailing().list({})
+for mailing in results:
+    print(mailing)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -147,7 +149,7 @@ results = client.mailing.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.mailing.load({"id": "mailing_id"})
+result = client.Mailing().load({"id": "mailing_id"})
 ```
 
 #### `remove(reqmatch, ctrl=None) -> dict`
@@ -155,7 +157,7 @@ result = client.mailing.load({"id": "mailing_id"})
 Remove the entity matching the given criteria. Raises on error.
 
 ```python
-result = client.mailing.remove({"id": "mailing_id"})
+result = client.Mailing().remove({"id": "mailing_id"})
 ```
 
 ### Common Methods

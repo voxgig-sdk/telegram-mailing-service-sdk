@@ -204,14 +204,7 @@ class TelegramMailingServiceSDK {
 
 
 
-  _mailing?: MailingEntity
-
-  // Idiomatic facade: `client.mailing.list()` / `client.mailing.load({ id })`.
-  get mailing(): MailingEntity {
-    return (this._mailing ??= new MailingEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.mailing` instead. */
+  // Entity access: `client.Mailing().list()` / `client.Mailing().load({ id })`.
   Mailing(data?: any) {
     const self = this
     return new MailingEntity(self,data)

@@ -33,36 +33,37 @@ local client = sdk.new({
 })
 ```
 
-### 2. List mailings
+### 2. List mailing records
+
+Entity operations return `(value, err)`. For `list`, `value` is the
+array of records itself — iterate it directly (there is no wrapper).
 
 ```lua
-local result, err = client:mailing():list()
+local mailings, err = client:Mailing():list()
 if err then error(err) end
 
-if type(result) == "table" then
-  for _, item in ipairs(result) do
-    local d = item:data_get()
-    print(d["id"], d["name"])
-  end
+for _, item in ipairs(mailings) do
+  print(item["id"], item["name"])
 end
 ```
 
 ### 3. Load a mailing
 
 ```lua
-local result, err = client:mailing():load({ id = "example_id" })
+local mailing, err = client:Mailing():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(mailing)
 ```
 
 ### 4. Create, update, and remove
 
 ```lua
 -- Create
-local created, _ = client:mailing():create({ name = "Example" })
+local created, err = client:Mailing():create({ name = "Example" })
+if err then error(err) end
 
 -- Remove
-client:mailing():remove({ id = created["id"] })
+client:Mailing():remove({ id = created["id"] })
 ```
 
 
@@ -108,8 +109,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:mailing():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Mailing():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -211,17 +212,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local mailing, err = client:Mailing():load({ id = "example_id" })
+    if err then error(err) end
+    -- mailing is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -255,7 +261,7 @@ API path: `/mailings`
 
 ### Mailing
 
-Create an instance: `const mailing = client.mailing`
+Create an instance: `local mailing = client:Mailing(nil)`
 
 #### Operations
 
@@ -287,21 +293,21 @@ Create an instance: `const mailing = client.mailing`
 
 #### Example: Load
 
-```ts
-const mailing = await client.mailing.load({ id: 'mailing_id' })
+```lua
+local mailing, err = client:Mailing():load({ id = "mailing_id" })
 ```
 
 #### Example: List
 
-```ts
-const mailings = await client.mailing.list()
+```lua
+local mailings, err = client:Mailing():list()
 ```
 
 #### Example: Create
 
-```ts
-const mailing = await client.mailing.create({
-  recipient: /* `$ARRAY` */,
+```lua
+local mailing, err = client:Mailing():create({
+  recipient = nil, -- `$ARRAY`
 })
 ```
 
@@ -377,7 +383,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local mailing = client:mailing()
+local mailing = client:Mailing()
 mailing:load({ id = "example_id" })
 
 -- mailing:data_get() now returns the loaded mailing data

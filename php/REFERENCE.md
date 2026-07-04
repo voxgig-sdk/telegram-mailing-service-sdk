@@ -86,7 +86,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## MailingEntity
 
 ```php
-$mailing = $client->mailing();
+$mailing = $client->Mailing();
 ```
 
 ### Fields
@@ -134,7 +134,7 @@ $mailing = $client->mailing();
 Create a new entity with the given data. Throws on error.
 
 ```php
-$result = $client->mailing()->create([
+$result = $client->Mailing()->create([
   "recipient" => /* `$ARRAY` */,
 ]);
 ```
@@ -144,7 +144,7 @@ $result = $client->mailing()->create([
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->mailing()->list([]);
+$results = $client->Mailing()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -152,7 +152,7 @@ $results = $client->mailing()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->mailing()->load(["id" => "mailing_id"]);
+$result = $client->Mailing()->load(["id" => "mailing_id"]);
 ```
 
 #### `remove(array $reqmatch, ?array $ctrl = null): mixed`
@@ -160,7 +160,7 @@ $result = $client->mailing()->load(["id" => "mailing_id"]);
 Remove the entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->mailing()->remove(["id" => "mailing_id"]);
+$result = $client->Mailing()->remove(["id" => "mailing_id"]);
 ```
 
 ### Common Methods

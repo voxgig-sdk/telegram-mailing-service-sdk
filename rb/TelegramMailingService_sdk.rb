@@ -208,13 +208,7 @@ class TelegramMailingServiceSDK
   end
 
 
-  # Idiomatic facade: client.mailing.list / client.mailing.load({ "id" => ... })
-  def mailing
-    require_relative 'entity/mailing_entity'
-    @mailing ||= MailingEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.mailing instead.
+  # Canonical facade: client.Mailing.list / client.Mailing.load({ "id" => ... })
   def Mailing(data = nil)
     require_relative 'entity/mailing_entity'
     MailingEntity.new(self, data)
