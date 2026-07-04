@@ -84,7 +84,7 @@ same parameters as `direct()`.
 ## MailingEntity
 
 ```lua
-local mailing = client:Mailing(nil)
+local mailing = client:mailing(nil)
 ```
 
 ### Fields
@@ -132,7 +132,7 @@ local mailing = client:Mailing(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Mailing():create({
+local result, err = client:mailing():create({
   recipient = --[[ `$ARRAY` ]],
 })
 ```
@@ -142,7 +142,7 @@ local result, err = client:Mailing():create({
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Mailing():list()
+local results, err = client:mailing():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -150,7 +150,7 @@ local results, err = client:Mailing():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Mailing():load({ id = "mailing_id" })
+local result, err = client:mailing():load({ id = "mailing_id" })
 ```
 
 #### `remove(reqmatch, ctrl) -> any, err`
@@ -158,7 +158,7 @@ local result, err = client:Mailing():load({ id = "mailing_id" })
 Remove the entity matching the given criteria.
 
 ```lua
-local result, err = client:Mailing():remove({ id = "mailing_id" })
+local result, err = client:mailing():remove({ id = "mailing_id" })
 ```
 
 ### Common Methods

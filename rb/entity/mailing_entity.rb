@@ -45,6 +45,7 @@ class MailingEntity
     end
   end
 
+  # @return [Mailing, Hash] the current Mailing data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class MailingEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Mailing fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Mailing.
+  #
+  # @param reqmatch [MailingLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Mailing, Hash] the loaded Mailing; raises TelegramMailingServiceError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class MailingEntity
 
 
   
+  # List Mailing items matching the given filter.
+  #
+  # @param reqmatch [MailingListMatch, Hash, nil] match filter (any subset of Mailing fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Mailing>, Array] the matching Mailing items; raises TelegramMailingServiceError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -106,6 +118,11 @@ class MailingEntity
 
 
   
+  # Create a new Mailing.
+  #
+  # @param reqdata [MailingCreateData, Hash, nil] body data
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Mailing, Hash] the created Mailing; raises TelegramMailingServiceError on failure
   def create(reqdata, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -130,6 +147,11 @@ class MailingEntity
   
 
   
+  # Remove an Mailing matching the given criteria.
+  #
+  # @param reqmatch [MailingRemoveMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Mailing, Hash] the removed Mailing; raises TelegramMailingServiceError on failure
   def remove(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

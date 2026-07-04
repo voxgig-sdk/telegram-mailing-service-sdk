@@ -44,17 +44,14 @@ class TestMailingEntity:
         mailing_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.mailing"), "mailing_ref01"))
 
-        mailing_ref01_data_result, err = mailing_ref01_ent.create(mailing_ref01_data, None)
-        assert err is None
-        mailing_ref01_data = helpers.to_map(mailing_ref01_data_result)
+        mailing_ref01_data = helpers.to_map(mailing_ref01_ent.create(mailing_ref01_data, None))
         assert mailing_ref01_data is not None
         assert mailing_ref01_data["id"] is not None
 
         # LIST
         mailing_ref01_match = {}
 
-        mailing_ref01_list_result, err = mailing_ref01_ent.list(mailing_ref01_match, None)
-        assert err is None
+        mailing_ref01_list_result = mailing_ref01_ent.list(mailing_ref01_match, None)
         assert isinstance(mailing_ref01_list_result, list)
 
         found_item = vs.select(
@@ -66,8 +63,7 @@ class TestMailingEntity:
         mailing_ref01_match_dt0 = {
             "id": mailing_ref01_data["id"],
         }
-        mailing_ref01_data_dt0_loaded, err = mailing_ref01_ent.load(mailing_ref01_match_dt0, None)
-        assert err is None
+        mailing_ref01_data_dt0_loaded = mailing_ref01_ent.load(mailing_ref01_match_dt0, None)
         mailing_ref01_data_dt0_load_result = helpers.to_map(mailing_ref01_data_dt0_loaded)
         assert mailing_ref01_data_dt0_load_result is not None
         assert mailing_ref01_data_dt0_load_result["id"] == mailing_ref01_data["id"]
@@ -76,14 +72,12 @@ class TestMailingEntity:
         mailing_ref01_match_rm0 = {
             "id": mailing_ref01_data["id"],
         }
-        _, err = mailing_ref01_ent.remove(mailing_ref01_match_rm0, None)
-        assert err is None
+        mailing_ref01_ent.remove(mailing_ref01_match_rm0, None)
 
         # LIST
         mailing_ref01_match_rt0 = {}
 
-        mailing_ref01_list_rt0_result, err = mailing_ref01_ent.list(mailing_ref01_match_rt0, None)
-        assert err is None
+        mailing_ref01_list_rt0_result = mailing_ref01_ent.list(mailing_ref01_match_rt0, None)
         assert isinstance(mailing_ref01_list_rt0_result, list)
 
         not_found_item = vs.select(

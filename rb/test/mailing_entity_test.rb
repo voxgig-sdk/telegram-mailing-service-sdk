@@ -36,8 +36,7 @@ class MailingEntityTest < Minitest::Test
     mailing_ref01_data = Helpers.to_map(Vs.getprop(
       Vs.getpath(setup[:data], "new.mailing"), "mailing_ref01"))
 
-    mailing_ref01_data_result, err = mailing_ref01_ent.create(mailing_ref01_data, nil)
-    assert_nil err
+    mailing_ref01_data_result = mailing_ref01_ent.create(mailing_ref01_data, nil)
     mailing_ref01_data = Helpers.to_map(mailing_ref01_data_result)
     assert !mailing_ref01_data.nil?
     assert !mailing_ref01_data["id"].nil?
@@ -45,8 +44,7 @@ class MailingEntityTest < Minitest::Test
     # LIST
     mailing_ref01_match = {}
 
-    mailing_ref01_list_result, err = mailing_ref01_ent.list(mailing_ref01_match, nil)
-    assert_nil err
+    mailing_ref01_list_result = mailing_ref01_ent.list(mailing_ref01_match, nil)
     assert mailing_ref01_list_result.is_a?(Array)
 
     found_item = Vs.select(
@@ -58,8 +56,7 @@ class MailingEntityTest < Minitest::Test
     mailing_ref01_match_dt0 = {
       "id" => mailing_ref01_data["id"],
     }
-    mailing_ref01_data_dt0_loaded, err = mailing_ref01_ent.load(mailing_ref01_match_dt0, nil)
-    assert_nil err
+    mailing_ref01_data_dt0_loaded = mailing_ref01_ent.load(mailing_ref01_match_dt0, nil)
     mailing_ref01_data_dt0_load_result = Helpers.to_map(mailing_ref01_data_dt0_loaded)
     assert !mailing_ref01_data_dt0_load_result.nil?
     assert_equal mailing_ref01_data_dt0_load_result["id"], mailing_ref01_data["id"]
@@ -68,14 +65,12 @@ class MailingEntityTest < Minitest::Test
     mailing_ref01_match_rm0 = {
       "id" => mailing_ref01_data["id"],
     }
-    _, err = mailing_ref01_ent.remove(mailing_ref01_match_rm0, nil)
-    assert_nil err
+    mailing_ref01_ent.remove(mailing_ref01_match_rm0, nil)
 
     # LIST
     mailing_ref01_match_rt0 = {}
 
-    mailing_ref01_list_rt0_result, err = mailing_ref01_ent.list(mailing_ref01_match_rt0, nil)
-    assert_nil err
+    mailing_ref01_list_rt0_result = mailing_ref01_ent.list(mailing_ref01_match_rt0, nil)
     assert mailing_ref01_list_rt0_result.is_a?(Array)
 
     not_found_item = Vs.select(

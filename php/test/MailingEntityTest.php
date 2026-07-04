@@ -43,8 +43,7 @@ class MailingEntityTest extends TestCase
         $mailing_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.mailing"), "mailing_ref01"));
 
-        [$mailing_ref01_data_result, $err] = $mailing_ref01_ent->create($mailing_ref01_data, null);
-        $this->assertNull($err);
+        $mailing_ref01_data_result = $mailing_ref01_ent->create($mailing_ref01_data, null);
         $mailing_ref01_data = Helpers::to_map($mailing_ref01_data_result);
         $this->assertNotNull($mailing_ref01_data);
         $this->assertNotNull($mailing_ref01_data["id"]);
@@ -52,8 +51,7 @@ class MailingEntityTest extends TestCase
         // LIST
         $mailing_ref01_match = [];
 
-        [$mailing_ref01_list_result, $err] = $mailing_ref01_ent->list($mailing_ref01_match, null);
-        $this->assertNull($err);
+        $mailing_ref01_list_result = $mailing_ref01_ent->list($mailing_ref01_match, null);
         $this->assertIsArray($mailing_ref01_list_result);
 
         $found_item = sdk_select(
@@ -65,8 +63,7 @@ class MailingEntityTest extends TestCase
         $mailing_ref01_match_dt0 = [
             "id" => $mailing_ref01_data["id"],
         ];
-        [$mailing_ref01_data_dt0_loaded, $err] = $mailing_ref01_ent->load($mailing_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $mailing_ref01_data_dt0_loaded = $mailing_ref01_ent->load($mailing_ref01_match_dt0, null);
         $mailing_ref01_data_dt0_load_result = Helpers::to_map($mailing_ref01_data_dt0_loaded);
         $this->assertNotNull($mailing_ref01_data_dt0_load_result);
         $this->assertEquals($mailing_ref01_data_dt0_load_result["id"], $mailing_ref01_data["id"]);
@@ -75,14 +72,12 @@ class MailingEntityTest extends TestCase
         $mailing_ref01_match_rm0 = [
             "id" => $mailing_ref01_data["id"],
         ];
-        [$_, $err] = $mailing_ref01_ent->remove($mailing_ref01_match_rm0, null);
-        $this->assertNull($err);
+        $mailing_ref01_ent->remove($mailing_ref01_match_rm0, null);
 
         // LIST
         $mailing_ref01_match_rt0 = [];
 
-        [$mailing_ref01_list_rt0_result, $err] = $mailing_ref01_ent->list($mailing_ref01_match_rt0, null);
-        $this->assertNull($err);
+        $mailing_ref01_list_rt0_result = $mailing_ref01_ent->list($mailing_ref01_match_rt0, null);
         $this->assertIsArray($mailing_ref01_list_rt0_result);
 
         $not_found_item = sdk_select(

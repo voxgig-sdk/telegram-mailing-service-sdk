@@ -9,9 +9,10 @@ The PHP SDK for the TelegramMailingService API — an entity-oriented client usi
 
 
 ## Install
-```bash
-composer require voxgig-sdk/telegram-mailing-service
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -26,40 +27,45 @@ loading a specific record.
 require_once 'telegrammailingservice_sdk.php';
 
 $client = new TelegramMailingServiceSDK([
-    "apikey" => getenv("TELEGRAM-MAILING-SERVICE_APIKEY"),
+    "apikey" => getenv("TELEGRAM_MAILING_SERVICE_APIKEY"),
 ]);
 ```
 
 ### 2. List mailings
 
 ```php
-[$result, $err] = $client->Mailing()->list();
-if ($err) { throw new \Exception($err); }
-
-if (is_array($result)) {
-    foreach ($result as $item) {
-        $d = $item->data_get();
-        echo $d["id"] . " " . $d["name"] . "\n";
+try {
+    $result = $client->mailing()->list();
+    if (is_array($result)) {
+        foreach ($result as $item) {
+            $d = $item->data_get();
+            echo $d["id"] . " " . $d["name"] . "\n";
+        }
     }
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
 }
 ```
 
 ### 3. Load a mailing
 
 ```php
-[$result, $err] = $client->Mailing()->load(["id" => "example_id"]);
-if ($err) { throw new \Exception($err); }
-print_r($result);
+try {
+    $result = $client->mailing()->load(["id" => "example_id"]);
+    print_r($result);
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
+}
 ```
 
 ### 4. Create, update, and remove
 
 ```php
 // Create
-[$created, $_] = $client->Mailing()->create(["name" => "Example"]);
+$created = $client->mailing()->create(["name" => "Example"]);
 
 // Remove
-$client->Mailing()->remove(["id" => $created["id"]]);
+$client->mailing()->remove(["id" => $created["id"]]);
 ```
 
 
@@ -70,28 +76,31 @@ $client->Mailing()->remove(["id" => $created["id"]]);
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -105,7 +114,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = TelegramMailingServiceSDK::test();
 
-[$result, $err] = $client->TelegramMailingService()->load(["id" => "test01"]);
+$result = $client->mailing()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -139,8 +148,8 @@ $client = new TelegramMailingServiceSDK([
 Create a `.env.local` file at the project root:
 
 ```
-TELEGRAM-MAILING-SERVICE_TEST_LIVE=TRUE
-TELEGRAM-MAILING-SERVICE_APIKEY=<your-key>
+TELEGRAM_MAILING_SERVICE_TEST_LIVE=TRUE
+TELEGRAM_MAILING_SERVICE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -209,8 +218,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -253,7 +266,7 @@ API path: `/mailings`
 
 ### Mailing
 
-Create an instance: `const mailing = client.Mailing()`
+Create an instance: `const mailing = client.mailing`
 
 #### Operations
 
@@ -286,19 +299,19 @@ Create an instance: `const mailing = client.Mailing()`
 #### Example: Load
 
 ```ts
-const mailing = await client.Mailing().load({ id: 'mailing_id' })
+const mailing = await client.mailing.load({ id: 'mailing_id' })
 ```
 
 #### Example: List
 
 ```ts
-const mailings = await client.Mailing().list()
+const mailings = await client.mailing.list()
 ```
 
 #### Example: Create
 
 ```ts
-const mailing = await client.Mailing().create({
+const mailing = await client.mailing.create({
   recipient: /* `$ARRAY` */,
 })
 ```
@@ -375,11 +388,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$mailing = $client->mailing();
+$mailing->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $mailing->dataGet() now returns the loaded mailing data
+// $mailing->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

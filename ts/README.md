@@ -9,9 +9,12 @@ The TypeScript SDK for the TelegramMailingService API — a type-safe, entity-or
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/telegram-mailing-service
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,17 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { TelegramMailingServiceSDK } from 'telegram-mailing-service'
+import { TelegramMailingServiceSDK } from '@voxgig-sdk/telegram-mailing-service'
 
 const client = new TelegramMailingServiceSDK({
-  apikey: process.env.TELEGRAM-MAILING-SERVICE_APIKEY,
+  apikey: process.env.TELEGRAM_MAILING_SERVICE_APIKEY,
 })
 ```
 
 ### 2. List mailings
 
 ```ts
-const result = await client.Mailing().list()
+const result = await client.mailing.list()
 
 if (result.ok) {
   for (const item of result.data) {
@@ -42,7 +45,7 @@ if (result.ok) {
 ### 3. Load a mailing
 
 ```ts
-const result = await client.Mailing().load({ id: 'example_id' })
+const result = await client.mailing.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -53,12 +56,12 @@ if (result.ok) {
 
 ```ts
 // Create
-const created = await client.Mailing().create({
+const created = await client.mailing.create({
   name: 'Example',
 })
 
 // Remove
-const removed = await client.Mailing().remove({
+const removed = await client.mailing.remove({
   id: created.data.id,
 })
 ```
@@ -105,7 +108,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = TelegramMailingServiceSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.mailing.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -122,7 +125,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.mailing
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -159,8 +162,8 @@ const client = new TelegramMailingServiceSDK({
 Create a `.env.local` file at the project root:
 
 ```
-TELEGRAM-MAILING-SERVICE_TEST_LIVE=TRUE
-TELEGRAM-MAILING-SERVICE_APIKEY=<your-key>
+TELEGRAM_MAILING_SERVICE_TEST_LIVE=TRUE
+TELEGRAM_MAILING_SERVICE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -305,7 +308,7 @@ API path: `/mailings`
 
 ### Mailing
 
-Create an instance: `const mailing = client.Mailing()`
+Create an instance: `const mailing = client.mailing`
 
 #### Operations
 
@@ -338,19 +341,19 @@ Create an instance: `const mailing = client.Mailing()`
 #### Example: Load
 
 ```ts
-const mailing = await client.Mailing().load({ id: 'mailing_id' })
+const mailing = await client.mailing.load({ id: 'mailing_id' })
 ```
 
 #### Example: List
 
 ```ts
-const mailings = await client.Mailing().list()
+const mailings = await client.mailing.list()
 ```
 
 #### Example: Create
 
 ```ts
-const mailing = await client.Mailing().create({
+const mailing = await client.mailing.create({
   recipient: /* `$ARRAY` */,
 })
 ```
@@ -413,7 +416,7 @@ telegram-mailing-service/
 Import the SDK from the package root:
 
 ```ts
-import { TelegramMailingServiceSDK } from 'telegram-mailing-service'
+import { TelegramMailingServiceSDK } from '@voxgig-sdk/telegram-mailing-service'
 ```
 
 ### Entity state
@@ -423,11 +426,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const mailing = client.mailing
+await mailing.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// mailing.data() now returns the loaded mailing data
+// mailing.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch MailingLoadMatch
+---@param ctrl? table
+---@return Mailing
+---@return string? err
 function MailingEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch MailingListMatch
+---@param ctrl? table
+---@return Mailing[]
+---@return string? err
 function MailingEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -126,6 +134,10 @@ end
 
 
 
+---@param reqdata MailingCreateData
+---@param ctrl? table
+---@return Mailing
+---@return string? err
 function MailingEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -150,6 +162,10 @@ end
 
 
 
+---@param reqmatch MailingRemoveMatch
+---@param ctrl? table
+---@return Mailing
+---@return string? err
 function MailingEntity:remove(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

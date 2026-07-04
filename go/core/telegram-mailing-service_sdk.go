@@ -245,6 +245,9 @@ func (sdk *TelegramMailingServiceSDK) Direct(fetchargs map[string]any) (map[stri
 }
 
 
+// Mailing returns a Mailing entity bound to this client.
+// Idiomatic usage: client.Mailing(nil).List(nil, nil) or
+// client.Mailing(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *TelegramMailingServiceSDK) Mailing(data map[string]any) TelegramMailingServiceEntity {
 	return NewMailingEntityFunc(sdk, data)
 }

@@ -9,12 +9,9 @@ The Lua SDK for the TelegramMailingService API — an entity-oriented client usi
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-telegram-mailing-service
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -32,14 +29,14 @@ loading a specific record.
 local sdk = require("telegram-mailing-service_sdk")
 
 local client = sdk.new({
-  apikey = os.getenv("TELEGRAM-MAILING-SERVICE_APIKEY"),
+  apikey = os.getenv("TELEGRAM_MAILING_SERVICE_APIKEY"),
 })
 ```
 
 ### 2. List mailings
 
 ```lua
-local result, err = client:Mailing():list()
+local result, err = client:mailing():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -53,7 +50,7 @@ end
 ### 3. Load a mailing
 
 ```lua
-local result, err = client:Mailing():load({ id = "example_id" })
+local result, err = client:mailing():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -62,10 +59,10 @@ print(result)
 
 ```lua
 -- Create
-local created, _ = client:Mailing():create({ name = "Example" })
+local created, _ = client:mailing():create({ name = "Example" })
 
 -- Remove
-client:Mailing():remove({ id = created["id"] })
+client:mailing():remove({ id = created["id"] })
 ```
 
 
@@ -111,7 +108,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:TelegramMailingService():load({ id = "test01" })
+local result, err = client:mailing():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -144,8 +141,8 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-TELEGRAM-MAILING-SERVICE_TEST_LIVE=TRUE
-TELEGRAM-MAILING-SERVICE_APIKEY=<your-key>
+TELEGRAM_MAILING_SERVICE_TEST_LIVE=TRUE
+TELEGRAM_MAILING_SERVICE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -258,7 +255,7 @@ API path: `/mailings`
 
 ### Mailing
 
-Create an instance: `const mailing = client.Mailing()`
+Create an instance: `const mailing = client.mailing`
 
 #### Operations
 
@@ -291,19 +288,19 @@ Create an instance: `const mailing = client.Mailing()`
 #### Example: Load
 
 ```ts
-const mailing = await client.Mailing().load({ id: 'mailing_id' })
+const mailing = await client.mailing.load({ id: 'mailing_id' })
 ```
 
 #### Example: List
 
 ```ts
-const mailings = await client.Mailing().list()
+const mailings = await client.mailing.list()
 ```
 
 #### Example: Create
 
 ```ts
-const mailing = await client.Mailing().create({
+const mailing = await client.mailing.create({
   recipient: /* `$ARRAY` */,
 })
 ```
@@ -380,11 +377,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local mailing = client:mailing()
+mailing:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- mailing:data_get() now returns the loaded mailing data
+-- mailing:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

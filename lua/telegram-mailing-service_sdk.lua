@@ -244,6 +244,19 @@ end
 
 
 
+-- Idiomatic facade: client:mailing():list() / client:mailing():load({ id = ... })
+function TelegramMailingServiceSDK:mailing(data)
+  local EntityMod = require("entity.mailing_entity")
+  if data == nil then
+    if self._mailing == nil then
+      self._mailing = EntityMod.new(self, nil)
+    end
+    return self._mailing
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:mailing() instead.
 function TelegramMailingServiceSDK:Mailing(data)
   local EntityMod = require("entity.mailing_entity")
   return EntityMod.new(self, data)

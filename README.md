@@ -10,26 +10,26 @@ This is an unofficial SDK for the Telegram Mailing Service public API, generated
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/telegram-mailing-service` | `npm install @voxgig-sdk/telegram-mailing-service` |
-| Python | `voxgig-sdk-telegram-mailing-service` | `pip install voxgig-sdk-telegram-mailing-service` |
-| PHP | `voxgig-sdk/telegram-mailing-service` | `composer require voxgig-sdk/telegram-mailing-service` |
-| Golang | `github.com/voxgig-sdk/telegram-mailing-service-sdk/go` | `go get github.com/voxgig-sdk/telegram-mailing-service-sdk/go` |
-| Ruby | `voxgig-sdk-telegram-mailing-service` | `gem install voxgig-sdk-telegram-mailing-service` |
-| Lua | `voxgig-sdk-telegram-mailing-service` | `luarocks install voxgig-sdk-telegram-mailing-service` |
+| TypeScript | `@voxgig-sdk/telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases) |
+| Python | `voxgig-sdk-telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases) |
+| PHP | `voxgig-sdk/telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases) |
+| Golang | `github.com/voxgig-sdk/telegram-mailing-service-sdk/go` | `go get github.com/voxgig-sdk/telegram-mailing-service-sdk/go@latest` |
+| Ruby | `voxgig-sdk-telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases) |
+| Lua | `voxgig-sdk-telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases) |
 
 ## Quickstart
 
 ### TypeScript
 
 ```ts
-import { TelegramMailingServiceSDK } from 'telegram-mailing-service'
+import { TelegramMailingServiceSDK } from '@voxgig-sdk/telegram-mailing-service'
 
 const client = new TelegramMailingServiceSDK({
-  apikey: process.env.TELEGRAM-MAILING-SERVICE_APIKEY,
+  apikey: process.env.TELEGRAM_MAILING_SERVICE_APIKEY,
 })
 
 // List all mailings
-const mailings = await client.Mailing().list()
+const mailings = await client.mailing.list()
 console.log(mailings.data)
 ```
 
@@ -71,7 +71,7 @@ The API exposes one entity:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Mailing** |  | `/mailings` |
+| **Mailing** | The Mailing entity (create, list, load, remove). | `/mailings` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -85,15 +85,15 @@ import os
 from telegrammailingservice_sdk import TelegramMailingServiceSDK
 
 client = TelegramMailingServiceSDK({
-    "apikey": os.environ.get("TELEGRAM-MAILING-SERVICE_APIKEY"),
+    "apikey": os.environ.get("TELEGRAM_MAILING_SERVICE_APIKEY"),
 })
 
 # List all mailings
-mailings, err = client.Mailing().list()
+mailings = client.mailing.list()
 print(mailings)
 
 # Load a specific mailing
-mailing, err = client.Mailing().load({"id": "example_id"})
+mailing = client.mailing.load({"id": "example_id"})
 print(mailing)
 ```
 
@@ -104,15 +104,15 @@ print(mailing)
 require_once 'telegrammailingservice_sdk.php';
 
 $client = new TelegramMailingServiceSDK([
-    "apikey" => getenv("TELEGRAM-MAILING-SERVICE_APIKEY"),
+    "apikey" => getenv("TELEGRAM_MAILING_SERVICE_APIKEY"),
 ]);
 
-// List all mailings
-[$mailings, $err] = $client->Mailing()->list();
+// List all mailings (throws on error)
+$mailings = $client->mailing()->list();
 print_r($mailings);
 
 // Load a specific mailing
-[$mailing, $err] = $client->Mailing()->load(["id" => "example_id"]);
+$mailing = $client->mailing()->load(["id" => "example_id"]);
 print_r($mailing);
 ```
 
@@ -122,7 +122,7 @@ print_r($mailing);
 import sdk "github.com/voxgig-sdk/telegram-mailing-service-sdk/go"
 
 client := sdk.NewTelegramMailingServiceSDK(map[string]any{
-    "apikey": os.Getenv("TELEGRAM-MAILING-SERVICE_APIKEY"),
+    "apikey": os.Getenv("TELEGRAM_MAILING_SERVICE_APIKEY"),
 })
 
 // List all mailings
@@ -136,15 +136,15 @@ fmt.Println(mailings)
 require_relative "TelegramMailingService_sdk"
 
 client = TelegramMailingServiceSDK.new({
-  "apikey" => ENV["TELEGRAM-MAILING-SERVICE_APIKEY"],
+  "apikey" => ENV["TELEGRAM_MAILING_SERVICE_APIKEY"],
 })
 
 # List all mailings
-mailings, err = client.Mailing().list
+mailings = client.mailing.list
 puts mailings
 
 # Load a specific mailing
-mailing, err = client.Mailing().load({ "id" => "example_id" })
+mailing = client.mailing.load({ "id" => "example_id" })
 puts mailing
 ```
 
@@ -154,15 +154,15 @@ puts mailing
 local sdk = require("telegram-mailing-service_sdk")
 
 local client = sdk.new({
-  apikey = os.getenv("TELEGRAM-MAILING-SERVICE_APIKEY"),
+  apikey = os.getenv("TELEGRAM_MAILING_SERVICE_APIKEY"),
 })
 
 -- List all mailings
-local mailings, err = client:Mailing():list()
+local mailings, err = client:mailing():list()
 print(mailings)
 
 -- Load a specific mailing
-local mailing, err = client:Mailing():load({ id = "example_id" })
+local mailing, err = client:mailing():load({ id = "example_id" })
 print(mailing)
 ```
 
@@ -175,7 +175,7 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = TelegramMailingServiceSDK.test()
-const result = await client.Mailing().load({ id: 'test01' })
+const result = await client.mailing.load({ id: 'test01' })
 // result.ok === true, result.data contains mock data
 ```
 
@@ -183,14 +183,14 @@ const result = await client.Mailing().load({ id: 'test01' })
 
 ```python
 client = TelegramMailingServiceSDK.test()
-result, err = client.Mailing().load({"id": "test01"})
+result = client.mailing.load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
 $client = TelegramMailingServiceSDK::test();
-[$result, $err] = $client->Mailing()->load(["id" => "test01"]);
+$result = $client->mailing()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -206,14 +206,14 @@ result, err := client.Mailing(nil).Load(
 
 ```ruby
 client = TelegramMailingServiceSDK.test
-result, err = client.Mailing().load({ "id" => "test01" })
+result = client.mailing.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Mailing():load({ id = "test01" })
+local result, err = client:mailing():load({ id = "test01" })
 ```
 
 ## How it works
@@ -266,7 +266,7 @@ console.log(result.data)
 
 **Python:**
 ```python
-result, err = client.direct({
+result = client.direct({
     "path": "/api/resource/{id}",
     "method": "GET",
     "params": {"id": "example"},
@@ -275,7 +275,7 @@ result, err = client.direct({
 
 **PHP:**
 ```php
-[$result, $err] = $client->direct([
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
@@ -293,7 +293,7 @@ result, err := client.Direct(map[string]any{
 
 **Ruby:**
 ```ruby
-result, err = client.direct({
+result = client.direct({
   "path" => "/api/resource/{id}",
   "method" => "GET",
   "params" => { "id" => "example" },

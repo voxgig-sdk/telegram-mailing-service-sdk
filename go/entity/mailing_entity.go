@@ -85,6 +85,27 @@ func (e *MailingEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Mailing; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *MailingEntity) DataTyped(data ...Mailing) Mailing {
+	if len(data) > 0 {
+		return typedFrom[Mailing](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Mailing](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Mailing (all fields
+// optional at the wire level).
+func (e *MailingEntity) MatchTyped(match ...Mailing) Mailing {
+	if len(match) > 0 {
+		return typedFrom[Mailing](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Mailing](e.Match())
+}
+
 
 func (e *MailingEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -111,6 +132,17 @@ func (e *MailingEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any,
 	})
 }
 
+// LoadTyped is the statically-typed variant of Load: it takes an
+// MailingLoadMatch and returns an Mailing. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *MailingEntity) LoadTyped(reqmatch MailingLoadMatch, ctrl map[string]any) (Mailing, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return Mailing{}, err
+	}
+	return typedFrom[Mailing](res), nil
+}
+
 
 
 
@@ -131,6 +163,17 @@ func (e *MailingEntity) List(reqmatch map[string]any, ctrl map[string]any) (any,
 			}
 		}
 	})
+}
+
+// ListTyped is the statically-typed variant of List: it takes an
+// MailingListMatch and returns []Mailing. It delegates to the untyped
+// List (identical runtime) and converts at the typed boundary.
+func (e *MailingEntity) ListTyped(reqmatch MailingListMatch, ctrl map[string]any) ([]Mailing, error) {
+	res, err := e.List(asMap(reqmatch), ctrl)
+	if err != nil {
+		return nil, err
+	}
+	return typedSliceFrom[Mailing](res), nil
 }
 
 
@@ -156,6 +199,17 @@ func (e *MailingEntity) Create(reqdata map[string]any, ctrl map[string]any) (any
 			}
 		}
 	})
+}
+
+// CreateTyped is the statically-typed variant of Create: it takes an
+// MailingCreateData and returns an Mailing. It delegates to the untyped
+// Create (identical runtime) and converts at the typed boundary.
+func (e *MailingEntity) CreateTyped(reqdata MailingCreateData, ctrl map[string]any) (Mailing, error) {
+	res, err := e.Create(asMap(reqdata), ctrl)
+	if err != nil {
+		return Mailing{}, err
+	}
+	return typedFrom[Mailing](res), nil
 }
 
 
@@ -189,6 +243,17 @@ func (e *MailingEntity) Remove(reqmatch map[string]any, ctrl map[string]any) (an
 			}
 		}
 	})
+}
+
+// RemoveTyped is the statically-typed variant of Remove: it takes an
+// MailingRemoveMatch and returns an Mailing. It delegates to the untyped
+// Remove (identical runtime) and converts at the typed boundary.
+func (e *MailingEntity) RemoveTyped(reqmatch MailingRemoveMatch, ctrl map[string]any) (Mailing, error) {
+	res, err := e.Remove(asMap(reqmatch), ctrl)
+	if err != nil {
+		return Mailing{}, err
+	}
+	return typedFrom[Mailing](res), nil
 }
 
 
