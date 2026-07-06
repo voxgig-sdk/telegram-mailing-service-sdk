@@ -67,8 +67,13 @@ class MailingEntity:
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch: MailingLoadMatch, ctrl=None) -> Mailing:
+    def load(self, reqmatch=None, ctrl=None) -> Mailing:
         utility = self._utility
+        # reqmatch is optional: an entity with no id-like key loads with no
+        # match. Treat None as an empty match so client.Mailing().load()
+        # works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "load",
             "ctrl": ctrl,
@@ -89,8 +94,12 @@ class MailingEntity:
 
 
     
-    def list(self, reqmatch: MailingListMatch, ctrl=None) -> list[Mailing]:
+    def list(self, reqmatch=None, ctrl=None) -> list[Mailing]:
         utility = self._utility
+        # reqmatch is optional: an omitted match lists all records. Treat None
+        # as an empty match so client.Mailing().list() works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "list",
             "ctrl": ctrl,
@@ -131,8 +140,13 @@ class MailingEntity:
     
 
     
-    def remove(self, reqmatch: MailingRemoveMatch, ctrl=None) -> Mailing:
+    def remove(self, reqmatch=None, ctrl=None) -> Mailing:
         utility = self._utility
+        # reqmatch is optional: an entity with no id-like key removes with no
+        # match. Treat None as an empty match so client.Mailing().remove()
+        # works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "remove",
             "ctrl": ctrl,

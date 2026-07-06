@@ -31,8 +31,7 @@ type MailingLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// MailingListMatch mirrors the mailing fields as an all-optional match
-// filter (Go analog of Partial<Mailing>).
+// MailingListMatch is the typed request payload for Mailing.ListTyped.
 type MailingListMatch struct {
 	Attachment *[]any `json:"attachment,omitempty"`
 	CompletedAt *string `json:"completed_at,omitempty"`
@@ -50,8 +49,7 @@ type MailingListMatch struct {
 	UpdatedAt *string `json:"updated_at,omitempty"`
 }
 
-// MailingCreateData mirrors the mailing fields as an all-optional match
-// filter (Go analog of Partial<Mailing>).
+// MailingCreateData is the typed request payload for Mailing.CreateTyped.
 type MailingCreateData struct {
 	Attachment *[]any `json:"attachment,omitempty"`
 	CompletedAt *string `json:"completed_at,omitempty"`
@@ -61,7 +59,7 @@ type MailingCreateData struct {
 	Message *string `json:"message,omitempty"`
 	Name *string `json:"name,omitempty"`
 	ParseMode *string `json:"parse_mode,omitempty"`
-	Recipient *[]any `json:"recipient,omitempty"`
+	Recipient []any `json:"recipient"`
 	ScheduleTime *string `json:"schedule_time,omitempty"`
 	SentCount *int `json:"sent_count,omitempty"`
 	Status *string `json:"status,omitempty"`

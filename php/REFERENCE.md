@@ -8,7 +8,7 @@ Complete API reference for the TelegramMailingService PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/telegram-mailing-service_sdk.php';
+require_once __DIR__ . '/telegrammailingservice_sdk.php';
 
 $client = new TelegramMailingServiceSDK($options);
 ```
@@ -46,11 +46,11 @@ $client = TelegramMailingServiceSDK::test();
 
 Create a new `MailingEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): TelegramMailingServiceUtility`
 
 Return a copy of the SDK utility object.
 
@@ -93,39 +93,39 @@ $mailing = $client->Mailing();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attachment` | ``$ARRAY`` | No |  |
-| `completed_at` | ``$STRING`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `failed_count` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `message` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `parse_mode` | ``$STRING`` | No |  |
-| `recipient` | ``$ARRAY`` | Yes |  |
-| `schedule_time` | ``$STRING`` | No |  |
-| `sent_count` | ``$INTEGER`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `total_recipient` | ``$INTEGER`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `attachment` | `array` | No |  |
+| `completed_at` | `string` | No |  |
+| `created_at` | `string` | No |  |
+| `failed_count` | `int` | No |  |
+| `id` | `string` | No |  |
+| `message` | `string` | No |  |
+| `name` | `string` | No |  |
+| `parse_mode` | `string` | No |  |
+| `recipient` | `array` | Yes |  |
+| `schedule_time` | `string` | No |  |
+| `sent_count` | `int` | No |  |
+| `status` | `string` | No |  |
+| `total_recipient` | `int` | No |  |
+| `updated_at` | `string` | No |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `attachment` | - | - | - | - | - |
-| `completed_at` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `failed_count` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `message` | - | - | Yes | - | - |
-| `name` | - | - | Yes | - | - |
-| `parse_mode` | - | - | - | - | - |
-| `recipient` | - | - | - | - | - |
-| `schedule_time` | - | - | - | - | - |
-| `sent_count` | - | - | - | - | - |
-| `status` | - | - | - | - | - |
-| `total_recipient` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| Field | load | list | create | remove |
+| --- | --- | --- | --- | --- |
+| `attachment` | - | - | - | - |
+| `completed_at` | - | - | - | - |
+| `created_at` | - | - | - | - |
+| `failed_count` | - | - | - | - |
+| `id` | - | - | - | - |
+| `message` | - | - | Yes | - |
+| `name` | - | - | Yes | - |
+| `parse_mode` | - | - | - | - |
+| `recipient` | - | - | - | - |
+| `schedule_time` | - | - | - | - |
+| `sent_count` | - | - | - | - |
+| `status` | - | - | - | - |
+| `total_recipient` | - | - | - | - |
+| `updated_at` | - | - | - | - |
 
 ### Operations
 
@@ -135,16 +135,16 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Mailing()->create([
-  "recipient" => /* `$ARRAY` */,
+  "recipient" => null, // array
 ]);
 ```
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Mailing()->list([]);
+$results = $client->Mailing()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -165,19 +165,19 @@ $result = $client->Mailing()->remove(["id" => "mailing_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -186,7 +186,7 @@ Set the entity match criteria.
 Create a new `MailingEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

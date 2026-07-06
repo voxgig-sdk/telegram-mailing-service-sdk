@@ -91,39 +91,39 @@ local mailing = client:Mailing(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attachment` | ``$ARRAY`` | No |  |
-| `completed_at` | ``$STRING`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `failed_count` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `message` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `parse_mode` | ``$STRING`` | No |  |
-| `recipient` | ``$ARRAY`` | Yes |  |
-| `schedule_time` | ``$STRING`` | No |  |
-| `sent_count` | ``$INTEGER`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `total_recipient` | ``$INTEGER`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `attachment` | `table` | No |  |
+| `completed_at` | `string` | No |  |
+| `created_at` | `string` | No |  |
+| `failed_count` | `number` | No |  |
+| `id` | `string` | No |  |
+| `message` | `string` | No |  |
+| `name` | `string` | No |  |
+| `parse_mode` | `string` | No |  |
+| `recipient` | `table` | Yes |  |
+| `schedule_time` | `string` | No |  |
+| `sent_count` | `number` | No |  |
+| `status` | `string` | No |  |
+| `total_recipient` | `number` | No |  |
+| `updated_at` | `string` | No |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `attachment` | - | - | - | - | - |
-| `completed_at` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `failed_count` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `message` | - | - | Yes | - | - |
-| `name` | - | - | Yes | - | - |
-| `parse_mode` | - | - | - | - | - |
-| `recipient` | - | - | - | - | - |
-| `schedule_time` | - | - | - | - | - |
-| `sent_count` | - | - | - | - | - |
-| `status` | - | - | - | - | - |
-| `total_recipient` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| Field | load | list | create | remove |
+| --- | --- | --- | --- | --- |
+| `attachment` | - | - | - | - |
+| `completed_at` | - | - | - | - |
+| `created_at` | - | - | - | - |
+| `failed_count` | - | - | - | - |
+| `id` | - | - | - | - |
+| `message` | - | - | Yes | - |
+| `name` | - | - | Yes | - |
+| `parse_mode` | - | - | - | - |
+| `recipient` | - | - | - | - |
+| `schedule_time` | - | - | - | - |
+| `sent_count` | - | - | - | - |
+| `status` | - | - | - | - |
+| `total_recipient` | - | - | - | - |
+| `updated_at` | - | - | - | - |
 
 ### Operations
 
@@ -133,7 +133,7 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Mailing():create({
-  recipient = --[[ `$ARRAY` ]],
+  recipient = --[[ table ]],
 })
 ```
 

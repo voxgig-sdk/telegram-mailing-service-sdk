@@ -78,7 +78,7 @@ MailingLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Mailing#list (any subset of Mailing fields).
+# Request payload for Mailing#list.
 #
 # @!attribute [rw] attachment
 #   @return [Array, nil]
@@ -139,7 +139,7 @@ MailingListMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Mailing#create (any subset of Mailing fields).
+# Request payload for Mailing#create.
 #
 # @!attribute [rw] attachment
 #   @return [Array, nil]
@@ -166,7 +166,7 @@ MailingListMatch = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] recipient
-#   @return [Array, nil]
+#   @return [Array]
 #
 # @!attribute [rw] schedule_time
 #   @return [String, nil]

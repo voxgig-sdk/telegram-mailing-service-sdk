@@ -37,7 +37,7 @@ class MailingLoadMatch
     public string $id;
 }
 
-/** Match filter for Mailing#list (any subset of Mailing fields). */
+/** Request payload for Mailing#list. */
 class MailingListMatch
 {
     public ?array $attachment = null;
@@ -56,7 +56,7 @@ class MailingListMatch
     public ?string $updated_at = null;
 }
 
-/** Match filter for Mailing#create (any subset of Mailing fields). */
+/** Request payload for Mailing#create. */
 class MailingCreateData
 {
     public ?array $attachment = null;
@@ -67,7 +67,7 @@ class MailingCreateData
     public ?string $message = null;
     public ?string $name = null;
     public ?string $parse_mode = null;
-    public ?array $recipient = null;
+    public array $recipient;
     public ?string $schedule_time = null;
     public ?int $sent_count = null;
     public ?string $status = null;

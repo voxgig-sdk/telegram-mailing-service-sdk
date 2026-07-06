@@ -8,7 +8,7 @@ Complete API reference for the TelegramMailingService Python SDK.
 ### Constructor
 
 ```python
-from telegram-mailing-service_sdk import TelegramMailingServiceSDK
+from telegrammailingservice_sdk import TelegramMailingServiceSDK
 
 client = TelegramMailingServiceSDK(options)
 ```
@@ -88,39 +88,39 @@ mailing = client.Mailing()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attachment` | ``$ARRAY`` | No |  |
-| `completed_at` | ``$STRING`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `failed_count` | ``$INTEGER`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `message` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `parse_mode` | ``$STRING`` | No |  |
-| `recipient` | ``$ARRAY`` | Yes |  |
-| `schedule_time` | ``$STRING`` | No |  |
-| `sent_count` | ``$INTEGER`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `total_recipient` | ``$INTEGER`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
+| `attachment` | `list` | No |  |
+| `completed_at` | `str` | No |  |
+| `created_at` | `str` | No |  |
+| `failed_count` | `int` | No |  |
+| `id` | `str` | No |  |
+| `message` | `str` | No |  |
+| `name` | `str` | No |  |
+| `parse_mode` | `str` | No |  |
+| `recipient` | `list` | Yes |  |
+| `schedule_time` | `str` | No |  |
+| `sent_count` | `int` | No |  |
+| `status` | `str` | No |  |
+| `total_recipient` | `int` | No |  |
+| `updated_at` | `str` | No |  |
 
 ### Field Usage by Operation
 
-| Field | load | list | create | update | remove |
-| --- | --- | --- | --- | --- | --- |
-| `attachment` | - | - | - | - | - |
-| `completed_at` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
-| `failed_count` | - | - | - | - | - |
-| `id` | - | - | - | - | - |
-| `message` | - | - | Yes | - | - |
-| `name` | - | - | Yes | - | - |
-| `parse_mode` | - | - | - | - | - |
-| `recipient` | - | - | - | - | - |
-| `schedule_time` | - | - | - | - | - |
-| `sent_count` | - | - | - | - | - |
-| `status` | - | - | - | - | - |
-| `total_recipient` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| Field | load | list | create | remove |
+| --- | --- | --- | --- | --- |
+| `attachment` | - | - | - | - |
+| `completed_at` | - | - | - | - |
+| `created_at` | - | - | - | - |
+| `failed_count` | - | - | - | - |
+| `id` | - | - | - | - |
+| `message` | - | - | Yes | - |
+| `name` | - | - | Yes | - |
+| `parse_mode` | - | - | - | - |
+| `recipient` | - | - | - | - |
+| `schedule_time` | - | - | - | - |
+| `sent_count` | - | - | - | - |
+| `status` | - | - | - | - |
+| `total_recipient` | - | - | - | - |
+| `updated_at` | - | - | - | - |
 
 ### Operations
 
@@ -130,16 +130,16 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Mailing().create({
-    "recipient": ...,  # `$ARRAY`
+    "recipient": [],  # list
 })
 ```
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Mailing().list({})
+results = client.Mailing().list()
 for mailing in results:
     print(mailing)
 ```

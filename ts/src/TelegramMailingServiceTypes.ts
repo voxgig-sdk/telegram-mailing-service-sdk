@@ -26,9 +26,39 @@ export interface MailingLoadMatch {
   id: string
 }
 
-export type MailingListMatch = Partial<Mailing>
+export interface MailingListMatch {
+  attachment?: any[]
+  completed_at?: string
+  created_at?: string
+  failed_count?: number
+  id?: string
+  message?: string
+  name?: string
+  parse_mode?: string
+  recipient?: any[]
+  schedule_time?: string
+  sent_count?: number
+  status?: string
+  total_recipient?: number
+  updated_at?: string
+}
 
-export type MailingCreateData = Partial<Mailing>
+export interface MailingCreateData {
+  attachment?: any[]
+  completed_at?: string
+  created_at?: string
+  failed_count?: number
+  id?: string
+  message?: string
+  name?: string
+  parse_mode?: string
+  recipient: any[]
+  schedule_time?: string
+  sent_count?: number
+  status?: string
+  total_recipient?: number
+  updated_at?: string
+}
 
 export interface MailingRemoveMatch {
   id: string

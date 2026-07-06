@@ -57,7 +57,11 @@ class MailingListMatch(TypedDict, total=False):
     updated_at: str
 
 
-class MailingCreateData(TypedDict, total=False):
+class MailingCreateDataRequired(TypedDict):
+    recipient: list
+
+
+class MailingCreateData(MailingCreateDataRequired, total=False):
     attachment: list
     completed_at: str
     created_at: str
@@ -66,7 +70,6 @@ class MailingCreateData(TypedDict, total=False):
     message: str
     name: str
     parse_mode: str
-    recipient: list
     schedule_time: str
     sent_count: int
     status: str

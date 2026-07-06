@@ -6,6 +6,21 @@ This is an unofficial SDK for the Telegram Mailing Service public API, generated
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
+## Entities, not endpoints
+
+This SDK exposes the API as a small set of **semantic entities** — Mailing — that you
+call directly, instead of assembling URL paths and query strings. Entities are
+**Capitalised** to mark them as the primary surface, each with the operations they
+support (`list`, `load`, `create`, `remove`):
+
+```ts
+const client = new TelegramMailingServiceSDK()
+const items = await client.Mailing().list()
+```
+
+Thinking in entities keeps the mental model small — for people and AI agents alike —
+rather than reasoning about raw HTTP routes and query parameters.
+
 ## Packages
 
 | Language | Package | Install |
@@ -75,8 +90,8 @@ The API exposes one entity:
 | --- | --- | --- |
 | **Mailing** | The Mailing entity (create, list, load, remove). | `/mailings` |
 
-Each entity supports the following operations where available: **load**,
-**list**, **create**, **update**, and **remove**.
+The operations available across these entities are **load**, **list**, **create**, **remove** — see each entity's
+own list above for exactly which it supports.
 
 ## Quickstart in other languages
 
@@ -91,7 +106,7 @@ client = TelegramMailingServiceSDK({
 })
 
 # List all mailings (returns a list, raises on error)
-mailings = client.Mailing().list({})
+mailings = client.Mailing().list()
 for mailing in mailings:
     print(mailing)
 
@@ -178,7 +193,7 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = TelegramMailingServiceSDK.test()
-const mailing = await client.Mailing().load({ id: 'test01' })
+const mailing = await client.Mailing().list()
 // mailing is a bare Mailing populated with mock data
 console.log(mailing)
 ```
@@ -187,7 +202,7 @@ console.log(mailing)
 
 ```python
 client = TelegramMailingServiceSDK.test()
-mailing = client.Mailing().load({"id": "test01"})
+mailing = client.Mailing().list()
 print(mailing)
 ```
 
@@ -198,15 +213,15 @@ print(mailing)
 $client = TelegramMailingServiceSDK::test([
     "entity" => ["mailing" => ["test01" => ["id" => "test01"]]],
 ]);
-$mailing = $client->Mailing()->load(["id" => "test01"]);
+$mailing = $client->Mailing()->list();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Mailing(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+result, err := client.Mailing(nil).List(
+    nil, nil,
 )
 ```
 
@@ -217,39 +232,17 @@ result, err := client.Mailing(nil).Load(
 client = TelegramMailingServiceSDK.test({
   "entity" => { "mailing" => { "test01" => { "id" => "test01" } } },
 })
-mailing = client.Mailing.load({ "id" => "test01" })
+mailing = client.Mailing.list()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Mailing():load({ id = "test01" })
+local result, err = client:Mailing():list()
 ```
 
-## How it works
-
-Every SDK call runs the same five-stage pipeline:
-
-1. **Point** — resolve the API endpoint from the operation definition.
-2. **Spec** — build the HTTP specification (URL, method, headers, body).
-3. **Request** — send the HTTP request.
-4. **Response** — receive and parse the response.
-5. **Result** — extract the result data for the caller.
-
-A feature hook fires at each stage (e.g. `PrePoint`, `PreSpec`,
-`PreRequest`), so features can inspect or modify the pipeline without
-forking the SDK.
-
-### Features
-
-| Feature | Purpose |
-| --- | --- |
-| **TestFeature** | In-memory mock transport for testing without a live server |
-
-Pass custom features via the `extend` option at construction time.
-
-### Direct and Prepare
+## Direct and prepare
 
 For endpoints the entity model doesn't cover, use the low-level methods:
 
@@ -322,6 +315,31 @@ local result, err = client:direct({
   params = { id = "example" },
 })
 ```
+
+## Advanced
+
+> Everyday use only needs the sections above. This explains the internals
+> behind every call — relevant when writing custom features.
+
+Every SDK call runs the same five-stage pipeline:
+
+1. **Point** — resolve the API endpoint from the operation definition.
+2. **Spec** — build the HTTP specification (URL, method, headers, body).
+3. **Request** — send the HTTP request.
+4. **Response** — receive and parse the response.
+5. **Result** — extract the result data for the caller.
+
+A feature hook fires at each stage (e.g. `PrePoint`, `PreSpec`,
+`PreRequest`), so features can inspect or modify the pipeline without
+forking the SDK.
+
+### Features
+
+| Feature | Purpose |
+| --- | --- |
+| **TestFeature** | In-memory mock transport for testing without a live server |
+
+Pass custom features via the `extend` option at construction time.
 
 ## Per-language documentation
 

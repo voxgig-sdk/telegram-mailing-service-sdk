@@ -221,7 +221,7 @@ class TelegramMailingServiceSDK:
 
 
     def Mailing(self, data=None) -> "MailingEntity":
-        """Entity factory: client.Mailing().list({}) / client.Mailing().load({"id": ...})."""
+        """Entity factory: client.Mailing().list() / client.Mailing().load({"id": ...})."""
         from entity.mailing_entity import MailingEntity
         return MailingEntity(self, data)
 

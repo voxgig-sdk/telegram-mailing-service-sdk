@@ -26,8 +26,36 @@
 ---@field id string
 
 ---@class MailingListMatch
+---@field attachment? table
+---@field completed_at? string
+---@field created_at? string
+---@field failed_count? number
+---@field id? string
+---@field message? string
+---@field name? string
+---@field parse_mode? string
+---@field recipient? table
+---@field schedule_time? string
+---@field sent_count? number
+---@field status? string
+---@field total_recipient? number
+---@field updated_at? string
 
 ---@class MailingCreateData
+---@field attachment? table
+---@field completed_at? string
+---@field created_at? string
+---@field failed_count? number
+---@field id? string
+---@field message? string
+---@field name? string
+---@field parse_mode? string
+---@field recipient table
+---@field schedule_time? string
+---@field sent_count? number
+---@field status? string
+---@field total_recipient? number
+---@field updated_at? string
 
 ---@class MailingRemoveMatch
 ---@field id string

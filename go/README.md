@@ -4,6 +4,8 @@
 
 The Golang SDK for the TelegramMailingService API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client.Mailing(nil)` — each with the same small set of operations (`List`, `Load`, `Create`, `Remove`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -61,26 +63,55 @@ func main() {
     }
 
     // Load a single mailing — the value is the loaded record.
-    mailing, err := client.Mailing(nil).Load(map[string]any{"id": "example_id"}, nil)
+    mailing, err := client.Mailing(nil).Load(map[string]any{"id": "example"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(mailing)
 
     // Create a mailing.
-    created, err := client.Mailing(nil).Create(map[string]any{"name": "Example"}, nil)
+    created, err := client.Mailing(nil).Create(map[string]any{"recipient": []any{}}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(created)
 
     // Remove a mailing.
-    removed, err := client.Mailing(nil).Remove(map[string]any{"id": "example_id"}, nil)
+    removed, err := client.Mailing(nil).Remove(map[string]any{"id": "example"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(removed)
 }
+```
+
+
+## Error handling
+
+Every entity operation returns `(value, error)`. Check `err` before
+using the value — there is no exception to catch:
+
+```go
+mailings, err := client.Mailing(nil).List(nil, nil)
+if err != nil {
+    // handle err
+    return
+}
+_ = mailings
+```
+
+`Direct` follows the same `(value, error)` convention:
+
+```go
+result, err := client.Direct(map[string]any{
+    "path":   "/api/resource/{id}",
+    "method": "GET",
+    "params": map[string]any{"id": "example_id"},
+})
+if err != nil {
+    // handle err
+}
+_ = result
 ```
 
 
@@ -130,13 +161,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-mailing, err := client.Mailing(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+mailing, err := client.Mailing(nil).List(
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(mailing) // the loaded mock data
+fmt.Println(mailing) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -226,7 +257,6 @@ All entities implement the `TelegramMailingServiceEntity` interface.
 | `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
 | `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
 | `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
-| `Update` | `(reqdata, ctrl map[string]any) (any, error)` | Update an existing entity. |
 | `Remove` | `(reqmatch, ctrl map[string]any) (any, error)` | Remove an entity. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
@@ -240,16 +270,16 @@ operation's data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `Load` / `Create` / `Remove` | the entity record (`map[string]any`) |
 | `List` | a `[]any` of entity records |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    mailing, err := client.Mailing(nil).Load(map[string]any{"id": "example_id"}, nil)
+    mailing, err := client.Mailing(nil).List(map[string]any{/* fields */}, nil)
     if err != nil { /* handle */ }
-    // mailing is the loaded record
+    // mailing is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -301,20 +331,20 @@ Create an instance: `mailing := client.Mailing(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attachment` | ``$ARRAY`` |  |
-| `completed_at` | ``$STRING`` |  |
-| `created_at` | ``$STRING`` |  |
-| `failed_count` | ``$INTEGER`` |  |
-| `id` | ``$STRING`` |  |
-| `message` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `parse_mode` | ``$STRING`` |  |
-| `recipient` | ``$ARRAY`` |  |
-| `schedule_time` | ``$STRING`` |  |
-| `sent_count` | ``$INTEGER`` |  |
-| `status` | ``$STRING`` |  |
-| `total_recipient` | ``$INTEGER`` |  |
-| `updated_at` | ``$STRING`` |  |
+| `attachment` | `[]any` |  |
+| `completed_at` | `string` |  |
+| `created_at` | `string` |  |
+| `failed_count` | `int` |  |
+| `id` | `string` |  |
+| `message` | `string` |  |
+| `name` | `string` |  |
+| `parse_mode` | `string` |  |
+| `recipient` | `[]any` |  |
+| `schedule_time` | `string` |  |
+| `sent_count` | `int` |  |
+| `status` | `string` |  |
+| `total_recipient` | `int` |  |
+| `updated_at` | `string` |  |
 
 #### Example: Load
 
@@ -340,17 +370,21 @@ fmt.Println(mailings) // the array of records
 
 ```go
 result, err := client.Mailing(nil).Create(map[string]any{
-    "recipient": /* `$ARRAY` */,
+    "recipient": /* []any */,
 }, nil)
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -367,9 +401,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller. An unexpected panic triggers the
-`PreUnexpected` hook.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -410,14 +444,14 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Load`, the entity
+Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
 mailing := client.Mailing(nil)
-mailing.Load(map[string]any{"id": "example_id"}, nil)
+mailing.List(nil, nil)
 
-// mailing.Data() now returns the loaded mailing data
+// mailing.Data() now returns the mailing data from the last list
 // mailing.Match() returns the last match criteria
 ```
 
