@@ -63,7 +63,7 @@ func main() {
     }
 
     // Load a single mailing — the value is the loaded record.
-    mailing, err := client.Mailing(nil).Load(map[string]any{"id": "example"}, nil)
+    mailing, err := client.Mailing(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
@@ -77,7 +77,7 @@ func main() {
     fmt.Println(created)
 
     // Remove a mailing.
-    removed, err := client.Mailing(nil).Remove(map[string]any{"id": "example"}, nil)
+    removed, err := client.Mailing(nil).Remove(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
@@ -322,9 +322,9 @@ Create an instance: `mailing := client.Mailing(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Remove(match, ctrl)` | Remove the matching entity. |
 
 #### Fields
@@ -370,8 +370,12 @@ fmt.Println(mailings) // the array of records
 
 ```go
 result, err := client.Mailing(nil).Create(map[string]any{
-    "recipient": /* []any */,
+    "recipient": []any{},
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 

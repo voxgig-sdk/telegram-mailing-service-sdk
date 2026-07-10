@@ -92,6 +92,7 @@ same parameters as `Direct()`.
 
 ```go
 mailing := client.Mailing(nil)
+fmt.Println(mailing.GetName()) // "mailing"
 ```
 
 ### Fields
@@ -134,22 +135,16 @@ mailing := client.Mailing(nil)
 
 ### Operations
 
-#### `Create(reqdata, ctrl map[string]any) (any, error)`
-
-Create a new entity with the given data.
-
-```go
-result, err := client.Mailing(nil).Create(map[string]any{
-    "recipient": /* []any */,
-}, nil)
-```
-
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
 
 List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Mailing(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -158,6 +153,24 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Mailing(nil).Load(map[string]any{"id": "mailing_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
+
+Create a new entity with the given data.
+
+```go
+result, err := client.Mailing(nil).Create(map[string]any{
+    "recipient": []any{},
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 #### `Remove(reqmatch, ctrl map[string]any) (any, error)`
@@ -166,6 +179,10 @@ Remove the entity matching the given criteria.
 
 ```go
 result, err := client.Mailing(nil).Remove(map[string]any{"id": "mailing_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

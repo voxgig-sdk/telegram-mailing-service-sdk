@@ -39,7 +39,7 @@ class Config {
     base: 'https://app.telegasend.ru/api/v1',
 
     auth: {
-      prefix: 'Bearer',
+      prefix: '',
     },
 
     headers: {

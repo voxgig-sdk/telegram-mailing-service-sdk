@@ -394,7 +394,7 @@ const mailings = await client.Mailing().list()
 
 ```ts
 const mailing = await client.Mailing().create({
-  recipient: /* any[] */,
+  recipient: [],
 })
 ```
 

@@ -159,7 +159,7 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Mailing().create({
-  recipient: /* any[] */,
+  recipient: [],
 })
 ```
 

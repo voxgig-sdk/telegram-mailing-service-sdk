@@ -330,7 +330,7 @@ local mailings, err = client:Mailing():list()
 
 ```lua
 local mailing, err = client:Mailing():create({
-  recipient = nil, -- table
+  recipient = {}, -- table
 })
 ```
 

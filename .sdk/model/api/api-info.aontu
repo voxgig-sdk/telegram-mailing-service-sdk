@@ -8,15 +8,22 @@ main: {
         url: "https://app.telegasend.ru"
       }
       description: "This API allows users to create, manage, and track mailing lists within the Telegram platform. It provides endpoints to create new mailings, check their status, and cancel existing mailings."
+      security: {
+        in: "header"
+        name: "X-API-Key"
+        prefix: ""
+        scheme: "ApiKeyAuth"
+        type: "apiKey"
+      }
       servers: [
         {
           description: "Production server"
           url: "https://app.telegasend.ru/api/v1"
         }
       ]
+      summary: "This API allows users to create, manage, and track mailing lists within the Telegram platform."
       title: "Telegram Mailing Service"
       version: "1.0.0"
+      website: "https://app.telegasend.ru"
     }
   }
-}
-
