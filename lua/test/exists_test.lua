@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- TelegramMailingService SDK exists test
 
 local sdk = require("telegram-mailing-service_sdk")
 
