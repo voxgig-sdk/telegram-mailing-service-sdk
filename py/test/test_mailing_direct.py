@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from telegrammailingservice_sdk.utility.voxgig_struct import voxgig_struct as vs
 from telegrammailingservice_sdk import TelegramMailingServiceSDK
-from core import helpers
+from telegrammailingservice_sdk.core import helpers
 from test import runner
 
 
@@ -105,16 +105,16 @@ def _mailing_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID": {},
-        "TELEGRAMMAILINGSERVICE_TEST_LIVE": "FALSE",
-        "TELEGRAMMAILINGSERVICE_APIKEY": "NONE",
+        "TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID": {},
+        "TELEGRAM_MAILING_SERVICE_TEST_LIVE": "FALSE",
+        "TELEGRAM_MAILING_SERVICE_APIKEY": "NONE",
     })
 
-    live = env.get("TELEGRAMMAILINGSERVICE_TEST_LIVE") == "TRUE"
+    live = env.get("TELEGRAM_MAILING_SERVICE_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("TELEGRAMMAILINGSERVICE_APIKEY"),
+            "apikey": env.get("TELEGRAM_MAILING_SERVICE_APIKEY"),
         }
         client = TelegramMailingServiceSDK(merged_opts)
         return {

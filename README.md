@@ -38,9 +38,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = TelegramMailingServiceSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = TelegramMailingServiceSDK.test({
+  entity: {
+    mailing: {
+      test01: { id: 'test01', recipients: [] },
+    },
+  },
+})
 const mailings = await client.Mailing().list()
-// mailings is an array of bare Mailing records populated with mock data
+// mailings is an array of Mailing entities, populated with mock data
+// — call mailings[0].data() for the record itself
 console.log(mailings)
 ```
 
@@ -112,7 +121,7 @@ const client = new TelegramMailingServiceSDK({
   apikey: process.env.TELEGRAM_MAILING_SERVICE_APIKEY,
 })
 
-// List all mailings (returns Mailing[])
+// List all mailings (returns MailingEntity[] — .data() for the record)
 const mailings = await client.Mailing().list()
 for (const mailing of mailings) {
   console.log(mailing)
@@ -198,7 +207,7 @@ $client = new TelegramMailingServiceSDK([
 $mailings = $client->Mailing()->list();
 print_r($mailings);
 
-// Load a specific mailing (returns the bare record; throws on error)
+// Load a specific mailing (returns the ENTITY; call data_get() for the record; throws on error)
 $mailing = $client->Mailing()->load(["id" => "example_id"]);
 print_r($mailing);
 ```
@@ -233,7 +242,7 @@ client = TelegramMailingServiceSDK.new({
 mailings = client.Mailing.list
 puts mailings
 
-# Load a specific mailing (returns the bare record; raises on error)
+# Load a specific mailing (returns the ENTITY; call data_get for the record)
 mailing = client.Mailing.load({ "id" => "example_id" })
 puts mailing
 ```
@@ -372,6 +381,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://app.telegasend.ru](https://app.telegasend.ru)
 

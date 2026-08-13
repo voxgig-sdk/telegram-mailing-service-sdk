@@ -114,16 +114,16 @@ def mailing_direct_setup(mockres)
   calls = []
 
   env = Runner.env_override({
-    "TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID" => {},
-    "TELEGRAMMAILINGSERVICE_TEST_LIVE" => "FALSE",
-    "TELEGRAMMAILINGSERVICE_APIKEY" => "NONE",
+    "TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID" => {},
+    "TELEGRAM_MAILING_SERVICE_TEST_LIVE" => "FALSE",
+    "TELEGRAM_MAILING_SERVICE_APIKEY" => "NONE",
   })
 
-  live = env["TELEGRAMMAILINGSERVICE_TEST_LIVE"] == "TRUE"
+  live = env["TELEGRAM_MAILING_SERVICE_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["TELEGRAMMAILINGSERVICE_APIKEY"],
+      "apikey" => env["TELEGRAM_MAILING_SERVICE_APIKEY"],
     }
     client = TelegramMailingServiceSDK.new(merged_opts)
     return {

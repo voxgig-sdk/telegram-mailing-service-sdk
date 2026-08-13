@@ -70,7 +70,7 @@ func main() {
     fmt.Println(mailing)
 
     // Create a mailing.
-    created, err := client.Mailing(nil).Create(map[string]any{"recipient": []any{}}, nil)
+    created, err := client.Mailing(nil).Create(map[string]any{"recipients": []any{}}, nil)
     if err != nil {
         panic(err)
     }
@@ -290,20 +290,20 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"attachment"` |  |
-| `"completed_at"` |  |
-| `"created_at"` |  |
-| `"failed_count"` |  |
+| `"attachments"` |  |
+| `"completedAt"` |  |
+| `"createdAt"` |  |
+| `"failedCount"` |  |
 | `"id"` |  |
 | `"message"` |  |
 | `"name"` |  |
-| `"parse_mode"` |  |
-| `"recipient"` |  |
-| `"schedule_time"` |  |
-| `"sent_count"` |  |
+| `"parseMode"` |  |
+| `"recipients"` |  |
+| `"scheduleTime"` |  |
+| `"sentCount"` |  |
 | `"status"` |  |
-| `"total_recipient"` |  |
-| `"updated_at"` |  |
+| `"totalRecipients"` |  |
+| `"updatedAt"` |  |
 
 Operations: Create, List, Load, Remove.
 
@@ -331,20 +331,20 @@ Create an instance: `mailing := client.Mailing(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attachment` | `[]any` |  |
-| `completed_at` | `string` |  |
-| `created_at` | `string` |  |
-| `failed_count` | `int` |  |
+| `attachments` | `[]any` |  |
+| `completedAt` | `string` |  |
+| `createdAt` | `string` |  |
+| `failedCount` | `int` |  |
 | `id` | `string` |  |
 | `message` | `string` |  |
 | `name` | `string` |  |
-| `parse_mode` | `string` |  |
-| `recipient` | `[]any` |  |
-| `schedule_time` | `string` |  |
-| `sent_count` | `int` |  |
+| `parseMode` | `string` |  |
+| `recipients` | `[]any` |  |
+| `scheduleTime` | `string` |  |
+| `sentCount` | `int` |  |
 | `status` | `string` |  |
-| `total_recipient` | `int` |  |
-| `updated_at` | `string` |  |
+| `totalRecipients` | `int` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
@@ -370,7 +370,7 @@ fmt.Println(mailings) // the array of records
 
 ```go
 result, err := client.Mailing(nil).Create(map[string]any{
-    "recipient": []any{},
+    "recipients": []any{},
 }, nil)
 if err != nil {
     panic(err)

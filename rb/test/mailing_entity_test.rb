@@ -62,7 +62,7 @@ class MailingEntityTest < Minitest::Test
     # The basic flow consumes synthetic IDs from the fixture. In live mode
     # without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID JSON to run live"
+      skip "live entity test uses synthetic IDs from fixture — set TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID JSON to run live"
       return
     end
     client = setup[:client]
@@ -73,7 +73,7 @@ class MailingEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.mailing"), "mailing_ref01"))
 
     mailing_ref01_data_result = mailing_ref01_ent.create(mailing_ref01_data, nil)
-    mailing_ref01_data = Helpers.to_map(mailing_ref01_data_result)
+    mailing_ref01_data = Helpers.to_map(mailing_ref01_data_result.respond_to?(:data_get) ? mailing_ref01_data_result.data_get : mailing_ref01_data_result)
     assert !mailing_ref01_data.nil?
     assert !mailing_ref01_data["id"].nil?
 
@@ -93,7 +93,7 @@ class MailingEntityTest < Minitest::Test
       "id" => mailing_ref01_data["id"],
     }
     mailing_ref01_data_dt0_loaded = mailing_ref01_ent.load(mailing_ref01_match_dt0, nil)
-    mailing_ref01_data_dt0_load_result = Helpers.to_map(mailing_ref01_data_dt0_loaded)
+    mailing_ref01_data_dt0_load_result = Helpers.to_map(mailing_ref01_data_dt0_loaded.respond_to?(:data_get) ? mailing_ref01_data_dt0_loaded.data_get : mailing_ref01_data_dt0_loaded)
     assert !mailing_ref01_data_dt0_load_result.nil?
     assert_equal mailing_ref01_data_dt0_load_result["id"], mailing_ref01_data["id"]
 
@@ -143,39 +143,39 @@ def mailing_basic_setup(extra)
   # Detect ENTID env override before envOverride consumes it. When live
   # mode is on without a real override, the basic test runs against synthetic
   # IDs from the fixture and 4xx's. Surface this so the test can skip.
-  entid_env_raw = ENV["TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID"]
+  entid_env_raw = ENV["TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 
   env = Runner.env_override({
-    "TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID" => idmap,
-    "TELEGRAMMAILINGSERVICE_TEST_LIVE" => "FALSE",
-    "TELEGRAMMAILINGSERVICE_TEST_EXPLAIN" => "FALSE",
-    "TELEGRAMMAILINGSERVICE_APIKEY" => "NONE",
+    "TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID" => idmap,
+    "TELEGRAM_MAILING_SERVICE_TEST_LIVE" => "FALSE",
+    "TELEGRAM_MAILING_SERVICE_TEST_EXPLAIN" => "FALSE",
+    "TELEGRAM_MAILING_SERVICE_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
-    env["TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID"])
+    env["TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID"])
   if idmap_resolved.nil?
     idmap_resolved = Helpers.to_map(idmap)
   end
 
-  if env["TELEGRAMMAILINGSERVICE_TEST_LIVE"] == "TRUE"
+  if env["TELEGRAM_MAILING_SERVICE_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["TELEGRAMMAILINGSERVICE_APIKEY"],
+        "apikey" => env["TELEGRAM_MAILING_SERVICE_APIKEY"],
       },
       extra || {},
     ])
     client = TelegramMailingServiceSDK.new(Helpers.to_map(merged_opts))
   end
 
-  live = env["TELEGRAMMAILINGSERVICE_TEST_LIVE"] == "TRUE"
+  live = env["TELEGRAM_MAILING_SERVICE_TEST_LIVE"] == "TRUE"
   {
     client: client,
     data: entity_data,
     idmap: idmap_resolved,
     env: env,
-    explain: env["TELEGRAMMAILINGSERVICE_TEST_EXPLAIN"] == "TRUE",
+    explain: env["TELEGRAM_MAILING_SERVICE_TEST_EXPLAIN"] == "TRUE",
     live: live,
     synthetic_only: live && !idmap_overridden,
     now: (Time.now.to_f * 1000).to_i,

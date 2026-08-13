@@ -37,7 +37,9 @@ const client = new TelegramMailingServiceSDK({
 
 ### 2. List mailing records
 
-`list()` resolves to an array of Mailing objects — iterate it directly:
+`list()` resolves to an array of Mailing ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const mailings = await client.Mailing().list()
@@ -63,14 +65,14 @@ try {
 ### 4. Create, update, and remove
 
 ```ts
-// Create — returns the created Mailing
+// Create — returns the created Mailing ENTITY (.data() for the record)
 const created = await client.Mailing().create({
-  recipient: [],
+  recipients: [],
 })
 
 // Remove
 await client.Mailing().remove({
-  id: created.id!,
+  id: created.data().id!,
 })
 ```
 
@@ -149,7 +151,8 @@ Create a mock client for unit testing — no server required:
 const client = TelegramMailingServiceSDK.test()
 
 const mailing = await client.Mailing().list()
-// mailing is a bare entity populated with mock response data
+// mailing is the entity, populated with mock response data
+// — call mailing.data() for the record itself
 console.log(mailing)
 ```
 
@@ -322,20 +325,20 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `attachment` |  |
-| `completed_at` |  |
-| `created_at` |  |
-| `failed_count` |  |
+| `attachments` |  |
+| `completedAt` |  |
+| `createdAt` |  |
+| `failedCount` |  |
 | `id` |  |
 | `message` |  |
 | `name` |  |
-| `parse_mode` |  |
-| `recipient` |  |
-| `schedule_time` |  |
-| `sent_count` |  |
+| `parseMode` |  |
+| `recipients` |  |
+| `scheduleTime` |  |
+| `sentCount` |  |
 | `status` |  |
-| `total_recipient` |  |
-| `updated_at` |  |
+| `totalRecipients` |  |
+| `updatedAt` |  |
 
 Operations: create, list, load, remove.
 
@@ -363,20 +366,20 @@ Create an instance: `const mailing = client.Mailing()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attachment` | `any[]` |  |
-| `completed_at` | `string` |  |
-| `created_at` | `string` |  |
-| `failed_count` | `number` |  |
+| `attachments` | `any[]` |  |
+| `completedAt` | `string` |  |
+| `createdAt` | `string` |  |
+| `failedCount` | `number` |  |
 | `id` | `string` |  |
 | `message` | `string` |  |
 | `name` | `string` |  |
-| `parse_mode` | `string` |  |
-| `recipient` | `any[]` |  |
-| `schedule_time` | `string` |  |
-| `sent_count` | `number` |  |
+| `parseMode` | `string` |  |
+| `recipients` | `any[]` |  |
+| `scheduleTime` | `string` |  |
+| `sentCount` | `number` |  |
 | `status` | `string` |  |
-| `total_recipient` | `number` |  |
-| `updated_at` | `string` |  |
+| `totalRecipients` | `number` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
@@ -394,7 +397,7 @@ const mailings = await client.Mailing().list()
 
 ```ts
 const mailing = await client.Mailing().create({
-  recipient: [],
+  recipients: [],
 })
 ```
 

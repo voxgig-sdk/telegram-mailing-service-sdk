@@ -55,7 +55,7 @@ except Exception as err:
 
 ### 3. Load a mailing
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -68,11 +68,11 @@ except Exception as err:
 ### 4. Create, update, and remove
 
 ```python
-# Create — returns the bare created record (a dict)
-created = client.Mailing().create({"recipient": []})
+# Create — returns the ENTITY (call data_get() for the record)
+created = client.Mailing().create({"recipients": []})
 
 # Remove
-client.Mailing().remove({"id": created["id"]})
+client.Mailing().remove({"id": created.data_get()["id"]})
 ```
 
 
@@ -149,7 +149,8 @@ Create a mock client for unit testing — no server required:
 ```python
 client = TelegramMailingServiceSDK.test()
 
-# Entity ops return the bare record and raise on error.
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
 mailing = client.Mailing().list()
 # mailing contains the mock response record
 ```
@@ -250,7 +251,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -272,20 +273,20 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `attachment` |  |
-| `completed_at` |  |
-| `created_at` |  |
-| `failed_count` |  |
+| `attachments` |  |
+| `completedAt` |  |
+| `createdAt` |  |
+| `failedCount` |  |
 | `id` |  |
 | `message` |  |
 | `name` |  |
-| `parse_mode` |  |
-| `recipient` |  |
-| `schedule_time` |  |
-| `sent_count` |  |
+| `parseMode` |  |
+| `recipients` |  |
+| `scheduleTime` |  |
+| `sentCount` |  |
 | `status` |  |
-| `total_recipient` |  |
-| `updated_at` |  |
+| `totalRecipients` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove.
 
@@ -313,20 +314,20 @@ Create an instance: `mailing = client.Mailing()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attachment` | `list` |  |
-| `completed_at` | `str` |  |
-| `created_at` | `str` |  |
-| `failed_count` | `int` |  |
+| `attachments` | `list` |  |
+| `completedAt` | `str` |  |
+| `createdAt` | `str` |  |
+| `failedCount` | `int` |  |
 | `id` | `str` |  |
 | `message` | `str` |  |
 | `name` | `str` |  |
-| `parse_mode` | `str` |  |
-| `recipient` | `list` |  |
-| `schedule_time` | `str` |  |
-| `sent_count` | `int` |  |
+| `parseMode` | `str` |  |
+| `recipients` | `list` |  |
+| `scheduleTime` | `str` |  |
+| `sentCount` | `int` |  |
 | `status` | `str` |  |
-| `total_recipient` | `int` |  |
-| `updated_at` | `str` |  |
+| `totalRecipients` | `int` |  |
+| `updatedAt` | `str` |  |
 
 #### Example: Load
 
@@ -344,7 +345,7 @@ mailings = client.Mailing().list()
 
 ```python
 mailing = client.Mailing().create({
-    "recipient": [],  # list
+    "recipients": [],  # list
 })
 ```
 

@@ -9,6 +9,7 @@ guide: {
     path: "/mailings": {
       op: create: method: *POST
       op: list: method: *GET
+      op: list: transform: res: *("`body.data`")|top
     }
     path: "/mailings/{mailingId}": {
       rename: param: "mailingId": *"id"

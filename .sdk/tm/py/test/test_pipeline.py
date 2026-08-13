@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import TelegramMailingServiceSDK
-from core.error import TelegramMailingServiceError
-from core.result import TelegramMailingServiceResult
-from core.response import TelegramMailingServiceResponse
-from core.spec import TelegramMailingServiceSpec
-from feature.base_feature import TelegramMailingServiceBaseFeature
+from projectname_sdk.core.error import TelegramMailingServiceError
+from projectname_sdk.core.result import TelegramMailingServiceResult
+from projectname_sdk.core.response import TelegramMailingServiceResponse
+from projectname_sdk.core.spec import TelegramMailingServiceSpec
+from projectname_sdk.feature.base_feature import TelegramMailingServiceBaseFeature
 
 
 def _client():

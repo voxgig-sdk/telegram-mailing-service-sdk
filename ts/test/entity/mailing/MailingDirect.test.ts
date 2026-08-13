@@ -19,11 +19,15 @@ import {
 describe('MailingDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when TELEGRAMMAILINGSERVICE_TEST_LIVE=TRUE.
-  afterEach(liveDelay('TELEGRAMMAILINGSERVICE_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when TELEGRAM_MAILING_SERVICE_TEST_LIVE=TRUE.
+  afterEach(liveDelay('TELEGRAM_MAILING_SERVICE_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new TelegramMailingServiceSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -134,19 +138,19 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID': {},
-    'TELEGRAMMAILINGSERVICE_TEST_LIVE': 'FALSE',
-    'TELEGRAMMAILINGSERVICE_APIKEY': 'NONE',
+    'TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID': {},
+    'TELEGRAM_MAILING_SERVICE_TEST_LIVE': 'FALSE',
+    'TELEGRAM_MAILING_SERVICE_APIKEY': 'NONE',
   })
 
-  const live = 'TRUE' === env.TELEGRAMMAILINGSERVICE_TEST_LIVE
+  const live = 'TRUE' === env.TELEGRAM_MAILING_SERVICE_TEST_LIVE
 
   if (live) {
     const client = new TelegramMailingServiceSDK({
-      apikey: env.TELEGRAMMAILINGSERVICE_APIKEY,
+      apikey: env.TELEGRAM_MAILING_SERVICE_APIKEY,
     })
 
-    let idmap: any = env['TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID']
+    let idmap: any = env['TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

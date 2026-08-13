@@ -26,8 +26,8 @@ import {
 describe('MailingEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when TELEGRAMMAILINGSERVICE_TEST_LIVE=TRUE.
-  afterEach(liveDelay('TELEGRAMMAILINGSERVICE_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when TELEGRAM_MAILING_SERVICE_TEST_LIVE=TRUE.
+  afterEach(liveDelay('TELEGRAM_MAILING_SERVICE_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = TelegramMailingServiceSDK.test()
@@ -62,14 +62,14 @@ describe('MailingEntity', async () => {
     const mailing_ref01_ent = client.Mailing()
     let mailing_ref01_data = setup.data.new.mailing['mailing_ref01']
 
-    mailing_ref01_data = await mailing_ref01_ent.create(mailing_ref01_data)
+    mailing_ref01_data = (await mailing_ref01_ent.create(mailing_ref01_data)).data()
     assert(null != mailing_ref01_data.id)
 
 
     // LIST
     const mailing_ref01_match: any = {}
 
-    const mailing_ref01_list = await mailing_ref01_ent.list(mailing_ref01_match)
+    const mailing_ref01_list = (await mailing_ref01_ent.list(mailing_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(mailing_ref01_list, { id: mailing_ref01_data.id })))
 
@@ -77,7 +77,7 @@ describe('MailingEntity', async () => {
     // LOAD
     const mailing_ref01_match_dt0: any = {}
     mailing_ref01_match_dt0.id = mailing_ref01_data.id
-    const mailing_ref01_data_dt0 = await mailing_ref01_ent.load(mailing_ref01_match_dt0)
+    const mailing_ref01_data_dt0 = (await mailing_ref01_ent.load(mailing_ref01_match_dt0)).data()
     assert(mailing_ref01_data_dt0.id === mailing_ref01_data.id)
 
 
@@ -89,7 +89,7 @@ describe('MailingEntity', async () => {
     // LIST
     const mailing_ref01_match_rt0: any = {}
 
-    const mailing_ref01_list_rt0 = await mailing_ref01_ent.list(mailing_ref01_match_rt0)
+    const mailing_ref01_list_rt0 = (await mailing_ref01_ent.list(mailing_ref01_match_rt0)).map((e: any) => e.data())
 
     assert(isempty(select(mailing_ref01_list_rt0, { id: mailing_ref01_data.id })))
 

@@ -15,20 +15,20 @@ declare(strict_types=1);
 /** Mailing entity data model. */
 class Mailing
 {
-    public ?array $attachment = null;
-    public ?string $completed_at = null;
-    public ?string $created_at = null;
-    public ?int $failed_count = null;
+    public ?array $attachments = null;
+    public ?string $completedAt = null;
+    public ?string $createdAt = null;
+    public ?int $failedCount = null;
     public ?string $id = null;
     public ?string $message = null;
     public ?string $name = null;
-    public ?string $parse_mode = null;
-    public array $recipient;
-    public ?string $schedule_time = null;
-    public ?int $sent_count = null;
+    public ?string $parseMode = null;
+    public array $recipients;
+    public ?string $scheduleTime = null;
+    public ?int $sentCount = null;
     public ?string $status = null;
-    public ?int $total_recipient = null;
-    public ?string $updated_at = null;
+    public ?int $totalRecipients = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Mailing#load. */
@@ -40,39 +40,39 @@ class MailingLoadMatch
 /** Request payload for Mailing#list. */
 class MailingListMatch
 {
-    public ?array $attachment = null;
-    public ?string $completed_at = null;
-    public ?string $created_at = null;
-    public ?int $failed_count = null;
+    public ?array $attachments = null;
+    public ?string $completedAt = null;
+    public ?string $createdAt = null;
+    public ?int $failedCount = null;
     public ?string $id = null;
     public ?string $message = null;
     public ?string $name = null;
-    public ?string $parse_mode = null;
-    public ?array $recipient = null;
-    public ?string $schedule_time = null;
-    public ?int $sent_count = null;
+    public ?string $parseMode = null;
+    public ?array $recipients = null;
+    public ?string $scheduleTime = null;
+    public ?int $sentCount = null;
     public ?string $status = null;
-    public ?int $total_recipient = null;
-    public ?string $updated_at = null;
+    public ?int $totalRecipients = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Mailing#create. */
 class MailingCreateData
 {
-    public ?array $attachment = null;
-    public ?string $completed_at = null;
-    public ?string $created_at = null;
-    public ?int $failed_count = null;
+    public ?array $attachments = null;
+    public ?string $completedAt = null;
+    public ?string $createdAt = null;
+    public ?int $failedCount = null;
     public ?string $id = null;
     public ?string $message = null;
     public ?string $name = null;
-    public ?string $parse_mode = null;
-    public array $recipient;
-    public ?string $schedule_time = null;
-    public ?int $sent_count = null;
+    public ?string $parseMode = null;
+    public array $recipients;
+    public ?string $scheduleTime = null;
+    public ?int $sentCount = null;
     public ?string $status = null;
-    public ?int $total_recipient = null;
-    public ?string $updated_at = null;
+    public ?int $totalRecipients = null;
+    public ?string $updatedAt = null;
 }
 
 /** Request payload for Mailing#remove. */

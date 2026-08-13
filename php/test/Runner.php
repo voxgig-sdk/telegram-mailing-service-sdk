@@ -43,8 +43,8 @@ class TelegramMailingServiceTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('TELEGRAMMAILINGSERVICE_TEST_LIVE');
-        $override = self::getenv('TELEGRAMMAILINGSERVICE_TEST_OVERRIDE');
+        $live = self::getenv('TELEGRAM_MAILING_SERVICE_TEST_LIVE');
+        $override = self::getenv('TELEGRAM_MAILING_SERVICE_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class TelegramMailingServiceTestRunner
             }
         }
 
-        $explain = self::getenv('TELEGRAMMAILINGSERVICE_TEST_EXPLAIN');
+        $explain = self::getenv('TELEGRAM_MAILING_SERVICE_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['TELEGRAMMAILINGSERVICE_TEST_EXPLAIN'] = $explain;
+            $m['TELEGRAM_MAILING_SERVICE_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

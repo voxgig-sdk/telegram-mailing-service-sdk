@@ -92,7 +92,7 @@ func TestMailingEntity(t *testing.T) {
 		// The basic flow consumes synthetic IDs from the fixture. In live mode
 		// without an *_ENTID env override, those IDs hit the live API and 4xx.
 		if setup.syntheticOnly {
-			t.Skip("live entity test uses synthetic IDs from fixture — set TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID JSON to run live")
+			t.Skip("live entity test uses synthetic IDs from fixture — set TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID JSON to run live")
 			return
 		}
 		client := setup.client
@@ -106,7 +106,7 @@ func TestMailingEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		mailingRef01Data = core.ToMapAny(mailingRef01DataResult)
+		mailingRef01Data = core.ToMapAny(entityData(mailingRef01DataResult))
 		if mailingRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -139,7 +139,7 @@ func TestMailingEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		mailingRef01DataDt0LoadResult := core.ToMapAny(mailingRef01DataDt0Loaded)
+		mailingRef01DataDt0LoadResult := core.ToMapAny(entityData(mailingRef01DataDt0Loaded))
 		if mailingRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}
@@ -213,38 +213,38 @@ func mailingBasicSetup(extra map[string]any) *entityTestSetup {
 	// Detect ENTID env override before envOverride consumes it. When live
 	// mode is on without a real override, the basic test runs against synthetic
 	// IDs from the fixture and 4xx's. Surface this so the test can skip.
-	entidEnvRaw := os.Getenv("TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID")
+	entidEnvRaw := os.Getenv("TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID")
 	idmapOverridden := entidEnvRaw != "" && strings.HasPrefix(strings.TrimSpace(entidEnvRaw), "{")
 
 	env := envOverride(map[string]any{
-		"TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID": idmap,
-		"TELEGRAMMAILINGSERVICE_TEST_LIVE":      "FALSE",
-		"TELEGRAMMAILINGSERVICE_TEST_EXPLAIN":   "FALSE",
-		"TELEGRAMMAILINGSERVICE_APIKEY":         "NONE",
+		"TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID": idmap,
+		"TELEGRAM_MAILING_SERVICE_TEST_LIVE":      "FALSE",
+		"TELEGRAM_MAILING_SERVICE_TEST_EXPLAIN":   "FALSE",
+		"TELEGRAM_MAILING_SERVICE_APIKEY":         "NONE",
 	})
 
-	idmapResolved := core.ToMapAny(env["TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID"])
+	idmapResolved := core.ToMapAny(env["TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID"])
 	if idmapResolved == nil {
 		idmapResolved = core.ToMapAny(idmap)
 	}
 
-	if env["TELEGRAMMAILINGSERVICE_TEST_LIVE"] == "TRUE" {
+	if env["TELEGRAM_MAILING_SERVICE_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["TELEGRAMMAILINGSERVICE_APIKEY"],
+				"apikey": env["TELEGRAM_MAILING_SERVICE_APIKEY"],
 			},
 			extra,
 		})
 		client = sdk.NewTelegramMailingServiceSDK(core.ToMapAny(mergedOpts))
 	}
 
-	live := env["TELEGRAMMAILINGSERVICE_TEST_LIVE"] == "TRUE"
+	live := env["TELEGRAM_MAILING_SERVICE_TEST_LIVE"] == "TRUE"
 	return &entityTestSetup{
 		client:        client,
 		data:          entityData,
 		idmap:         idmapResolved,
 		env:           env,
-		explain:       env["TELEGRAMMAILINGSERVICE_TEST_EXPLAIN"] == "TRUE",
+		explain:       env["TELEGRAM_MAILING_SERVICE_TEST_EXPLAIN"] == "TRUE",
 		live:          live,
 		syntheticOnly: live && !idmapOverridden,
 		now:           time.Now().UnixMilli(),

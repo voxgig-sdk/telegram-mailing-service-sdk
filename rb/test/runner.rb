@@ -23,8 +23,8 @@ module TelegramMailingServiceTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("TELEGRAMMAILINGSERVICE_TEST_LIVE")
-    override = getenv("TELEGRAMMAILINGSERVICE_TEST_OVERRIDE")
+    live = getenv("TELEGRAM_MAILING_SERVICE_TEST_LIVE")
+    override = getenv("TELEGRAM_MAILING_SERVICE_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module TelegramMailingServiceTestRunner
       end
     end
 
-    explain = getenv("TELEGRAMMAILINGSERVICE_TEST_EXPLAIN")
-    m["TELEGRAMMAILINGSERVICE_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("TELEGRAM_MAILING_SERVICE_TEST_EXPLAIN")
+    m["TELEGRAM_MAILING_SERVICE_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

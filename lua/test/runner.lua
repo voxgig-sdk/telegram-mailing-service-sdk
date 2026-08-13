@@ -35,8 +35,8 @@ end
 
 
 function runner.env_override(m)
-  local live = runner.getenv("TELEGRAMMAILINGSERVICE_TEST_LIVE")
-  local override = runner.getenv("TELEGRAMMAILINGSERVICE_TEST_OVERRIDE")
+  local live = runner.getenv("TELEGRAM_MAILING_SERVICE_TEST_LIVE")
+  local override = runner.getenv("TELEGRAM_MAILING_SERVICE_TEST_OVERRIDE")
 
   if live == "TRUE" or override == "TRUE" then
     for key, _ in pairs(m) do
@@ -56,9 +56,9 @@ function runner.env_override(m)
     end
   end
 
-  local explain = runner.getenv("TELEGRAMMAILINGSERVICE_TEST_EXPLAIN")
+  local explain = runner.getenv("TELEGRAM_MAILING_SERVICE_TEST_EXPLAIN")
   if explain ~= nil and explain ~= "" then
-    m["TELEGRAMMAILINGSERVICE_TEST_EXPLAIN"] = explain
+    m["TELEGRAM_MAILING_SERVICE_TEST_EXPLAIN"] = explain
   end
 
   return m

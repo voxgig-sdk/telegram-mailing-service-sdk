@@ -10,16 +10,16 @@
 
 # Mailing entity data model.
 #
-# @!attribute [rw] attachment
+# @!attribute [rw] attachments
 #   @return [Array, nil]
 #
-# @!attribute [rw] completed_at
+# @!attribute [rw] completedAt
 #   @return [String, nil]
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
 #
-# @!attribute [rw] failed_count
+# @!attribute [rw] failedCount
 #   @return [Integer, nil]
 #
 # @!attribute [rw] id
@@ -31,41 +31,41 @@
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] parse_mode
+# @!attribute [rw] parseMode
 #   @return [String, nil]
 #
-# @!attribute [rw] recipient
+# @!attribute [rw] recipients
 #   @return [Array]
 #
-# @!attribute [rw] schedule_time
+# @!attribute [rw] scheduleTime
 #   @return [String, nil]
 #
-# @!attribute [rw] sent_count
+# @!attribute [rw] sentCount
 #   @return [Integer, nil]
 #
 # @!attribute [rw] status
 #   @return [String, nil]
 #
-# @!attribute [rw] total_recipient
+# @!attribute [rw] totalRecipients
 #   @return [Integer, nil]
 #
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 Mailing = Struct.new(
-  :attachment,
-  :completed_at,
-  :created_at,
-  :failed_count,
+  :attachments,
+  :completedAt,
+  :createdAt,
+  :failedCount,
   :id,
   :message,
   :name,
-  :parse_mode,
-  :recipient,
-  :schedule_time,
-  :sent_count,
+  :parseMode,
+  :recipients,
+  :scheduleTime,
+  :sentCount,
   :status,
-  :total_recipient,
-  :updated_at,
+  :totalRecipients,
+  :updatedAt,
   keyword_init: true
 )
 
@@ -80,16 +80,16 @@ MailingLoadMatch = Struct.new(
 
 # Request payload for Mailing#list.
 #
-# @!attribute [rw] attachment
+# @!attribute [rw] attachments
 #   @return [Array, nil]
 #
-# @!attribute [rw] completed_at
+# @!attribute [rw] completedAt
 #   @return [String, nil]
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
 #
-# @!attribute [rw] failed_count
+# @!attribute [rw] failedCount
 #   @return [Integer, nil]
 #
 # @!attribute [rw] id
@@ -101,56 +101,56 @@ MailingLoadMatch = Struct.new(
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] parse_mode
+# @!attribute [rw] parseMode
 #   @return [String, nil]
 #
-# @!attribute [rw] recipient
+# @!attribute [rw] recipients
 #   @return [Array, nil]
 #
-# @!attribute [rw] schedule_time
+# @!attribute [rw] scheduleTime
 #   @return [String, nil]
 #
-# @!attribute [rw] sent_count
+# @!attribute [rw] sentCount
 #   @return [Integer, nil]
 #
 # @!attribute [rw] status
 #   @return [String, nil]
 #
-# @!attribute [rw] total_recipient
+# @!attribute [rw] totalRecipients
 #   @return [Integer, nil]
 #
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 MailingListMatch = Struct.new(
-  :attachment,
-  :completed_at,
-  :created_at,
-  :failed_count,
+  :attachments,
+  :completedAt,
+  :createdAt,
+  :failedCount,
   :id,
   :message,
   :name,
-  :parse_mode,
-  :recipient,
-  :schedule_time,
-  :sent_count,
+  :parseMode,
+  :recipients,
+  :scheduleTime,
+  :sentCount,
   :status,
-  :total_recipient,
-  :updated_at,
+  :totalRecipients,
+  :updatedAt,
   keyword_init: true
 )
 
 # Request payload for Mailing#create.
 #
-# @!attribute [rw] attachment
+# @!attribute [rw] attachments
 #   @return [Array, nil]
 #
-# @!attribute [rw] completed_at
+# @!attribute [rw] completedAt
 #   @return [String, nil]
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
 #
-# @!attribute [rw] failed_count
+# @!attribute [rw] failedCount
 #   @return [Integer, nil]
 #
 # @!attribute [rw] id
@@ -162,41 +162,41 @@ MailingListMatch = Struct.new(
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] parse_mode
+# @!attribute [rw] parseMode
 #   @return [String, nil]
 #
-# @!attribute [rw] recipient
+# @!attribute [rw] recipients
 #   @return [Array]
 #
-# @!attribute [rw] schedule_time
+# @!attribute [rw] scheduleTime
 #   @return [String, nil]
 #
-# @!attribute [rw] sent_count
+# @!attribute [rw] sentCount
 #   @return [Integer, nil]
 #
 # @!attribute [rw] status
 #   @return [String, nil]
 #
-# @!attribute [rw] total_recipient
+# @!attribute [rw] totalRecipients
 #   @return [Integer, nil]
 #
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 MailingCreateData = Struct.new(
-  :attachment,
-  :completed_at,
-  :created_at,
-  :failed_count,
+  :attachments,
+  :completedAt,
+  :createdAt,
+  :failedCount,
   :id,
   :message,
   :name,
-  :parse_mode,
-  :recipient,
-  :schedule_time,
-  :sent_count,
+  :parseMode,
+  :recipients,
+  :scheduleTime,
+  :sentCount,
   :status,
-  :total_recipient,
-  :updated_at,
+  :totalRecipients,
+  :updatedAt,
   keyword_init: true
 )
 

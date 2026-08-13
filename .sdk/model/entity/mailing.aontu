@@ -6,22 +6,22 @@ main: kit: entity: mailing: {
 
   fields: [
     {
-      name: "attachment"
+      name: "attachments"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "completed_at"
+      name: "completedAt"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "created_at"
+      name: "createdAt"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "failed_count"
+      name: "failedCount"
       req: false
       type: "`$INTEGER`"
     }
@@ -53,22 +53,22 @@ main: kit: entity: mailing: {
       type: "`$STRING`"
     }
     {
-      name: "parse_mode"
+      name: "parseMode"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "recipient"
+      name: "recipients"
       req: true
       type: "`$ARRAY`"
     }
     {
-      name: "schedule_time"
+      name: "scheduleTime"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "sent_count"
+      name: "sentCount"
       req: false
       type: "`$INTEGER`"
     }
@@ -78,12 +78,12 @@ main: kit: entity: mailing: {
       type: "`$STRING`"
     }
     {
-      name: "total_recipient"
+      name: "totalRecipients"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "updated_at"
+      name: "updatedAt"
       req: false
       type: "`$STRING`"
     }
@@ -157,7 +157,7 @@ main: kit: entity: mailing: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.data`"
           }
         }
       ]

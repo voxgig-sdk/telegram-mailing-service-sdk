@@ -39,7 +39,7 @@ begin
   # list returns an Array of Mailing records — iterate directly.
   mailings = client.Mailing.list
   mailings.each do |item|
-    puts "#{item["id"]} #{item["attachment"]}"
+    puts "#{item["id"]} #{item["attachments"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -50,7 +50,7 @@ end
 
 ```ruby
 begin
-  # load returns the bare Mailing record (raises on error).
+  # load returns the ENTITY — call data_get for the Mailing record (raises on error).
   mailing = client.Mailing.load({ "id" => "example_id" })
   puts mailing
 rescue => err
@@ -61,11 +61,11 @@ end
 ### 4. Create, update, and remove
 
 ```ruby
-# create returns the bare created Mailing record.
-created = client.Mailing.create({ "recipient" => [] })
+# create returns the ENTITY — call data_get for the created Mailing record.
+created = client.Mailing.create({ "recipients" => [] })
 
 # Remove
-client.Mailing.remove({ "id" => created["id"] })
+client.Mailing.remove({ "id" => created.data_get["id"] })
 ```
 
 
@@ -146,7 +146,8 @@ client = TelegramMailingServiceSDK.test({
   "entity" => { "mailing" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 mailing = client.Mailing.list()
 puts mailing
 ```
@@ -268,20 +269,20 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `attachment` |  |
-| `completed_at` |  |
-| `created_at` |  |
-| `failed_count` |  |
+| `attachments` |  |
+| `completedAt` |  |
+| `createdAt` |  |
+| `failedCount` |  |
 | `id` |  |
 | `message` |  |
 | `name` |  |
-| `parse_mode` |  |
-| `recipient` |  |
-| `schedule_time` |  |
-| `sent_count` |  |
+| `parseMode` |  |
+| `recipients` |  |
+| `scheduleTime` |  |
+| `sentCount` |  |
 | `status` |  |
-| `total_recipient` |  |
-| `updated_at` |  |
+| `totalRecipients` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove.
 
@@ -309,25 +310,25 @@ Create an instance: `mailing = client.Mailing`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attachment` | `Array` |  |
-| `completed_at` | `String` |  |
-| `created_at` | `String` |  |
-| `failed_count` | `Integer` |  |
+| `attachments` | `Array` |  |
+| `completedAt` | `String` |  |
+| `createdAt` | `String` |  |
+| `failedCount` | `Integer` |  |
 | `id` | `String` |  |
 | `message` | `String` |  |
 | `name` | `String` |  |
-| `parse_mode` | `String` |  |
-| `recipient` | `Array` |  |
-| `schedule_time` | `String` |  |
-| `sent_count` | `Integer` |  |
+| `parseMode` | `String` |  |
+| `recipients` | `Array` |  |
+| `scheduleTime` | `String` |  |
+| `sentCount` | `Integer` |  |
 | `status` | `String` |  |
-| `total_recipient` | `Integer` |  |
-| `updated_at` | `String` |  |
+| `totalRecipients` | `Integer` |  |
+| `updatedAt` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Mailing record (raises on error).
+# load returns the ENTITY — call data_get for the Mailing record (raises on error).
 mailing = client.Mailing.load({ "id" => "mailing_id" })
 ```
 
@@ -342,7 +343,7 @@ mailings = client.Mailing.list
 
 ```ruby
 mailing = client.Mailing.create({
-  "recipient" => [], # Array
+  "recipients" => [], # Array
 })
 ```
 

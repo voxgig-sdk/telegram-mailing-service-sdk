@@ -115,16 +115,16 @@ function mailing_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["TELEGRAMMAILINGSERVICE_TEST_MAILING_ENTID"] = {},
-    ["TELEGRAMMAILINGSERVICE_TEST_LIVE"] = "FALSE",
-    ["TELEGRAMMAILINGSERVICE_APIKEY"] = "NONE",
+    ["TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID"] = {},
+    ["TELEGRAM_MAILING_SERVICE_TEST_LIVE"] = "FALSE",
+    ["TELEGRAM_MAILING_SERVICE_APIKEY"] = "NONE",
   })
 
-  local live = env["TELEGRAMMAILINGSERVICE_TEST_LIVE"] == "TRUE"
+  local live = env["TELEGRAM_MAILING_SERVICE_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["TELEGRAMMAILINGSERVICE_APIKEY"],
+      apikey = env["TELEGRAM_MAILING_SERVICE_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

@@ -35,28 +35,28 @@ class TelegramMailingServiceConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'attachment',
+              'name' => 'attachments',
               'req' => false,
               'type' => '`$ARRAY`',
               'index$' => 0,
             ],
             [
               'active' => true,
-              'name' => 'completed_at',
+              'name' => 'completedAt',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 1,
             ],
             [
               'active' => true,
-              'name' => 'created_at',
+              'name' => 'createdAt',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 2,
             ],
             [
               'active' => true,
-              'name' => 'failed_count',
+              'name' => 'failedCount',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 3,
@@ -96,28 +96,28 @@ class TelegramMailingServiceConfig
             ],
             [
               'active' => true,
-              'name' => 'parse_mode',
+              'name' => 'parseMode',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 7,
             ],
             [
               'active' => true,
-              'name' => 'recipient',
+              'name' => 'recipients',
               'req' => true,
               'type' => '`$ARRAY`',
               'index$' => 8,
             ],
             [
               'active' => true,
-              'name' => 'schedule_time',
+              'name' => 'scheduleTime',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 9,
             ],
             [
               'active' => true,
-              'name' => 'sent_count',
+              'name' => 'sentCount',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 10,
@@ -131,14 +131,14 @@ class TelegramMailingServiceConfig
             ],
             [
               'active' => true,
-              'name' => 'total_recipient',
+              'name' => 'totalRecipients',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 12,
             ],
             [
               'active' => true,
-              'name' => 'updated_at',
+              'name' => 'updatedAt',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 13,
@@ -153,6 +153,7 @@ class TelegramMailingServiceConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/mailings',
                   'parts' => [
@@ -204,6 +205,7 @@ class TelegramMailingServiceConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/mailings',
                   'parts' => [
@@ -218,7 +220,7 @@ class TelegramMailingServiceConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.data`',
                   ],
                   'index$' => 0,
                 ],
@@ -244,6 +246,7 @@ class TelegramMailingServiceConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/mailings/{mailingId}',
                   'parts' => [
@@ -288,6 +291,7 @@ class TelegramMailingServiceConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/mailings/{mailingId}',
                   'parts' => [

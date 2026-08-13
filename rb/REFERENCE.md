@@ -94,39 +94,39 @@ mailing = client.Mailing
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attachment` | `Array` | No |  |
-| `completed_at` | `String` | No |  |
-| `created_at` | `String` | No |  |
-| `failed_count` | `Integer` | No |  |
+| `attachments` | `Array` | No |  |
+| `completedAt` | `String` | No |  |
+| `createdAt` | `String` | No |  |
+| `failedCount` | `Integer` | No |  |
 | `id` | `String` | No |  |
 | `message` | `String` | No |  |
 | `name` | `String` | No |  |
-| `parse_mode` | `String` | No |  |
-| `recipient` | `Array` | Yes |  |
-| `schedule_time` | `String` | No |  |
-| `sent_count` | `Integer` | No |  |
+| `parseMode` | `String` | No |  |
+| `recipients` | `Array` | Yes |  |
+| `scheduleTime` | `String` | No |  |
+| `sentCount` | `Integer` | No |  |
 | `status` | `String` | No |  |
-| `total_recipient` | `Integer` | No |  |
-| `updated_at` | `String` | No |  |
+| `totalRecipients` | `Integer` | No |  |
+| `updatedAt` | `String` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | remove |
 | --- | --- | --- | --- | --- |
-| `attachment` | - | - | - | - |
-| `completed_at` | - | - | - | - |
-| `created_at` | - | - | - | - |
-| `failed_count` | - | - | - | - |
+| `attachments` | - | - | - | - |
+| `completedAt` | - | - | - | - |
+| `createdAt` | - | - | - | - |
+| `failedCount` | - | - | - | - |
 | `id` | - | - | - | - |
 | `message` | - | - | Yes | - |
 | `name` | - | - | Yes | - |
-| `parse_mode` | - | - | - | - |
-| `recipient` | - | - | - | - |
-| `schedule_time` | - | - | - | - |
-| `sent_count` | - | - | - | - |
+| `parseMode` | - | - | - | - |
+| `recipients` | - | - | - | - |
+| `scheduleTime` | - | - | - | - |
+| `sentCount` | - | - | - | - |
 | `status` | - | - | - | - |
-| `total_recipient` | - | - | - | - |
-| `updated_at` | - | - | - | - |
+| `totalRecipients` | - | - | - | - |
+| `updatedAt` | - | - | - | - |
 
 ### Operations
 
@@ -136,7 +136,7 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Mailing.create({
-  "recipient" => [], # Array
+  "recipients" => [], # Array
 })
 ```
 

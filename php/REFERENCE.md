@@ -93,39 +93,39 @@ $mailing = $client->Mailing();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attachment` | `array` | No |  |
-| `completed_at` | `string` | No |  |
-| `created_at` | `string` | No |  |
-| `failed_count` | `int` | No |  |
+| `attachments` | `array` | No |  |
+| `completedAt` | `string` | No |  |
+| `createdAt` | `string` | No |  |
+| `failedCount` | `int` | No |  |
 | `id` | `string` | No |  |
 | `message` | `string` | No |  |
 | `name` | `string` | No |  |
-| `parse_mode` | `string` | No |  |
-| `recipient` | `array` | Yes |  |
-| `schedule_time` | `string` | No |  |
-| `sent_count` | `int` | No |  |
+| `parseMode` | `string` | No |  |
+| `recipients` | `array` | Yes |  |
+| `scheduleTime` | `string` | No |  |
+| `sentCount` | `int` | No |  |
 | `status` | `string` | No |  |
-| `total_recipient` | `int` | No |  |
-| `updated_at` | `string` | No |  |
+| `totalRecipients` | `int` | No |  |
+| `updatedAt` | `string` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | remove |
 | --- | --- | --- | --- | --- |
-| `attachment` | - | - | - | - |
-| `completed_at` | - | - | - | - |
-| `created_at` | - | - | - | - |
-| `failed_count` | - | - | - | - |
+| `attachments` | - | - | - | - |
+| `completedAt` | - | - | - | - |
+| `createdAt` | - | - | - | - |
+| `failedCount` | - | - | - | - |
 | `id` | - | - | - | - |
 | `message` | - | - | Yes | - |
 | `name` | - | - | Yes | - |
-| `parse_mode` | - | - | - | - |
-| `recipient` | - | - | - | - |
-| `schedule_time` | - | - | - | - |
-| `sent_count` | - | - | - | - |
+| `parseMode` | - | - | - | - |
+| `recipients` | - | - | - | - |
+| `scheduleTime` | - | - | - | - |
+| `sentCount` | - | - | - | - |
 | `status` | - | - | - | - |
-| `total_recipient` | - | - | - | - |
-| `updated_at` | - | - | - | - |
+| `totalRecipients` | - | - | - | - |
+| `updatedAt` | - | - | - | - |
 
 ### Operations
 
@@ -135,7 +135,7 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Mailing()->create([
-  "recipient" => null, // array
+  "recipients" => null, // array
 ]);
 ```
 

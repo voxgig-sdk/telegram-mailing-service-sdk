@@ -6,20 +6,20 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Mailing {
-  attachment?: any[]
-  completed_at?: string
-  created_at?: string
-  failed_count?: number
+  attachments?: any[]
+  completedAt?: string
+  createdAt?: string
+  failedCount?: number
   id?: string
   message?: string
   name?: string
-  parse_mode?: string
-  recipient: any[]
-  schedule_time?: string
-  sent_count?: number
+  parseMode?: string
+  recipients: any[]
+  scheduleTime?: string
+  sentCount?: number
   status?: string
-  total_recipient?: number
-  updated_at?: string
+  totalRecipients?: number
+  updatedAt?: string
 }
 
 export interface MailingLoadMatch {
@@ -27,37 +27,37 @@ export interface MailingLoadMatch {
 }
 
 export interface MailingListMatch {
-  attachment?: any[]
-  completed_at?: string
-  created_at?: string
-  failed_count?: number
+  attachments?: any[]
+  completedAt?: string
+  createdAt?: string
+  failedCount?: number
   id?: string
   message?: string
   name?: string
-  parse_mode?: string
-  recipient?: any[]
-  schedule_time?: string
-  sent_count?: number
+  parseMode?: string
+  recipients?: any[]
+  scheduleTime?: string
+  sentCount?: number
   status?: string
-  total_recipient?: number
-  updated_at?: string
+  totalRecipients?: number
+  updatedAt?: string
 }
 
 export interface MailingCreateData {
-  attachment?: any[]
-  completed_at?: string
-  created_at?: string
-  failed_count?: number
+  attachments?: any[]
+  completedAt?: string
+  createdAt?: string
+  failedCount?: number
   id?: string
   message?: string
   name?: string
-  parse_mode?: string
-  recipient: any[]
-  schedule_time?: string
-  sent_count?: number
+  parseMode?: string
+  recipients: any[]
+  scheduleTime?: string
+  sentCount?: number
   status?: string
-  total_recipient?: number
-  updated_at?: string
+  totalRecipients?: number
+  updatedAt?: string
 }
 
 export interface MailingRemoveMatch {

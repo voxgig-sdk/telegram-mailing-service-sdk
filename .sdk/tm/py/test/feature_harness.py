@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import TelegramMailingServiceControl
-from core.error import TelegramMailingServiceError
-from core.result import TelegramMailingServiceResult
-from core.spec import TelegramMailingServiceSpec
+from projectname_sdk.config import make_config
+from projectname_sdk.features import _make_feature
+from projectname_sdk.core.control import TelegramMailingServiceControl
+from projectname_sdk.core.error import TelegramMailingServiceError
+from projectname_sdk.core.result import TelegramMailingServiceResult
+from projectname_sdk.core.spec import TelegramMailingServiceSpec
 
 
 # True when this SDK was generated with the named feature.

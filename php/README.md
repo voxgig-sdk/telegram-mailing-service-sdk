@@ -40,7 +40,7 @@ try {
     // list() returns an array of Mailing records — iterate directly.
     $mailings = $client->Mailing()->list();
     foreach ($mailings as $item) {
-        echo $item["id"] . " " . $item["attachment"] . "\n";
+        echo $item["id"] . " " . $item["attachments"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -51,7 +51,7 @@ try {
 
 ```php
 try {
-    // load() returns the bare Mailing record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Mailing record (throws on error).
     $mailing = $client->Mailing()->load(["id" => "example_id"]);
     print_r($mailing);
 } catch (\Throwable $err) {
@@ -62,11 +62,11 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// create() returns the bare created Mailing record.
-$created = $client->Mailing()->create(["recipient" => []]);
+// create() returns the ENTITY — call data_get() for the created Mailing record.
+$created = $client->Mailing()->create(["recipients" => []]);
 
 // Remove
-$client->Mailing()->remove(["id" => $created["id"]]);
+$client->Mailing()->remove(["id" => $created->data_get()["id"]]);
 ```
 
 
@@ -152,7 +152,8 @@ $client = TelegramMailingServiceSDK::test([
     "entity" => ["mailing" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the bare mock record (throws on error).
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
 $mailing = $client->Mailing()->list();
 print_r($mailing);
 ```
@@ -256,7 +257,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -278,20 +279,20 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `attachment` |  |
-| `completed_at` |  |
-| `created_at` |  |
-| `failed_count` |  |
+| `attachments` |  |
+| `completedAt` |  |
+| `createdAt` |  |
+| `failedCount` |  |
 | `id` |  |
 | `message` |  |
 | `name` |  |
-| `parse_mode` |  |
-| `recipient` |  |
-| `schedule_time` |  |
-| `sent_count` |  |
+| `parseMode` |  |
+| `recipients` |  |
+| `scheduleTime` |  |
+| `sentCount` |  |
 | `status` |  |
-| `total_recipient` |  |
-| `updated_at` |  |
+| `totalRecipients` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove.
 
@@ -319,25 +320,25 @@ Create an instance: `$mailing = $client->Mailing();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attachment` | `array` |  |
-| `completed_at` | `string` |  |
-| `created_at` | `string` |  |
-| `failed_count` | `int` |  |
+| `attachments` | `array` |  |
+| `completedAt` | `string` |  |
+| `createdAt` | `string` |  |
+| `failedCount` | `int` |  |
 | `id` | `string` |  |
 | `message` | `string` |  |
 | `name` | `string` |  |
-| `parse_mode` | `string` |  |
-| `recipient` | `array` |  |
-| `schedule_time` | `string` |  |
-| `sent_count` | `int` |  |
+| `parseMode` | `string` |  |
+| `recipients` | `array` |  |
+| `scheduleTime` | `string` |  |
+| `sentCount` | `int` |  |
 | `status` | `string` |  |
-| `total_recipient` | `int` |  |
-| `updated_at` | `string` |  |
+| `totalRecipients` | `int` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Mailing record (throws on error).
+// load() returns the ENTITY — call data_get() for the Mailing record (throws on error).
 $mailing = $client->Mailing()->load(["id" => "mailing_id"]);
 ```
 
@@ -352,7 +353,7 @@ $mailings = $client->Mailing()->list();
 
 ```php
 $mailing = $client->Mailing()->create([
-    "recipient" => null, // array
+    "recipients" => null, // array
 ]);
 ```
 

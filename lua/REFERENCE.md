@@ -91,39 +91,39 @@ local mailing = client:Mailing(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attachment` | `table` | No |  |
-| `completed_at` | `string` | No |  |
-| `created_at` | `string` | No |  |
-| `failed_count` | `number` | No |  |
+| `attachments` | `table` | No |  |
+| `completedAt` | `string` | No |  |
+| `createdAt` | `string` | No |  |
+| `failedCount` | `number` | No |  |
 | `id` | `string` | No |  |
 | `message` | `string` | No |  |
 | `name` | `string` | No |  |
-| `parse_mode` | `string` | No |  |
-| `recipient` | `table` | Yes |  |
-| `schedule_time` | `string` | No |  |
-| `sent_count` | `number` | No |  |
+| `parseMode` | `string` | No |  |
+| `recipients` | `table` | Yes |  |
+| `scheduleTime` | `string` | No |  |
+| `sentCount` | `number` | No |  |
 | `status` | `string` | No |  |
-| `total_recipient` | `number` | No |  |
-| `updated_at` | `string` | No |  |
+| `totalRecipients` | `number` | No |  |
+| `updatedAt` | `string` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | remove |
 | --- | --- | --- | --- | --- |
-| `attachment` | - | - | - | - |
-| `completed_at` | - | - | - | - |
-| `created_at` | - | - | - | - |
-| `failed_count` | - | - | - | - |
+| `attachments` | - | - | - | - |
+| `completedAt` | - | - | - | - |
+| `createdAt` | - | - | - | - |
+| `failedCount` | - | - | - | - |
 | `id` | - | - | - | - |
 | `message` | - | - | Yes | - |
 | `name` | - | - | Yes | - |
-| `parse_mode` | - | - | - | - |
-| `recipient` | - | - | - | - |
-| `schedule_time` | - | - | - | - |
-| `sent_count` | - | - | - | - |
+| `parseMode` | - | - | - | - |
+| `recipients` | - | - | - | - |
+| `scheduleTime` | - | - | - | - |
+| `sentCount` | - | - | - | - |
 | `status` | - | - | - | - |
-| `total_recipient` | - | - | - | - |
-| `updated_at` | - | - | - | - |
+| `totalRecipients` | - | - | - | - |
+| `updatedAt` | - | - | - | - |
 
 ### Operations
 
@@ -133,7 +133,7 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Mailing():create({
-  recipient = --[[ table ]],
+  recipients = --[[ table ]],
 })
 ```
 

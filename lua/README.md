@@ -45,7 +45,7 @@ local mailings, err = client:Mailing():list()
 if err then error(err) end
 
 for _, item in ipairs(mailings) do
-  print(item["id"], item["completed_at"])
+  print(item["id"], item["completedAt"])
 end
 ```
 
@@ -61,11 +61,11 @@ print(mailing)
 
 ```lua
 -- Create
-local created, err = client:Mailing():create({ recipient = {} })
+local created, err = client:Mailing():create({ recipients = {} })
 if err then error(err) end
 
 -- Remove
-client:Mailing():remove({ id = created["id"] })
+client:Mailing():remove({ id = created:data_get()["id"] })
 ```
 
 
@@ -258,20 +258,20 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `attachment` |  |
-| `completed_at` |  |
-| `created_at` |  |
-| `failed_count` |  |
+| `attachments` |  |
+| `completedAt` |  |
+| `createdAt` |  |
+| `failedCount` |  |
 | `id` |  |
 | `message` |  |
 | `name` |  |
-| `parse_mode` |  |
-| `recipient` |  |
-| `schedule_time` |  |
-| `sent_count` |  |
+| `parseMode` |  |
+| `recipients` |  |
+| `scheduleTime` |  |
+| `sentCount` |  |
 | `status` |  |
-| `total_recipient` |  |
-| `updated_at` |  |
+| `totalRecipients` |  |
+| `updatedAt` |  |
 
 Operations: Create, List, Load, Remove.
 
@@ -299,20 +299,20 @@ Create an instance: `local mailing = client:Mailing(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attachment` | `table` |  |
-| `completed_at` | `string` |  |
-| `created_at` | `string` |  |
-| `failed_count` | `number` |  |
+| `attachments` | `table` |  |
+| `completedAt` | `string` |  |
+| `createdAt` | `string` |  |
+| `failedCount` | `number` |  |
 | `id` | `string` |  |
 | `message` | `string` |  |
 | `name` | `string` |  |
-| `parse_mode` | `string` |  |
-| `recipient` | `table` |  |
-| `schedule_time` | `string` |  |
-| `sent_count` | `number` |  |
+| `parseMode` | `string` |  |
+| `recipients` | `table` |  |
+| `scheduleTime` | `string` |  |
+| `sentCount` | `number` |  |
 | `status` | `string` |  |
-| `total_recipient` | `number` |  |
-| `updated_at` | `string` |  |
+| `totalRecipients` | `number` |  |
+| `updatedAt` | `string` |  |
 
 #### Example: Load
 
@@ -330,7 +330,7 @@ local mailings, err = client:Mailing():list()
 
 ```lua
 local mailing, err = client:Mailing():create({
-  recipient = {}, -- table
+  recipients = {}, -- table
 })
 ```
 

@@ -88,39 +88,39 @@ mailing = client.Mailing()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attachment` | `list` | No |  |
-| `completed_at` | `str` | No |  |
-| `created_at` | `str` | No |  |
-| `failed_count` | `int` | No |  |
+| `attachments` | `list` | No |  |
+| `completedAt` | `str` | No |  |
+| `createdAt` | `str` | No |  |
+| `failedCount` | `int` | No |  |
 | `id` | `str` | No |  |
 | `message` | `str` | No |  |
 | `name` | `str` | No |  |
-| `parse_mode` | `str` | No |  |
-| `recipient` | `list` | Yes |  |
-| `schedule_time` | `str` | No |  |
-| `sent_count` | `int` | No |  |
+| `parseMode` | `str` | No |  |
+| `recipients` | `list` | Yes |  |
+| `scheduleTime` | `str` | No |  |
+| `sentCount` | `int` | No |  |
 | `status` | `str` | No |  |
-| `total_recipient` | `int` | No |  |
-| `updated_at` | `str` | No |  |
+| `totalRecipients` | `int` | No |  |
+| `updatedAt` | `str` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | remove |
 | --- | --- | --- | --- | --- |
-| `attachment` | - | - | - | - |
-| `completed_at` | - | - | - | - |
-| `created_at` | - | - | - | - |
-| `failed_count` | - | - | - | - |
+| `attachments` | - | - | - | - |
+| `completedAt` | - | - | - | - |
+| `createdAt` | - | - | - | - |
+| `failedCount` | - | - | - | - |
 | `id` | - | - | - | - |
 | `message` | - | - | Yes | - |
 | `name` | - | - | Yes | - |
-| `parse_mode` | - | - | - | - |
-| `recipient` | - | - | - | - |
-| `schedule_time` | - | - | - | - |
-| `sent_count` | - | - | - | - |
+| `parseMode` | - | - | - | - |
+| `recipients` | - | - | - | - |
+| `scheduleTime` | - | - | - | - |
+| `sentCount` | - | - | - | - |
 | `status` | - | - | - | - |
-| `total_recipient` | - | - | - | - |
-| `updated_at` | - | - | - | - |
+| `totalRecipients` | - | - | - | - |
+| `updatedAt` | - | - | - | - |
 
 ### Operations
 
@@ -130,7 +130,7 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Mailing().create({
-    "recipient": [],  # list
+    "recipients": [],  # list
 })
 ```
 
