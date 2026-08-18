@@ -40,7 +40,7 @@ class TelegramMailingServiceSDK
         $utility = new TelegramMailingServiceUtility();
         $this->_utility = $utility;
 
-        $config = TelegramMailingServiceConfig::make_config();
+        $config = TelegramMailingServiceConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

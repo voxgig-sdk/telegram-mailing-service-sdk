@@ -15,7 +15,7 @@ require_relative "../TelegramMailingService_sdk"
 module TelegramMailingServiceFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = TelegramMailingServiceConfig.make_config["feature"]
+    f = TelegramMailingServiceConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

@@ -28,7 +28,7 @@ class TelegramMailingServiceSDK
     utility = TelegramMailingServiceUtility.new
     @_utility = utility
 
-    config = TelegramMailingServiceConfig.make_config
+    config = TelegramMailingServiceConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

@@ -40,7 +40,7 @@ class MailingEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = TelegramMailingServiceConfig::make_config();
+        $cfg = TelegramMailingServiceConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = TelegramMailingServiceSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];

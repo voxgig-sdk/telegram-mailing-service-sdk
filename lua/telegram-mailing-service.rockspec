@@ -23,6 +23,7 @@ build = {
   modules = {
     ["telegram-mailing-service_sdk"] = "telegram-mailing-service_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }
