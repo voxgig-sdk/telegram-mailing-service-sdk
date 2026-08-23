@@ -6,7 +6,7 @@ The Golang SDK for the TelegramMailingService API — an entity-oriented client 
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Mailing(nil)` — each with the same small set of operations (`List`, `Load`, `Create`, `Remove`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -290,20 +290,20 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"attachments"` |  |
-| `"completedAt"` |  |
-| `"createdAt"` |  |
-| `"failedCount"` |  |
-| `"id"` |  |
-| `"message"` |  |
-| `"name"` |  |
-| `"parseMode"` |  |
-| `"recipients"` |  |
-| `"scheduleTime"` |  |
-| `"sentCount"` |  |
-| `"status"` |  |
-| `"totalRecipients"` |  |
-| `"updatedAt"` |  |
+| `"attachments"` | Optional list of file URLs to attach |
+| `"completedAt"` | Timestamp when the mailing was completed |
+| `"createdAt"` | Timestamp when the mailing was created |
+| `"failedCount"` | Number of messages that failed to send |
+| `"id"` | Unique identifier of the mailing |
+| `"message"` | Message content |
+| `"name"` | Name of the mailing campaign |
+| `"parseMode"` | Message formatting mode |
+| `"recipients"` | List of Telegram usernames or chat IDs |
+| `"scheduleTime"` | Scheduled time for the mailing |
+| `"sentCount"` | Number of messages successfully sent |
+| `"status"` | Current status of the mailing |
+| `"totalRecipients"` | Total number of recipients |
+| `"updatedAt"` | Timestamp when the mailing was last updated |
 
 Operations: Create, List, Load, Remove.
 
@@ -331,20 +331,20 @@ Create an instance: `mailing := client.Mailing(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attachments` | `[]any` |  |
-| `completedAt` | `string` |  |
-| `createdAt` | `string` |  |
-| `failedCount` | `int` |  |
-| `id` | `string` |  |
-| `message` | `string` |  |
-| `name` | `string` |  |
-| `parseMode` | `string` |  |
-| `recipients` | `[]any` |  |
-| `scheduleTime` | `string` |  |
-| `sentCount` | `int` |  |
-| `status` | `string` |  |
-| `totalRecipients` | `int` |  |
-| `updatedAt` | `string` |  |
+| `attachments` | `[]any` | Optional list of file URLs to attach |
+| `completedAt` | `string` | Timestamp when the mailing was completed |
+| `createdAt` | `string` | Timestamp when the mailing was created |
+| `failedCount` | `int` | Number of messages that failed to send |
+| `id` | `string` | Unique identifier of the mailing |
+| `message` | `string` | Message content |
+| `name` | `string` | Name of the mailing campaign |
+| `parseMode` | `string` | Message formatting mode |
+| `recipients` | `[]any` | List of Telegram usernames or chat IDs |
+| `scheduleTime` | `string` | Scheduled time for the mailing |
+| `sentCount` | `int` | Number of messages successfully sent |
+| `status` | `string` | Current status of the mailing |
+| `totalRecipients` | `int` | Total number of recipients |
+| `updatedAt` | `string` | Timestamp when the mailing was last updated |
 
 #### Example: Load
 

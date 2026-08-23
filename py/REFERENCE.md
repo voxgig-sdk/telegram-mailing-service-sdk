@@ -88,20 +88,20 @@ mailing = client.Mailing()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attachments` | `list` | No |  |
-| `completedAt` | `str` | No |  |
-| `createdAt` | `str` | No |  |
-| `failedCount` | `int` | No |  |
-| `id` | `str` | No |  |
-| `message` | `str` | No |  |
-| `name` | `str` | No |  |
-| `parseMode` | `str` | No |  |
-| `recipients` | `list` | Yes |  |
-| `scheduleTime` | `str` | No |  |
-| `sentCount` | `int` | No |  |
-| `status` | `str` | No |  |
-| `totalRecipients` | `int` | No |  |
-| `updatedAt` | `str` | No |  |
+| `attachments` | `list` | No | Optional list of file URLs to attach |
+| `completedAt` | `str` | No | Timestamp when the mailing was completed |
+| `createdAt` | `str` | No | Timestamp when the mailing was created |
+| `failedCount` | `int` | No | Number of messages that failed to send |
+| `id` | `str` | No | Unique identifier of the mailing |
+| `message` | `str` | No | Message content |
+| `name` | `str` | No | Name of the mailing campaign |
+| `parseMode` | `str` | No | Message formatting mode |
+| `recipients` | `list` | Yes | List of Telegram usernames or chat IDs |
+| `scheduleTime` | `str` | No | Scheduled time for the mailing |
+| `sentCount` | `int` | No | Number of messages successfully sent |
+| `status` | `str` | No | Current status of the mailing |
+| `totalRecipients` | `int` | No | Total number of recipients |
+| `updatedAt` | `str` | No | Timestamp when the mailing was last updated |
 
 ### Field Usage by Operation
 

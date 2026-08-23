@@ -36,30 +36,35 @@
               "active": true,
               "name": "attachments",
               "req": false,
+              "short": "Optional list of file URLs to attach",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "completedAt",
               "req": false,
+              "short": "Timestamp when the mailing was completed",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "createdAt",
               "req": false,
+              "short": "Timestamp when the mailing was created",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "failedCount",
               "req": false,
+              "short": "Number of messages that failed to send",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Unique identifier of the mailing",
               "type": "`$STRING`"
             },
             {
@@ -72,6 +77,7 @@
                 }
               },
               "req": false,
+              "short": "Message content",
               "type": "`$STRING`"
             },
             {
@@ -84,48 +90,56 @@
                 }
               },
               "req": false,
+              "short": "Name of the mailing campaign",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "parseMode",
               "req": false,
+              "short": "Message formatting mode",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "recipients",
               "req": true,
+              "short": "List of Telegram usernames or chat IDs",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "scheduleTime",
               "req": false,
+              "short": "Scheduled time for the mailing",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "sentCount",
               "req": false,
+              "short": "Number of messages successfully sent",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "status",
               "req": false,
+              "short": "Current status of the mailing",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "totalRecipients",
               "req": false,
+              "short": "Total number of recipients",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "updatedAt",
               "req": false,
+              "short": "Timestamp when the mailing was last updated",
               "type": "`$STRING`"
             }
           ],

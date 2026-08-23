@@ -94,20 +94,20 @@ mailing = client.Mailing
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attachments` | `Array` | No |  |
-| `completedAt` | `String` | No |  |
-| `createdAt` | `String` | No |  |
-| `failedCount` | `Integer` | No |  |
-| `id` | `String` | No |  |
-| `message` | `String` | No |  |
-| `name` | `String` | No |  |
-| `parseMode` | `String` | No |  |
-| `recipients` | `Array` | Yes |  |
-| `scheduleTime` | `String` | No |  |
-| `sentCount` | `Integer` | No |  |
-| `status` | `String` | No |  |
-| `totalRecipients` | `Integer` | No |  |
-| `updatedAt` | `String` | No |  |
+| `attachments` | `Array` | No | Optional list of file URLs to attach |
+| `completedAt` | `String` | No | Timestamp when the mailing was completed |
+| `createdAt` | `String` | No | Timestamp when the mailing was created |
+| `failedCount` | `Integer` | No | Number of messages that failed to send |
+| `id` | `String` | No | Unique identifier of the mailing |
+| `message` | `String` | No | Message content |
+| `name` | `String` | No | Name of the mailing campaign |
+| `parseMode` | `String` | No | Message formatting mode |
+| `recipients` | `Array` | Yes | List of Telegram usernames or chat IDs |
+| `scheduleTime` | `String` | No | Scheduled time for the mailing |
+| `sentCount` | `Integer` | No | Number of messages successfully sent |
+| `status` | `String` | No | Current status of the mailing |
+| `totalRecipients` | `Integer` | No | Total number of recipients |
+| `updatedAt` | `String` | No | Timestamp when the mailing was last updated |
 
 ### Field Usage by Operation
 

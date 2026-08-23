@@ -93,20 +93,20 @@ $mailing = $client->Mailing();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `attachments` | `array` | No |  |
-| `completedAt` | `string` | No |  |
-| `createdAt` | `string` | No |  |
-| `failedCount` | `int` | No |  |
-| `id` | `string` | No |  |
-| `message` | `string` | No |  |
-| `name` | `string` | No |  |
-| `parseMode` | `string` | No |  |
-| `recipients` | `array` | Yes |  |
-| `scheduleTime` | `string` | No |  |
-| `sentCount` | `int` | No |  |
-| `status` | `string` | No |  |
-| `totalRecipients` | `int` | No |  |
-| `updatedAt` | `string` | No |  |
+| `attachments` | `array` | No | Optional list of file URLs to attach |
+| `completedAt` | `string` | No | Timestamp when the mailing was completed |
+| `createdAt` | `string` | No | Timestamp when the mailing was created |
+| `failedCount` | `int` | No | Number of messages that failed to send |
+| `id` | `string` | No | Unique identifier of the mailing |
+| `message` | `string` | No | Message content |
+| `name` | `string` | No | Name of the mailing campaign |
+| `parseMode` | `string` | No | Message formatting mode |
+| `recipients` | `array` | Yes | List of Telegram usernames or chat IDs |
+| `scheduleTime` | `string` | No | Scheduled time for the mailing |
+| `sentCount` | `int` | No | Number of messages successfully sent |
+| `status` | `string` | No | Current status of the mailing |
+| `totalRecipients` | `int` | No | Total number of recipients |
+| `updatedAt` | `string` | No | Timestamp when the mailing was last updated |
 
 ### Field Usage by Operation
 

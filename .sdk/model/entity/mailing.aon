@@ -8,26 +8,31 @@ main: kit: entity: mailing: {
     {
       name: "attachments"
       req: false
+      short: "Optional list of file URLs to attach"
       type: "`$ARRAY`"
     }
     {
       name: "completedAt"
       req: false
+      short: "Timestamp when the mailing was completed"
       type: "`$STRING`"
     }
     {
       name: "createdAt"
       req: false
+      short: "Timestamp when the mailing was created"
       type: "`$STRING`"
     }
     {
       name: "failedCount"
       req: false
+      short: "Number of messages that failed to send"
       type: "`$INTEGER`"
     }
     {
       name: "id"
       req: false
+      short: "Unique identifier of the mailing"
       type: "`$STRING`"
     }
     {
@@ -39,6 +44,7 @@ main: kit: entity: mailing: {
         }
       }
       req: false
+      short: "Message content"
       type: "`$STRING`"
     }
     {
@@ -50,41 +56,49 @@ main: kit: entity: mailing: {
         }
       }
       req: false
+      short: "Name of the mailing campaign"
       type: "`$STRING`"
     }
     {
       name: "parseMode"
       req: false
+      short: "Message formatting mode"
       type: "`$STRING`"
     }
     {
       name: "recipients"
       req: true
+      short: "List of Telegram usernames or chat IDs"
       type: "`$ARRAY`"
     }
     {
       name: "scheduleTime"
       req: false
+      short: "Scheduled time for the mailing"
       type: "`$STRING`"
     }
     {
       name: "sentCount"
       req: false
+      short: "Number of messages successfully sent"
       type: "`$INTEGER`"
     }
     {
       name: "status"
       req: false
+      short: "Current status of the mailing"
       type: "`$STRING`"
     }
     {
       name: "totalRecipients"
       req: false
+      short: "Total number of recipients"
       type: "`$INTEGER`"
     }
     {
       name: "updatedAt"
       req: false
+      short: "Timestamp when the mailing was last updated"
       type: "`$STRING`"
     }
   ]

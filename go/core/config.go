@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "TelegramMailingService",
+			"slug": "telegram-mailing-service",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -36,22 +39,27 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "attachments",
+						"short": "Optional list of file URLs to attach",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "completedAt",
+						"short": "Timestamp when the mailing was completed",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "createdAt",
+						"short": "Timestamp when the mailing was created",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "failedCount",
+						"short": "Number of messages that failed to send",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Unique identifier of the mailing",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -62,6 +70,7 @@ func MakeConfig() map[string]any {
 								"type": "`$STRING`",
 							},
 						},
+						"short": "Message content",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -72,35 +81,43 @@ func MakeConfig() map[string]any {
 								"type": "`$STRING`",
 							},
 						},
+						"short": "Name of the mailing campaign",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "parseMode",
+						"short": "Message formatting mode",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "recipients",
 						"req": true,
+						"short": "List of Telegram usernames or chat IDs",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "scheduleTime",
+						"short": "Scheduled time for the mailing",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "sentCount",
+						"short": "Number of messages successfully sent",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "status",
+						"short": "Current status of the mailing",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "totalRecipients",
+						"short": "Total number of recipients",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "updatedAt",
+						"short": "Timestamp when the mailing was last updated",
 						"type": "`$STRING`",
 					},
 				},

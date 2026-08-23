@@ -19,6 +19,9 @@ module TelegramMailingServiceConfig
     {
       "main" => {
         "name" => "TelegramMailingService",
+        "slug" => "telegram-mailing-service",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -44,22 +47,27 @@ module TelegramMailingServiceConfig
           "fields" => [
             {
               "name" => "attachments",
+              "short" => "Optional list of file URLs to attach",
               "type" => "`$ARRAY`",
             },
             {
               "name" => "completedAt",
+              "short" => "Timestamp when the mailing was completed",
               "type" => "`$STRING`",
             },
             {
               "name" => "createdAt",
+              "short" => "Timestamp when the mailing was created",
               "type" => "`$STRING`",
             },
             {
               "name" => "failedCount",
+              "short" => "Number of messages that failed to send",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "id",
+              "short" => "Unique identifier of the mailing",
               "type" => "`$STRING`",
             },
             {
@@ -70,6 +78,7 @@ module TelegramMailingServiceConfig
                   "type" => "`$STRING`",
                 },
               },
+              "short" => "Message content",
               "type" => "`$STRING`",
             },
             {
@@ -80,35 +89,43 @@ module TelegramMailingServiceConfig
                   "type" => "`$STRING`",
                 },
               },
+              "short" => "Name of the mailing campaign",
               "type" => "`$STRING`",
             },
             {
               "name" => "parseMode",
+              "short" => "Message formatting mode",
               "type" => "`$STRING`",
             },
             {
               "name" => "recipients",
               "req" => true,
+              "short" => "List of Telegram usernames or chat IDs",
               "type" => "`$ARRAY`",
             },
             {
               "name" => "scheduleTime",
+              "short" => "Scheduled time for the mailing",
               "type" => "`$STRING`",
             },
             {
               "name" => "sentCount",
+              "short" => "Number of messages successfully sent",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "status",
+              "short" => "Current status of the mailing",
               "type" => "`$STRING`",
             },
             {
               "name" => "totalRecipients",
+              "short" => "Total number of recipients",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "updatedAt",
+              "short" => "Timestamp when the mailing was last updated",
               "type" => "`$STRING`",
             },
           ],

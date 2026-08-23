@@ -269,20 +269,20 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `attachments` |  |
-| `completedAt` |  |
-| `createdAt` |  |
-| `failedCount` |  |
-| `id` |  |
-| `message` |  |
-| `name` |  |
-| `parseMode` |  |
-| `recipients` |  |
-| `scheduleTime` |  |
-| `sentCount` |  |
-| `status` |  |
-| `totalRecipients` |  |
-| `updatedAt` |  |
+| `attachments` | Optional list of file URLs to attach |
+| `completedAt` | Timestamp when the mailing was completed |
+| `createdAt` | Timestamp when the mailing was created |
+| `failedCount` | Number of messages that failed to send |
+| `id` | Unique identifier of the mailing |
+| `message` | Message content |
+| `name` | Name of the mailing campaign |
+| `parseMode` | Message formatting mode |
+| `recipients` | List of Telegram usernames or chat IDs |
+| `scheduleTime` | Scheduled time for the mailing |
+| `sentCount` | Number of messages successfully sent |
+| `status` | Current status of the mailing |
+| `totalRecipients` | Total number of recipients |
+| `updatedAt` | Timestamp when the mailing was last updated |
 
 Operations: Create, List, Load, Remove.
 
@@ -310,20 +310,20 @@ Create an instance: `mailing = client.Mailing`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attachments` | `Array` |  |
-| `completedAt` | `String` |  |
-| `createdAt` | `String` |  |
-| `failedCount` | `Integer` |  |
-| `id` | `String` |  |
-| `message` | `String` |  |
-| `name` | `String` |  |
-| `parseMode` | `String` |  |
-| `recipients` | `Array` |  |
-| `scheduleTime` | `String` |  |
-| `sentCount` | `Integer` |  |
-| `status` | `String` |  |
-| `totalRecipients` | `Integer` |  |
-| `updatedAt` | `String` |  |
+| `attachments` | `Array` | Optional list of file URLs to attach |
+| `completedAt` | `String` | Timestamp when the mailing was completed |
+| `createdAt` | `String` | Timestamp when the mailing was created |
+| `failedCount` | `Integer` | Number of messages that failed to send |
+| `id` | `String` | Unique identifier of the mailing |
+| `message` | `String` | Message content |
+| `name` | `String` | Name of the mailing campaign |
+| `parseMode` | `String` | Message formatting mode |
+| `recipients` | `Array` | List of Telegram usernames or chat IDs |
+| `scheduleTime` | `String` | Scheduled time for the mailing |
+| `sentCount` | `Integer` | Number of messages successfully sent |
+| `status` | `String` | Current status of the mailing |
+| `totalRecipients` | `Integer` | Total number of recipients |
+| `updatedAt` | `String` | Timestamp when the mailing was last updated |
 
 #### Example: Load
 

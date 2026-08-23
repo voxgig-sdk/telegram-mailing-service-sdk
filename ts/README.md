@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -325,20 +325,20 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `attachments` |  |
-| `completedAt` |  |
-| `createdAt` |  |
-| `failedCount` |  |
-| `id` |  |
-| `message` |  |
-| `name` |  |
-| `parseMode` |  |
-| `recipients` |  |
-| `scheduleTime` |  |
-| `sentCount` |  |
-| `status` |  |
-| `totalRecipients` |  |
-| `updatedAt` |  |
+| `attachments` | Optional list of file URLs to attach |
+| `completedAt` | Timestamp when the mailing was completed |
+| `createdAt` | Timestamp when the mailing was created |
+| `failedCount` | Number of messages that failed to send |
+| `id` | Unique identifier of the mailing |
+| `message` | Message content |
+| `name` | Name of the mailing campaign |
+| `parseMode` | Message formatting mode |
+| `recipients` | List of Telegram usernames or chat IDs |
+| `scheduleTime` | Scheduled time for the mailing |
+| `sentCount` | Number of messages successfully sent |
+| `status` | Current status of the mailing |
+| `totalRecipients` | Total number of recipients |
+| `updatedAt` | Timestamp when the mailing was last updated |
 
 Operations: create, list, load, remove.
 
@@ -366,20 +366,20 @@ Create an instance: `const mailing = client.Mailing()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `attachments` | `any[]` |  |
-| `completedAt` | `string` |  |
-| `createdAt` | `string` |  |
-| `failedCount` | `number` |  |
-| `id` | `string` |  |
-| `message` | `string` |  |
-| `name` | `string` |  |
-| `parseMode` | `string` |  |
-| `recipients` | `any[]` |  |
-| `scheduleTime` | `string` |  |
-| `sentCount` | `number` |  |
-| `status` | `string` |  |
-| `totalRecipients` | `number` |  |
-| `updatedAt` | `string` |  |
+| `attachments` | `any[]` | Optional list of file URLs to attach |
+| `completedAt` | `string` | Timestamp when the mailing was completed |
+| `createdAt` | `string` | Timestamp when the mailing was created |
+| `failedCount` | `number` | Number of messages that failed to send |
+| `id` | `string` | Unique identifier of the mailing |
+| `message` | `string` | Message content |
+| `name` | `string` | Name of the mailing campaign |
+| `parseMode` | `string` | Message formatting mode |
+| `recipients` | `any[]` | List of Telegram usernames or chat IDs |
+| `scheduleTime` | `string` | Scheduled time for the mailing |
+| `sentCount` | `number` | Number of messages successfully sent |
+| `status` | `string` | Current status of the mailing |
+| `totalRecipients` | `number` | Total number of recipients |
+| `updatedAt` | `string` | Timestamp when the mailing was last updated |
 
 #### Example: Load
 
