@@ -27,20 +27,9 @@ export interface MailingLoadMatch {
 }
 
 export interface MailingListMatch {
-  attachments?: any[]
-  completedAt?: string
-  createdAt?: string
-  failedCount?: number
-  id?: string
-  message?: string
-  name?: string
-  parseMode?: string
-  recipients?: any[]
-  scheduleTime?: string
-  sentCount?: number
+  limit?: number
+  offset?: number
   status?: string
-  totalRecipients?: number
-  updatedAt?: string
 }
 
 export interface MailingCreateData {

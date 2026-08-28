@@ -80,62 +80,18 @@ MailingLoadMatch = Struct.new(
 
 # Request payload for Mailing#list.
 #
-# @!attribute [rw] attachments
-#   @return [Array, nil]
-#
-# @!attribute [rw] completedAt
-#   @return [String, nil]
-#
-# @!attribute [rw] createdAt
-#   @return [String, nil]
-#
-# @!attribute [rw] failedCount
+# @!attribute [rw] limit
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id
-#   @return [String, nil]
-#
-# @!attribute [rw] message
-#   @return [String, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] parseMode
-#   @return [String, nil]
-#
-# @!attribute [rw] recipients
-#   @return [Array, nil]
-#
-# @!attribute [rw] scheduleTime
-#   @return [String, nil]
-#
-# @!attribute [rw] sentCount
+# @!attribute [rw] offset
 #   @return [Integer, nil]
 #
 # @!attribute [rw] status
 #   @return [String, nil]
-#
-# @!attribute [rw] totalRecipients
-#   @return [Integer, nil]
-#
-# @!attribute [rw] updatedAt
-#   @return [String, nil]
 MailingListMatch = Struct.new(
-  :attachments,
-  :completedAt,
-  :createdAt,
-  :failedCount,
-  :id,
-  :message,
-  :name,
-  :parseMode,
-  :recipients,
-  :scheduleTime,
-  :sentCount,
+  :limit,
+  :offset,
   :status,
-  :totalRecipients,
-  :updatedAt,
   keyword_init: true
 )
 

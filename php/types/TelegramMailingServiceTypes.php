@@ -40,20 +40,9 @@ class MailingLoadMatch
 /** Request payload for Mailing#list. */
 class MailingListMatch
 {
-    public ?array $attachments = null;
-    public ?string $completedAt = null;
-    public ?string $createdAt = null;
-    public ?int $failedCount = null;
-    public ?string $id = null;
-    public ?string $message = null;
-    public ?string $name = null;
-    public ?string $parseMode = null;
-    public ?array $recipients = null;
-    public ?string $scheduleTime = null;
-    public ?int $sentCount = null;
+    public ?int $limit = null;
+    public ?int $offset = null;
     public ?string $status = null;
-    public ?int $totalRecipients = null;
-    public ?string $updatedAt = null;
 }
 
 /** Request payload for Mailing#create. */

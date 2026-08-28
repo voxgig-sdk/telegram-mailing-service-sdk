@@ -37,20 +37,9 @@ type MailingLoadMatch struct {
 
 // MailingListMatch is the typed request payload for Mailing.ListTyped.
 type MailingListMatch struct {
-	Attachments *[]any `json:"attachments,omitempty"`
-	CompletedAt *string `json:"completedAt,omitempty"`
-	CreatedAt *string `json:"createdAt,omitempty"`
-	FailedCount *int `json:"failedCount,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Message *string `json:"message,omitempty"`
-	Name *string `json:"name,omitempty"`
-	ParseMode *string `json:"parseMode,omitempty"`
-	Recipients *[]any `json:"recipients,omitempty"`
-	ScheduleTime *string `json:"scheduleTime,omitempty"`
-	SentCount *int `json:"sentCount,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Offset *int `json:"offset,omitempty"`
 	Status *string `json:"status,omitempty"`
-	TotalRecipients *int `json:"totalRecipients,omitempty"`
-	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
 // MailingCreateData is the typed request payload for Mailing.CreateTyped.

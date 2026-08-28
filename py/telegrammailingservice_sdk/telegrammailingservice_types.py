@@ -41,20 +41,9 @@ class MailingLoadMatch(TypedDict):
 
 
 class MailingListMatch(TypedDict, total=False):
-    attachments: list
-    completedAt: str
-    createdAt: str
-    failedCount: int
-    id: str
-    message: str
-    name: str
-    parseMode: str
-    recipients: list
-    scheduleTime: str
-    sentCount: int
+    limit: int
+    offset: int
     status: str
-    totalRecipients: int
-    updatedAt: str
 
 
 class MailingCreateDataRequired(TypedDict):

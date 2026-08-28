@@ -26,20 +26,9 @@
 ---@field id string
 
 ---@class MailingListMatch
----@field attachments? table
----@field completedAt? string
----@field createdAt? string
----@field failedCount? number
----@field id? string
----@field message? string
----@field name? string
----@field parseMode? string
----@field recipients? table
----@field scheduleTime? string
----@field sentCount? number
+---@field limit? number
+---@field offset? number
 ---@field status? string
----@field totalRecipients? number
----@field updatedAt? string
 
 ---@class MailingCreateData
 ---@field attachments? table
