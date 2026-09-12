@@ -100,7 +100,7 @@ func TestMailingEntity(t *testing.T) {
 		// CREATE
 		mailingRef01Ent := client.Mailing(nil)
 		mailingRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "mailing"}, setup.data), "mailing_ref01"))
+			vs.GetPath(setup.data, []any{"new", "mailing"}), "mailing_ref01"))
 
 		mailingRef01DataResult, err := mailingRef01Ent.Create(mailingRef01Data, nil)
 		if err != nil {
@@ -200,7 +200,7 @@ func mailingBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"mailing01", "mailing02", "mailing03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -220,7 +220,7 @@ func mailingBasicSetup(extra map[string]any) *entityTestSetup {
 		"TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID": idmap,
 		"TELEGRAM_MAILING_SERVICE_TEST_LIVE":      "FALSE",
 		"TELEGRAM_MAILING_SERVICE_TEST_EXPLAIN":   "FALSE",
-		"TELEGRAM_MAILING_SERVICE_APIKEY":         "NONE",
+		"TELEGRAM_MAILING_SERVICE_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID"])
@@ -229,11 +229,23 @@ func mailingBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["TELEGRAM_MAILING_SERVICE_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["TELEGRAM_MAILING_SERVICE_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewTelegramMailingServiceSDK(core.ToMapAny(mergedOpts))
 	}

@@ -1,6 +1,14 @@
 # TelegramMailingService SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -61,11 +69,13 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date-time",
             "name": "completedAt",
             "short": "Timestamp when the mailing was completed",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "createdAt",
             "short": "Timestamp when the mailing was created",
             "type": "`$STRING`",
@@ -76,6 +86,7 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "uuid",
             "name": "id",
             "short": "Unique identifier of the mailing",
             "type": "`$STRING`",
@@ -114,6 +125,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date-time",
             "name": "scheduleTime",
             "short": "Scheduled time for the mailing",
             "type": "`$STRING`",
@@ -134,11 +146,16 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "updatedAt",
             "short": "Timestamp when the mailing was last updated",
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "mailing",
         "op": {
           "create": {
@@ -150,14 +167,19 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/mailings",
-                "parts": [
-                  "mailings",
+                "segments": [
+                  {
+                    "lit": "mailings",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "mailings",
+                ],
               },
             ],
           },
@@ -193,8 +215,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/mailings",
-                "parts": [
-                  "mailings",
+                "segments": [
+                  {
+                    "lit": "mailings",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -207,6 +231,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.data`",
                 },
+                "parts": [
+                  "mailings",
+                ],
               },
             ],
           },
@@ -229,15 +256,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/mailings/{mailingId}",
-                "parts": [
-                  "mailings",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "mailingId": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "mailings",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -247,6 +278,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "mailings",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -269,15 +304,19 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/mailings/{mailingId}",
-                "parts": [
-                  "mailings",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "mailingId": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "mailings",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -287,6 +326,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "mailings",
+                  "{id}",
+                ],
               },
             ],
           },

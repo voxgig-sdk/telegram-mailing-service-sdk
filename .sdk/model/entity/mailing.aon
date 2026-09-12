@@ -12,12 +12,14 @@ main: kit: entity: mailing: {
       type: "`$ARRAY`"
     }
     {
+      format: "date-time"
       name: "completedAt"
       req: false
       short: "Timestamp when the mailing was completed"
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "createdAt"
       req: false
       short: "Timestamp when the mailing was created"
@@ -30,6 +32,7 @@ main: kit: entity: mailing: {
       type: "`$INTEGER`"
     }
     {
+      format: "uuid"
       name: "id"
       req: false
       short: "Unique identifier of the mailing"
@@ -72,6 +75,7 @@ main: kit: entity: mailing: {
       type: "`$ARRAY`"
     }
     {
+      format: "date-time"
       name: "scheduleTime"
       req: false
       short: "Scheduled time for the mailing"
@@ -96,6 +100,7 @@ main: kit: entity: mailing: {
       type: "`$INTEGER`"
     }
     {
+      format: "date-time"
       name: "updatedAt"
       req: false
       short: "Timestamp when the mailing was last updated"
@@ -116,8 +121,10 @@ main: kit: entity: mailing: {
         {
           method: "POST"
           orig: "/mailings"
-          parts: [
-            "mailings"
+          segments: [
+            {
+              lit: "mailings"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -159,8 +166,10 @@ main: kit: entity: mailing: {
           }
           method: "GET"
           orig: "/mailings"
-          parts: [
-            "mailings"
+          segments: [
+            {
+              lit: "mailings"
+            }
           ]
           select: {
             exist: [
@@ -193,15 +202,19 @@ main: kit: entity: mailing: {
           }
           method: "GET"
           orig: "/mailings/{mailingId}"
-          parts: [
-            "mailings"
-            "{id}"
-          ]
           rename: {
             param: {
               mailingId: "id"
             }
           }
+          segments: [
+            {
+              lit: "mailings"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -231,15 +244,19 @@ main: kit: entity: mailing: {
           }
           method: "DELETE"
           orig: "/mailings/{mailingId}"
-          parts: [
-            "mailings"
-            "{id}"
-          ]
           rename: {
             param: {
               mailingId: "id"
             }
           }
+          segments: [
+            {
+              lit: "mailings"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

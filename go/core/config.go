@@ -44,11 +44,13 @@ func MakeConfig() map[string]any {
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "completedAt",
 						"short": "Timestamp when the mailing was completed",
 						"type": "`$STRING`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "createdAt",
 						"short": "Timestamp when the mailing was created",
 						"type": "`$STRING`",
@@ -59,6 +61,7 @@ func MakeConfig() map[string]any {
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
+						"format": "uuid",
 						"name": "id",
 						"short": "Unique identifier of the mailing",
 						"type": "`$STRING`",
@@ -97,6 +100,7 @@ func MakeConfig() map[string]any {
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "scheduleTime",
 						"short": "Scheduled time for the mailing",
 						"type": "`$STRING`",
@@ -117,10 +121,15 @@ func MakeConfig() map[string]any {
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "updatedAt",
 						"short": "Timestamp when the mailing was last updated",
 						"type": "`$STRING`",
 					},
+				},
+				"id": map[string]any{
+					"field": "id",
+					"name": "id",
 				},
 				"name": "mailing",
 				"op": map[string]any{
@@ -133,13 +142,18 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "POST",
 								"orig": "/mailings",
-								"parts": []any{
-									"mailings",
+								"segments": []any{
+									map[string]any{
+										"lit": "mailings",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"mailings",
 								},
 							},
 						},
@@ -176,8 +190,10 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/mailings",
-								"parts": []any{
-									"mailings",
+								"segments": []any{
+									map[string]any{
+										"lit": "mailings",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -189,6 +205,9 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.data`",
+								},
+								"parts": []any{
+									"mailings",
 								},
 							},
 						},
@@ -212,13 +231,17 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/mailings/{mailingId}",
-								"parts": []any{
-									"mailings",
-									"{id}",
-								},
 								"rename": map[string]any{
 									"param": map[string]any{
 										"mailingId": "id",
+									},
+								},
+								"segments": []any{
+									map[string]any{
+										"lit": "mailings",
+									},
+									map[string]any{
+										"var": "id",
 									},
 								},
 								"select": map[string]any{
@@ -229,6 +252,10 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"mailings",
+									"{id}",
 								},
 							},
 						},
@@ -252,13 +279,17 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "DELETE",
 								"orig": "/mailings/{mailingId}",
-								"parts": []any{
-									"mailings",
-									"{id}",
-								},
 								"rename": map[string]any{
 									"param": map[string]any{
 										"mailingId": "id",
+									},
+								},
+								"segments": []any{
+									map[string]any{
+										"lit": "mailings",
+									},
+									map[string]any{
+										"var": "id",
 									},
 								},
 								"select": map[string]any{
@@ -270,6 +301,10 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
+								"parts": []any{
+									"mailings",
+									"{id}",
+								},
 							},
 						},
 					},
@@ -280,6 +315,17 @@ func MakeConfig() map[string]any {
 			},
 		},
 	}
+}
+
+// The plugin definitions the model selected per feature, as []any so a
+// feature package can consume them without core naming its types. Empty
+// when no active feature declares active plugin groups for this target.
+var featurePlugins = map[string][]any{
+}
+
+// FeaturePlugins is the definitions list for one feature's chain.
+func FeaturePlugins(name string) []any {
+	return featurePlugins[name]
 }
 
 var (

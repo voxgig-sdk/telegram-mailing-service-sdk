@@ -169,7 +169,7 @@ function mailing_basic_setup(extra)
     ["TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID"] = idmap,
     ["TELEGRAM_MAILING_SERVICE_TEST_LIVE"] = "FALSE",
     ["TELEGRAM_MAILING_SERVICE_TEST_EXPLAIN"] = "FALSE",
-    ["TELEGRAM_MAILING_SERVICE_APIKEY"] = "NONE",
+    ["TELEGRAM_MAILING_SERVICE_APIKEY"] = "",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -180,6 +180,9 @@ function mailing_basic_setup(extra)
 
   if env["TELEGRAM_MAILING_SERVICE_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
+      -- FIRST, so the generated fields below win: sdk-test-control.json's
+      -- test.client.options adds to the live client, it does not redirect it.
+      runner.live_client_options(),
       {
         apikey = env["TELEGRAM_MAILING_SERVICE_APIKEY"],
       },

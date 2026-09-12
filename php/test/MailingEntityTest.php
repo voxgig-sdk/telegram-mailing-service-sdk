@@ -156,7 +156,7 @@ function mailing_basic_setup($extra)
         "TELEGRAM_MAILING_SERVICE_TEST_MAILING_ENTID" => $idmap,
         "TELEGRAM_MAILING_SERVICE_TEST_LIVE" => "FALSE",
         "TELEGRAM_MAILING_SERVICE_TEST_EXPLAIN" => "FALSE",
-        "TELEGRAM_MAILING_SERVICE_APIKEY" => "NONE",
+        "TELEGRAM_MAILING_SERVICE_APIKEY" => "",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -167,10 +167,17 @@ function mailing_basic_setup($extra)
 
     if ($env["TELEGRAM_MAILING_SERVICE_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
+            // FIRST, so the generated fields below win: sdk-test-control.json's
+            // test.client.options adds to the live client, it does not redirect it.
+            Runner::live_client_options(),
             [
                 "apikey" => $env["TELEGRAM_MAILING_SERVICE_APIKEY"],
             ],
-            $extra ?? [],
+            // ismap, not a plain "?? []" default: an empty PHP array is a
+            // LIST, and a non-map later entry REPLACES the accumulated map in
+            // merge - so the no-extras call discarded live_client_options()
+            // and the apikey/server map above it.
+            Vs::ismap($extra) ? $extra : new \stdClass(),
         ]);
         $client = new TelegramMailingServiceSDK(Helpers::to_map($merged_opts));
     }

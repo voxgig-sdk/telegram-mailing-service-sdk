@@ -40,11 +40,13 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "completedAt",
             ["short"] = "Timestamp when the mailing was completed",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "createdAt",
             ["short"] = "Timestamp when the mailing was created",
             ["type"] = "`$STRING`",
@@ -55,6 +57,7 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "uuid",
             ["name"] = "id",
             ["short"] = "Unique identifier of the mailing",
             ["type"] = "`$STRING`",
@@ -93,6 +96,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "scheduleTime",
             ["short"] = "Scheduled time for the mailing",
             ["type"] = "`$STRING`",
@@ -113,10 +117,15 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updatedAt",
             ["short"] = "Timestamp when the mailing was last updated",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "mailing",
         ["op"] = {
@@ -129,13 +138,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/mailings",
-                ["parts"] = {
-                  "mailings",
+                ["segments"] = {
+                  {
+                    ["lit"] = "mailings",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "mailings",
                 },
               },
             },
@@ -172,8 +186,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/mailings",
-                ["parts"] = {
-                  "mailings",
+                ["segments"] = {
+                  {
+                    ["lit"] = "mailings",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -185,6 +201,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.data`",
+                },
+                ["parts"] = {
+                  "mailings",
                 },
               },
             },
@@ -208,13 +227,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/mailings/{mailingId}",
-                ["parts"] = {
-                  "mailings",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["mailingId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "mailings",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -225,6 +248,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "mailings",
+                  "{id}",
                 },
               },
             },
@@ -248,13 +275,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/mailings/{mailingId}",
-                ["parts"] = {
-                  "mailings",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["mailingId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "mailings",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -265,6 +296,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "mailings",
+                  "{id}",
                 },
               },
             },

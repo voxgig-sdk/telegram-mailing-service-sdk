@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -76,11 +87,13 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "date-time",
           "name": "completedAt",
           "short": "Timestamp when the mailing was completed",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "createdAt",
           "short": "Timestamp when the mailing was created",
           "type": "`$STRING`"
@@ -91,6 +104,7 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "uuid",
           "name": "id",
           "short": "Unique identifier of the mailing",
           "type": "`$STRING`"
@@ -129,6 +143,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "date-time",
           "name": "scheduleTime",
           "short": "Scheduled time for the mailing",
           "type": "`$STRING`"
@@ -149,11 +164,16 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "updatedAt",
           "short": "Timestamp when the mailing was last updated",
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "mailing",
       "op": {
         "create": {
@@ -165,14 +185,19 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/mailings",
-              "parts": [
-                "mailings"
+              "segments": [
+                {
+                  "lit": "mailings"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "mailings"
+              ]
             }
           ]
         },
@@ -208,8 +233,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/mailings",
-              "parts": [
-                "mailings"
+              "segments": [
+                {
+                  "lit": "mailings"
+                }
               ],
               "select": {
                 "exist": [
@@ -221,7 +248,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.data`"
-              }
+              },
+              "parts": [
+                "mailings"
+              ]
             }
           ]
         },
@@ -244,15 +274,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/mailings/{mailingId}",
-              "parts": [
-                "mailings",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "mailingId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "mailings"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -261,7 +295,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "mailings",
+                "{id}"
+              ]
             }
           ]
         },
@@ -284,15 +322,19 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/mailings/{mailingId}",
-              "parts": [
-                "mailings",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "mailingId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "mailings"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -301,7 +343,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "mailings",
+                "{id}"
+              ]
             }
           ]
         }
@@ -317,6 +363,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 
