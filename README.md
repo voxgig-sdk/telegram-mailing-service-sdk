@@ -105,7 +105,7 @@ local results, err = client:Mailing():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases) |
+| TypeScript | `@voxgig-sdk/telegram-mailing-service-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases) |
 | Python | `voxgig-sdk-telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases) |
 | PHP | `voxgig-sdk/telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/telegram-mailing-service-sdk/go` | `go get github.com/voxgig-sdk/telegram-mailing-service-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:Mailing():list()
 ### TypeScript
 
 ```ts
-import { TelegramMailingServiceSDK } from '@voxgig-sdk/telegram-mailing-service'
+import { TelegramMailingServiceSDK } from '@voxgig-sdk/telegram-mailing-service-sdk'
 
 const client = new TelegramMailingServiceSDK({
   apikey: process.env.TELEGRAM_MAILING_SERVICE_APIKEY,

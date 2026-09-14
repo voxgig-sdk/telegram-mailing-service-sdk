@@ -1,5 +1,5 @@
 {
-  "name": "@voxgig-sdk/telegram-mailing-service",
+  "name": "@voxgig-sdk/telegram-mailing-service-sdk",
   "version": "0.0.1",
   "description": "Unofficial generated TypeScript SDK for the Telegram Mailing Service public API. Not affiliated with or endorsed by the upstream API provider.",
   "keywords": [

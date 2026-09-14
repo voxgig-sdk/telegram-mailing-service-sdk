@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { TelegramMailingServiceSDK } from '@voxgig-sdk/telegram-mailing-service'
+import { TelegramMailingServiceSDK } from '@voxgig-sdk/telegram-mailing-service-sdk'
 
 const client = new TelegramMailingServiceSDK({
   apikey: process.env.TELEGRAM_MAILING_SERVICE_APIKEY,
@@ -484,7 +484,7 @@ telegram-mailing-service/
 Import the SDK from the package root:
 
 ```ts
-import { TelegramMailingServiceSDK } from '@voxgig-sdk/telegram-mailing-service'
+import { TelegramMailingServiceSDK } from '@voxgig-sdk/telegram-mailing-service-sdk'
 ```
 
 ### Entity state
