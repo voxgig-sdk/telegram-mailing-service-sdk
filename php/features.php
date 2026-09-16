@@ -4,7 +4,10 @@ declare(strict_types=1);
 // TelegramMailingService SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class TelegramMailingServiceFeatures
@@ -14,8 +17,14 @@ class TelegramMailingServiceFeatures
         switch ($name) {
             case "base":
                 return new TelegramMailingServiceBaseFeature();
+            case "ratelimit":
+                return new TelegramMailingServiceRatelimitFeature();
+            case "retry":
+                return new TelegramMailingServiceRetryFeature();
             case "test":
                 return new TelegramMailingServiceTestFeature();
+            case "timeout":
+                return new TelegramMailingServiceTimeoutFeature();
             default:
                 return new TelegramMailingServiceBaseFeature();
         }
@@ -31,7 +40,10 @@ class TelegramMailingServiceFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;
