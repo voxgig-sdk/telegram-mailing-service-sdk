@@ -105,12 +105,12 @@ local results, err = client:Mailing():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/telegram-mailing-service-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases) |
-| Python | `voxgig-sdk-telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases) |
-| PHP | `voxgig-sdk/telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases) |
+| TypeScript | `@voxgig-sdk/telegram-mailing-service-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/tags) |
+| Python | `voxgig-sdk-telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/tags) |
+| PHP | `voxgig-sdk/telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/telegram-mailing-service-sdk/go` | `go get github.com/voxgig-sdk/telegram-mailing-service-sdk/go@latest` |
-| Ruby | `voxgig-sdk-telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases) |
-| Lua | `voxgig-sdk-telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/releases) |
+| Ruby | `voxgig-sdk-telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/tags) |
+| Lua | `voxgig-sdk-telegram-mailing-service` | publish pending — [install from git tag](https://github.com/voxgig-sdk/telegram-mailing-service-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/telegram-mailing-service-sdk/go-cli` | `go install github.com/voxgig-sdk/telegram-mailing-service-sdk/go-cli/cmd/telegram-mailing-service@latest` |
 | Go MCP server | `github.com/voxgig-sdk/telegram-mailing-service-sdk/go-mcp` | `go get github.com/voxgig-sdk/telegram-mailing-service-sdk/go-mcp@latest` |
 
