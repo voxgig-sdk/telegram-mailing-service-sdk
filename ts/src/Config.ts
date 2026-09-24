@@ -16,12 +16,6 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS: Record<string, any[]> = {
   
 }
@@ -32,7 +26,6 @@ class Config {
   makeFeature(this: any, fn: string) {
     const fc = FEATURE_CLASS[fn]
     const fi = new fc()
-    // TODO: errors etc
     return fi
   }
 
@@ -144,91 +137,105 @@ class Config {
       "fields": [
         {
           "name": "attachments",
-          "short": "Optional list of file URLs to attach",
-          "type": "`$ARRAY`"
+          "title": "Attachments",
+          "type": "`$ARRAY`",
+          "short": "Optional list of file URLs to attach"
         },
         {
-          "format": "date-time",
           "name": "completedAt",
+          "title": "Completed At",
+          "type": "`$STRING`",
           "short": "Timestamp when the mailing was completed",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
-          "format": "date-time",
           "name": "createdAt",
+          "title": "Created At",
+          "type": "`$STRING`",
           "short": "Timestamp when the mailing was created",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
           "name": "failedCount",
-          "short": "Number of messages that failed to send",
-          "type": "`$INTEGER`"
+          "title": "Failed Count",
+          "type": "`$INTEGER`",
+          "short": "Number of messages that failed to send"
         },
         {
-          "format": "uuid",
           "name": "id",
+          "title": "Id",
+          "type": "`$STRING`",
           "short": "Unique identifier of the mailing",
-          "type": "`$STRING`"
+          "format": "uuid"
         },
         {
           "name": "message",
+          "title": "Message",
+          "type": "`$STRING`",
           "op": {
             "create": {
               "req": true,
               "type": "`$STRING`"
             }
           },
-          "short": "Message content",
-          "type": "`$STRING`"
+          "short": "Message content"
         },
         {
           "name": "name",
+          "title": "Name",
+          "type": "`$STRING`",
           "op": {
             "create": {
               "req": true,
               "type": "`$STRING`"
             }
           },
-          "short": "Name of the mailing campaign",
-          "type": "`$STRING`"
+          "short": "Name of the mailing campaign"
         },
         {
           "name": "parseMode",
-          "short": "Message formatting mode",
-          "type": "`$STRING`"
+          "title": "Parse Mode",
+          "type": "`$STRING`",
+          "short": "Message formatting mode"
         },
         {
           "name": "recipients",
+          "title": "Recipients",
+          "type": "`$ARRAY`",
           "req": true,
-          "short": "List of Telegram usernames or chat IDs",
-          "type": "`$ARRAY`"
+          "short": "List of Telegram usernames or chat IDs"
         },
         {
-          "format": "date-time",
           "name": "scheduleTime",
+          "title": "Schedule Time",
+          "type": "`$STRING`",
           "short": "Scheduled time for the mailing",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
           "name": "sentCount",
-          "short": "Number of messages successfully sent",
-          "type": "`$INTEGER`"
+          "title": "Sent Count",
+          "type": "`$INTEGER`",
+          "short": "Number of messages successfully sent"
         },
         {
           "name": "status",
-          "short": "Current status of the mailing",
-          "type": "`$STRING`"
+          "title": "Status",
+          "type": "`$STRING`",
+          "short": "Current status of the mailing"
         },
         {
           "name": "totalRecipients",
-          "short": "Total number of recipients",
-          "type": "`$INTEGER`"
+          "title": "Total Recipients",
+          "type": "`$INTEGER`",
+          "short": "Total number of recipients"
         },
         {
-          "format": "date-time",
           "name": "updatedAt",
+          "title": "Updated At",
+          "type": "`$STRING`",
           "short": "Timestamp when the mailing was last updated",
-          "type": "`$STRING`"
+          "format": "date-time"
         }
       ],
       "id": {
@@ -242,7 +249,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/mailings",
@@ -251,14 +257,16 @@ class Config {
                   "lit": "mailings"
                 }
               ],
-              "select": {},
+              "parts": [
+                "mailings"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "mailings"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         },
@@ -267,30 +275,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "example": 20,
-                    "kind": "query",
-                    "name": "limit",
-                    "orig": "limit",
-                    "type": "`$INTEGER`"
-                  },
-                  {
-                    "example": 0,
-                    "kind": "query",
-                    "name": "offset",
-                    "orig": "offset",
-                    "type": "`$INTEGER`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "status",
-                    "orig": "status",
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/mailings",
@@ -299,20 +283,45 @@ class Config {
                   "lit": "mailings"
                 }
               ],
+              "parts": [
+                "mailings"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body.data`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "limit",
+                    "orig": "limit",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "example": 20
+                  },
+                  {
+                    "name": "offset",
+                    "orig": "offset",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "example": 0
+                  },
+                  {
+                    "name": "status",
+                    "orig": "status",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  }
+                ]
+              },
               "select": {
                 "exist": [
                   "limit",
                   "offset",
                   "status"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body.data`"
-              },
-              "parts": [
-                "mailings"
-              ]
+              }
             }
           ]
         },
@@ -321,25 +330,9 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "mailing_id",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/mailings/{mailingId}",
-              "rename": {
-                "param": {
-                  "mailingId": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "mailings"
@@ -348,19 +341,35 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
+              "parts": [
+                "mailings",
+                "{id}"
+              ],
+              "rename": {
+                "param": {
+                  "mailingId": "id"
+                }
               },
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "mailings",
-                "{id}"
-              ]
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "mailing_id",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         },
@@ -369,25 +378,9 @@ class Config {
           "name": "remove",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "mailing_id",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "DELETE",
               "orig": "/mailings/{mailingId}",
-              "rename": {
-                "param": {
-                  "mailingId": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "mailings"
@@ -396,19 +389,35 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
+              "parts": [
+                "mailings",
+                "{id}"
+              ],
+              "rename": {
+                "param": {
+                  "mailingId": "id"
+                }
               },
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "mailings",
-                "{id}"
-              ]
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "mailing_id",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         }

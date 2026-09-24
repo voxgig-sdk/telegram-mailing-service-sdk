@@ -1,7 +1,7 @@
 // Typed models for the TelegramMailingService SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,20 +14,6 @@ import (
 
 // Mailing is the typed data model for the mailing entity.
 type Mailing struct {
-	Attachments *[]any `json:"attachments,omitempty"`
-	CompletedAt *string `json:"completedAt,omitempty"`
-	CreatedAt *string `json:"createdAt,omitempty"`
-	FailedCount *int `json:"failedCount,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Message *string `json:"message,omitempty"`
-	Name *string `json:"name,omitempty"`
-	ParseMode *string `json:"parseMode,omitempty"`
-	Recipients []any `json:"recipients"`
-	ScheduleTime *string `json:"scheduleTime,omitempty"`
-	SentCount *int `json:"sentCount,omitempty"`
-	Status *string `json:"status,omitempty"`
-	TotalRecipients *int `json:"totalRecipients,omitempty"`
-	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
 // MailingLoadMatch is the typed request payload for Mailing.LoadTyped.

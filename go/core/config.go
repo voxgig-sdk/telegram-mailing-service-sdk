@@ -95,34 +95,41 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "attachments",
-						"short": "Optional list of file URLs to attach",
+						"title": "Attachments",
 						"type": "`$ARRAY`",
+						"short": "Optional list of file URLs to attach",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "completedAt",
-						"short": "Timestamp when the mailing was completed",
+						"title": "Completed At",
 						"type": "`$STRING`",
+						"short": "Timestamp when the mailing was completed",
+						"format": "date-time",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "createdAt",
-						"short": "Timestamp when the mailing was created",
+						"title": "Created At",
 						"type": "`$STRING`",
+						"short": "Timestamp when the mailing was created",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "failedCount",
-						"short": "Number of messages that failed to send",
+						"title": "Failed Count",
 						"type": "`$INTEGER`",
+						"short": "Number of messages that failed to send",
 					},
 					map[string]any{
-						"format": "uuid",
 						"name": "id",
-						"short": "Unique identifier of the mailing",
+						"title": "Id",
 						"type": "`$STRING`",
+						"short": "Unique identifier of the mailing",
+						"format": "uuid",
 					},
 					map[string]any{
 						"name": "message",
+						"title": "Message",
+						"type": "`$STRING`",
 						"op": map[string]any{
 							"create": map[string]any{
 								"req": true,
@@ -130,10 +137,11 @@ func MakeConfig() map[string]any {
 							},
 						},
 						"short": "Message content",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"title": "Name",
+						"type": "`$STRING`",
 						"op": map[string]any{
 							"create": map[string]any{
 								"req": true,
@@ -141,45 +149,51 @@ func MakeConfig() map[string]any {
 							},
 						},
 						"short": "Name of the mailing campaign",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "parseMode",
-						"short": "Message formatting mode",
+						"title": "Parse Mode",
 						"type": "`$STRING`",
+						"short": "Message formatting mode",
 					},
 					map[string]any{
 						"name": "recipients",
+						"title": "Recipients",
+						"type": "`$ARRAY`",
 						"req": true,
 						"short": "List of Telegram usernames or chat IDs",
-						"type": "`$ARRAY`",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "scheduleTime",
-						"short": "Scheduled time for the mailing",
+						"title": "Schedule Time",
 						"type": "`$STRING`",
+						"short": "Scheduled time for the mailing",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "sentCount",
-						"short": "Number of messages successfully sent",
+						"title": "Sent Count",
 						"type": "`$INTEGER`",
+						"short": "Number of messages successfully sent",
 					},
 					map[string]any{
 						"name": "status",
-						"short": "Current status of the mailing",
+						"title": "Status",
 						"type": "`$STRING`",
+						"short": "Current status of the mailing",
 					},
 					map[string]any{
 						"name": "totalRecipients",
-						"short": "Total number of recipients",
+						"title": "Total Recipients",
 						"type": "`$INTEGER`",
+						"short": "Total number of recipients",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "updatedAt",
-						"short": "Timestamp when the mailing was last updated",
+						"title": "Updated At",
 						"type": "`$STRING`",
+						"short": "Timestamp when the mailing was last updated",
+						"format": "date-time",
 					},
 				},
 				"id": map[string]any{
@@ -193,7 +207,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/mailings",
@@ -202,14 +215,16 @@ func MakeConfig() map[string]any {
 										"lit": "mailings",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"mailings",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"mailings",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -218,36 +233,44 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": 20,
-											"kind": "query",
-											"name": "limit",
-											"orig": "limit",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"example": 0,
-											"kind": "query",
-											"name": "offset",
-											"orig": "offset",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "status",
-											"orig": "status",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/mailings",
 								"segments": []any{
 									map[string]any{
 										"lit": "mailings",
+									},
+								},
+								"parts": []any{
+									"mailings",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.data`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "limit",
+											"orig": "limit",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 20,
+										},
+										map[string]any{
+											"name": "offset",
+											"orig": "offset",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 0,
+										},
+										map[string]any{
+											"name": "status",
+											"orig": "status",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
 									},
 								},
 								"select": map[string]any{
@@ -257,13 +280,6 @@ func MakeConfig() map[string]any {
 										"status",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.data`",
-								},
-								"parts": []any{
-									"mailings",
-								},
 							},
 						},
 					},
@@ -272,25 +288,9 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "mailing_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/mailings/{mailingId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"mailingId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "mailings",
@@ -299,18 +299,34 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"mailings",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"mailingId": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"mailings",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "mailing_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -320,25 +336,9 @@ func MakeConfig() map[string]any {
 						"name": "remove",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "mailing_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "DELETE",
 								"orig": "/mailings/{mailingId}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"mailingId": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "mailings",
@@ -347,18 +347,34 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"mailings",
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"mailingId": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"mailings",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "mailing_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},

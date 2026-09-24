@@ -1,0 +1,81 @@
+# BasicMailingFlow
+
+main: kit: flow: BasicMailingFlow:
+{
+  entity: "mailing",
+  kind: "basic",
+  name: "BasicMailingFlow",
+  step: [
+    {
+      i: {
+        ref: "mailing_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "mailing_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "mailing_ref01",
+        srcdatavar: "mailing_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "mailing01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-mailing_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "mailing_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "mailing01"
+      }
+
+      o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "mailing_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicMailingFlow"
+}

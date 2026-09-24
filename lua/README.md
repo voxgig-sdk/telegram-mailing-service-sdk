@@ -45,7 +45,7 @@ local mailings, err = client:Mailing():list()
 if err then error(err) end
 
 for _, item in ipairs(mailings) do
-  print(item["id"], item["completedAt"])
+  print(item["id"])
 end
 ```
 

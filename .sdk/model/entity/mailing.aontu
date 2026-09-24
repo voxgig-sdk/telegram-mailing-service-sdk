@@ -1,0 +1,310 @@
+# Entity: mailing
+
+main: kit: entity: mailing: {
+
+  alias: field: {}
+
+  fields: {
+    attachments: {
+      h: "Attachments"
+      n: "attachments"
+      r: false
+      sh: "Optional list of file URLs to attach"
+      t: "`$ARRAY`"
+    }
+    completedAt: {
+      fo: "date-time"
+      h: "Completed At"
+      n: "completedAt"
+      r: false
+      sh: "Timestamp when the mailing was completed"
+      t: "`$STRING`"
+    }
+    createdAt: {
+      fo: "date-time"
+      h: "Created At"
+      n: "createdAt"
+      r: false
+      sh: "Timestamp when the mailing was created"
+      t: "`$STRING`"
+    }
+    failedCount: {
+      h: "Failed Count"
+      n: "failedCount"
+      r: false
+      sh: "Number of messages that failed to send"
+      t: "`$INTEGER`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Unique identifier of the mailing"
+      t: "`$STRING`"
+    }
+    message: {
+      h: "Message"
+      n: "message"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "Message content"
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "Name of the mailing campaign"
+      t: "`$STRING`"
+    }
+    parseMode: {
+      h: "Parse Mode"
+      n: "parseMode"
+      r: false
+      sh: "Message formatting mode"
+      t: "`$STRING`"
+    }
+    recipients: {
+      h: "Recipients"
+      n: "recipients"
+      r: true
+      sh: "List of Telegram usernames or chat IDs"
+      t: "`$ARRAY`"
+    }
+    scheduleTime: {
+      fo: "date-time"
+      h: "Schedule Time"
+      n: "scheduleTime"
+      r: false
+      sh: "Scheduled time for the mailing"
+      t: "`$STRING`"
+    }
+    sentCount: {
+      h: "Sent Count"
+      n: "sentCount"
+      r: false
+      sh: "Number of messages successfully sent"
+      t: "`$INTEGER`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      sh: "Current status of the mailing"
+      t: "`$STRING`"
+    }
+    totalRecipients: {
+      h: "Total Recipients"
+      n: "totalRecipients"
+      r: false
+      sh: "Total number of recipients"
+      t: "`$INTEGER`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: false
+      sh: "Timestamp when the mailing was last updated"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "mailing"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /mailings"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/mailings"
+          s: [
+            {
+              lit: "mailings"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /mailings"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 20
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/mailings"
+          q: {
+            exist: [
+              "limit"
+              "offset"
+              "status"
+            ]
+          }
+          s: [
+            {
+              lit: "mailings"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.data`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /mailings/{mailingId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "mailing_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/mailings/{mailingId}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              mailingId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "mailings"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /mailings/{mailingId}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "mailing_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/mailings/{mailingId}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              mailingId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "mailings"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

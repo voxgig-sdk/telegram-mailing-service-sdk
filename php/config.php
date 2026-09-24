@@ -117,34 +117,41 @@ class TelegramMailingServiceConfig
           'fields' => [
             [
               'name' => 'attachments',
-              'short' => 'Optional list of file URLs to attach',
+              'title' => 'Attachments',
               'type' => '`$ARRAY`',
+              'short' => 'Optional list of file URLs to attach',
             ],
             [
-              'format' => 'date-time',
               'name' => 'completedAt',
-              'short' => 'Timestamp when the mailing was completed',
+              'title' => 'Completed At',
               'type' => '`$STRING`',
+              'short' => 'Timestamp when the mailing was completed',
+              'format' => 'date-time',
             ],
             [
-              'format' => 'date-time',
               'name' => 'createdAt',
-              'short' => 'Timestamp when the mailing was created',
+              'title' => 'Created At',
               'type' => '`$STRING`',
+              'short' => 'Timestamp when the mailing was created',
+              'format' => 'date-time',
             ],
             [
               'name' => 'failedCount',
-              'short' => 'Number of messages that failed to send',
+              'title' => 'Failed Count',
               'type' => '`$INTEGER`',
+              'short' => 'Number of messages that failed to send',
             ],
             [
-              'format' => 'uuid',
               'name' => 'id',
-              'short' => 'Unique identifier of the mailing',
+              'title' => 'Id',
               'type' => '`$STRING`',
+              'short' => 'Unique identifier of the mailing',
+              'format' => 'uuid',
             ],
             [
               'name' => 'message',
+              'title' => 'Message',
+              'type' => '`$STRING`',
               'op' => [
                 'create' => [
                   'req' => true,
@@ -152,10 +159,11 @@ class TelegramMailingServiceConfig
                 ],
               ],
               'short' => 'Message content',
-              'type' => '`$STRING`',
             ],
             [
               'name' => 'name',
+              'title' => 'Name',
+              'type' => '`$STRING`',
               'op' => [
                 'create' => [
                   'req' => true,
@@ -163,45 +171,51 @@ class TelegramMailingServiceConfig
                 ],
               ],
               'short' => 'Name of the mailing campaign',
-              'type' => '`$STRING`',
             ],
             [
               'name' => 'parseMode',
-              'short' => 'Message formatting mode',
+              'title' => 'Parse Mode',
               'type' => '`$STRING`',
+              'short' => 'Message formatting mode',
             ],
             [
               'name' => 'recipients',
+              'title' => 'Recipients',
+              'type' => '`$ARRAY`',
               'req' => true,
               'short' => 'List of Telegram usernames or chat IDs',
-              'type' => '`$ARRAY`',
             ],
             [
-              'format' => 'date-time',
               'name' => 'scheduleTime',
-              'short' => 'Scheduled time for the mailing',
+              'title' => 'Schedule Time',
               'type' => '`$STRING`',
+              'short' => 'Scheduled time for the mailing',
+              'format' => 'date-time',
             ],
             [
               'name' => 'sentCount',
-              'short' => 'Number of messages successfully sent',
+              'title' => 'Sent Count',
               'type' => '`$INTEGER`',
+              'short' => 'Number of messages successfully sent',
             ],
             [
               'name' => 'status',
-              'short' => 'Current status of the mailing',
+              'title' => 'Status',
               'type' => '`$STRING`',
+              'short' => 'Current status of the mailing',
             ],
             [
               'name' => 'totalRecipients',
-              'short' => 'Total number of recipients',
+              'title' => 'Total Recipients',
               'type' => '`$INTEGER`',
+              'short' => 'Total number of recipients',
             ],
             [
-              'format' => 'date-time',
               'name' => 'updatedAt',
-              'short' => 'Timestamp when the mailing was last updated',
+              'title' => 'Updated At',
               'type' => '`$STRING`',
+              'short' => 'Timestamp when the mailing was last updated',
+              'format' => 'date-time',
             ],
           ],
           'id' => [
@@ -215,7 +229,6 @@ class TelegramMailingServiceConfig
               'name' => 'create',
               'points' => [
                 [
-                  'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/mailings',
@@ -224,14 +237,16 @@ class TelegramMailingServiceConfig
                       'lit' => 'mailings',
                     ],
                   ],
-                  'select' => [],
+                  'parts' => [
+                    'mailings',
+                  ],
+                  'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'parts' => [
-                    'mailings',
-                  ],
+                  'args' => [],
+                  'select' => [],
                 ],
               ],
             ],
@@ -240,36 +255,44 @@ class TelegramMailingServiceConfig
               'name' => 'list',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'example' => 20,
-                        'kind' => 'query',
-                        'name' => 'limit',
-                        'orig' => 'limit',
-                        'type' => '`$INTEGER`',
-                      ],
-                      [
-                        'example' => 0,
-                        'kind' => 'query',
-                        'name' => 'offset',
-                        'orig' => 'offset',
-                        'type' => '`$INTEGER`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'status',
-                        'orig' => 'status',
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/mailings',
                   'segments' => [
                     [
                       'lit' => 'mailings',
+                    ],
+                  ],
+                  'parts' => [
+                    'mailings',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.data`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'limit',
+                        'orig' => 'limit',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'example' => 20,
+                      ],
+                      [
+                        'name' => 'offset',
+                        'orig' => 'offset',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'example' => 0,
+                      ],
+                      [
+                        'name' => 'status',
+                        'orig' => 'status',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
                     ],
                   ],
                   'select' => [
@@ -279,13 +302,6 @@ class TelegramMailingServiceConfig
                       'status',
                     ],
                   ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.data`',
-                  ],
-                  'parts' => [
-                    'mailings',
-                  ],
                 ],
               ],
             ],
@@ -294,25 +310,9 @@ class TelegramMailingServiceConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [
-                    'params' => [
-                      [
-                        'kind' => 'param',
-                        'name' => 'id',
-                        'orig' => 'mailing_id',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/mailings/{mailingId}',
-                  'rename' => [
-                    'param' => [
-                      'mailingId' => 'id',
-                    ],
-                  ],
                   'segments' => [
                     [
                       'lit' => 'mailings',
@@ -321,18 +321,34 @@ class TelegramMailingServiceConfig
                       'var' => 'id',
                     ],
                   ],
-                  'select' => [
-                    'exist' => [
-                      'id',
+                  'parts' => [
+                    'mailings',
+                    '{id}',
+                  ],
+                  'rename' => [
+                    'param' => [
+                      'mailingId' => 'id',
                     ],
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'parts' => [
-                    'mailings',
-                    '{id}',
+                  'args' => [
+                    'params' => [
+                      [
+                        'name' => 'id',
+                        'orig' => 'mailing_id',
+                        'type' => '`$STRING`',
+                        'kind' => 'param',
+                        'reqd' => true,
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'id',
+                    ],
                   ],
                 ],
               ],
@@ -342,25 +358,9 @@ class TelegramMailingServiceConfig
               'name' => 'remove',
               'points' => [
                 [
-                  'args' => [
-                    'params' => [
-                      [
-                        'kind' => 'param',
-                        'name' => 'id',
-                        'orig' => 'mailing_id',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/mailings/{mailingId}',
-                  'rename' => [
-                    'param' => [
-                      'mailingId' => 'id',
-                    ],
-                  ],
                   'segments' => [
                     [
                       'lit' => 'mailings',
@@ -369,18 +369,34 @@ class TelegramMailingServiceConfig
                       'var' => 'id',
                     ],
                   ],
-                  'select' => [
-                    'exist' => [
-                      'id',
+                  'parts' => [
+                    'mailings',
+                    '{id}',
+                  ],
+                  'rename' => [
+                    'param' => [
+                      'mailingId' => 'id',
                     ],
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'parts' => [
-                    'mailings',
-                    '{id}',
+                  'args' => [
+                    'params' => [
+                      [
+                        'name' => 'id',
+                        'orig' => 'mailing_id',
+                        'type' => '`$STRING`',
+                        'kind' => 'param',
+                        'reqd' => true,
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'id',
+                    ],
                   ],
                 ],
               ],
